@@ -23,7 +23,7 @@
       (.favorites
         {:field ["Hack Emacs" "Linux OS" "Web Programming"]
          :game ["Heroes of The Storm" "WOW"]
-         :misc  ["Reading" "Music"]})))
+         :misc  ["Reading" "Music" "Photography" "Play guitar"]})))
 #+end_src
 
 * 我的座右铭
