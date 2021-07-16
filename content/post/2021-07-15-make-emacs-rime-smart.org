@@ -5,24 +5,26 @@ draft: false
 tags: [Emacs, Rime]
 categories: [Tools]
 ---
-在之前的文章中，已经介绍过 Emacs-rime 在各个平台上的安装。但为了让这个输入法变得更加智能，更加好用，最近更新了 Emacs Rime 的配置，使得它能够在切换为中文时，会自动切换光标的颜色。而且，临时英文模式基于 rime 的 inline_ascii 模式，能够支持临时模式下输入带空格和符号的长句。
+在之前的文章中，已经介绍过 [[https://github.com/DogLooksGood/emacs-rime][Emacs-rime]] 在各个平台上的安装。但为了让这个输入法变得更加智能，更加好用，最近更新了 Emacs-rime 的配置，使得它能够在切换为中文时，会自动切换光标的颜色。而且，临时英文模式基于 [[https://github.com/rime/home][Rime]] 的 inline_ascii 模式，能够支持临时模式下输入带空格和符号的长句。
 
 * 自动光标颜色切换
   为什么要更换光标颜色呢？
+  
   很多朋友理解不了为什么要折腾这个。其实，更换光标颜色主要有以下3种用途：
-  1. 在Emacs全屏使用时，特别是使用了 write-room 以后，整个界面连 mode-line 都没有了，这时根本没有办法识别当前的输入法状态。
-  2. Emacs-rime 或者 pyim 等输入法有自动探测当前输入环境的功能，可以自动切换输入法状态为英文或者中文模式，比如后面要介绍的 inline ascii 模式。
-  3. 由于使用了 Shift 进行中英文切换，经常会在英文输入大写字母时突然又不想输入大写，这时输入法状态就会切换中文，造成本来想输入英文，结果出来的是中文，打断输入的流畅性。
+  
+  1. 在 Emacs 全屏使用时，特别是使用了 [[https://github.com/joostkremers/writeroom-mode][writeroom-mode]] 以后，整个界面连 mode-line 都没有了，这时根本没有办法识别当前的输入法状态。
+  2. [[https://github.com/DogLooksGood/emacs-rime][Emacs-rime]] 或者 [[https://github.com/tumashu/pyim][pyim]] 等输入法有自动探测当前输入环境的功能，可以自动切换输入法状态为英文或者中文模式，比如后面要介绍的 inline ascii 模式。
+  3. 由于使用了 ~Shift~ 进行中英文切换，经常会在英文输入大写字母时突然又不想输入大写，这时输入法状态就会切换中文，造成本来想输入英文，结果出来的是中文，打断输入的流畅性。
 
-  其实，对于这个问题，Emacs 社区已经有了现成的方案：
+  对于这个问题，Emacs 社区已经有了现成的方案：
 
   1. [[https://github.com/tumashu/pyim][pyim]] 输入法最近增加了根据输入法状态切换颜色的功能。
   2. [[https://github.com/laishulu/emacs-smart-input-source][sis]] 方案也自带这个功能。
   3. [[https://github.com/DogLooksGood/emacs-rime][emacs-rime]] 也可以直接使用 [[https://github.com/emacsmirror/cursor-chg/blob/master/cursor-chg.el][cursor-chg]] 这个包实现。
 
-cursor-chg 对我来说功能太多，我只要换个光标颜色而已。它除了支持更换光标颜色，还支持在闲置时更换光标的形状，在切换到只读模式的buffer时更换光标的形状。
+~cursor-chg~ 对我来说功能太多，我只要换个光标颜色而已。但它除了支持更换光标颜色，还支持在闲置时更换光标的形状，在切换到只读模式的 buffer 时更换光标的形状。
 
-所以，在参考了cursor-chg ，以及在 Emacs 社区 @tumashu 大佬的帮助下， 实现了简单的输入法切换更换光标颜色的功能。
+所以，在参考了 ~cursor-chg~ ，以及在 [[https://emacs-china.org/t/topic/17717][Emacs 社区]] @tumashu 大佬的帮助下， 实现了简洁的输入法切换更换光标颜色的功能。
 
 #+begin_src emacs-lisp
   ;;; im-cursor-chg.el --- Change cursor color for input method  -*- lexical-binding: t; -*-
@@ -153,4 +155,5 @@ patch:
  
 #+end_src
 
+~Happy Hacking Emacs!~
 
