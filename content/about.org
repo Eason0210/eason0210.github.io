@@ -1,20 +1,37 @@
 #+title: About Me
 #+date: 2021:07:15
 #+draft: false
-~欢迎来到我的世界。~
 
-~这里是我记录探索技术过程中的一些想法和心得，并和志同道合的朋友一起分享我的收获。~
+#+begin_quote
+欢迎来到我的世界。
 
-~也会分享一些在生活中的感想与体会。~
+在这里，我会记录不断探索最新技术过程中积累的一些操作技巧，以及我的一些想法和心得。
 
-* 我喜爱的领域
-- Emacs
-- Linux 操作系统
-- Web 编程
-* 我喜爱的编程语言
-- Elisp, C++, Haskell, Python
-* 我的业余爱好
-- 看书，听音乐，玩风暴，摄影，弹吉他
+同时，希望能够跟志同道合的朋友一起分享我的收获。
+
+另外，我也会分享一些在生活中的感想与体会。
+#+end_quote
+
+#+begin_src clojure
+  (def Eason-Huang
+    (doto (Programmer.)
+      (.alias "Eason0210" "Aqua")
+      (.jobLocation "Shanghai")
+      (.homepage "https://eason0210.github.io")
+      (.university "ChongQing JiaoTong University")
+      (.languages [:C++ :Haskell :Clojure])
+      (.favorites
+        {:field ["Hack Emacs" "Linux OS" "Web Programming"]
+         :game ["Heroes of The Storm" "WOW"]
+         :misc  ["Reading" "Music"]})))
+#+end_src
+
 * 我的座右铭
 - 一切皆有可能！Nothing is impossible！
+
+* 站点更新日志
+- 2021-07-15, 基于 [[https://github.com/Eason0210/eason0210.github.io][GitHub CI]] 自动构建网站
+- 2021-07-14，[[https://jekyllrb.com][Jekyll]] --> [[https://gohugo.io][Hugo]]，主题 [[https://github.com/olOwOlo/hugo-theme-even][even]]  
+- 2020-04-25，[[https://jekyllrb.com][Jekyll]]，基于 [[https://github.com/Eason0210/eason0210.github.io-jekyll][GitHub]] 自动构建网站
+
 
