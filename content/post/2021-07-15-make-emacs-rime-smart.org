@@ -1,0 +1,156 @@
+---
+title: "如何让你的 Emacs-rime 更加智能"
+date: 2021-07-15T20:36:16+08:00
+draft: false
+tags: [Emacs, Rime]
+categories: [Tools]
+---
+在之前的文章中，已经介绍过 Emacs-rime 在各个平台上的安装。但为了让这个输入法变得更加智能，更加好用，最近更新了 Emacs Rime 的配置，使得它能够在切换为中文时，会自动切换光标的颜色。而且，临时英文模式基于 rime 的 inline_ascii 模式，能够支持临时模式下输入带空格和符号的长句。
+
+* 自动光标颜色切换
+  为什么要更换光标颜色呢？
+  很多朋友理解不了为什么要折腾这个。其实，更换光标颜色主要有以下3种用途：
+  1. 在Emacs全屏使用时，特别是使用了 write-room 以后，整个界面连 mode-line 都没有了，这时根本没有办法识别当前的输入法状态。
+  2. Emacs-rime 或者 pyim 等输入法有自动探测当前输入环境的功能，可以自动切换输入法状态为英文或者中文模式，比如后面要介绍的 inline ascii 模式。
+  3. 由于使用了 Shift 进行中英文切换，经常会在英文输入大写字母时突然又不想输入大写，这时输入法状态就会切换中文，造成本来想输入英文，结果出来的是中文，打断输入的流畅性。
+
+  其实，对于这个问题，Emacs 社区已经有了现成的方案：
+
+  1. [[https://github.com/tumashu/pyim][pyim]] 输入法最近增加了根据输入法状态切换颜色的功能。
+  2. [[https://github.com/laishulu/emacs-smart-input-source][sis]] 方案也自带这个功能。
+  3. [[https://github.com/DogLooksGood/emacs-rime][emacs-rime]] 也可以直接使用 [[https://github.com/emacsmirror/cursor-chg/blob/master/cursor-chg.el][cursor-chg]] 这个包实现。
+
+cursor-chg 对我来说功能太多，我只要换个光标颜色而已。它除了支持更换光标颜色，还支持在闲置时更换光标的形状，在切换到只读模式的buffer时更换光标的形状。
+
+所以，在参考了cursor-chg ，以及在 Emacs 社区 @tumashu 大佬的帮助下， 实现了简单的输入法切换更换光标颜色的功能。
+
+#+begin_src emacs-lisp
+  ;;; im-cursor-chg.el --- Change cursor color for input method  -*- lexical-binding: t; -*-
+
+;; Inspired by code from cursor-chg
+;; URL: https://github.com/emacsmirror/cursor-chg/blob/master/cursor-chg.el
+
+;;; Commentary:
+;;
+;; To turn on the cursor color change by default,
+;; put the following in your Emacs init file.
+;;
+;; (require 'im-cursor-chg)
+;; (cursor-chg-mode 1)
+;;
+;;; Code:
+
+(require 'rime nil t)
+
+(defvar im-cursor-color "Orange"
+  "The color for input method.")
+
+(defvar im-default-cursor-color (frame-parameter nil 'cursor-color)
+  "The default cursor color.")
+
+(defun im--chinese-p ()
+  "Check if the current input state is Chinese."
+  (if (featurep 'rime)
+      (and (rime--should-enable-p)
+           (not (rime--should-inline-ascii-p))
+           current-input-method)
+    current-input-method))
+
+(defun im-change-cursor-color ()
+  "Set cursor color depending on input method."
+  (interactive)
+  (set-cursor-color (if (im--chinese-p)
+                        im-cursor-color
+                      im-default-cursor-color)))
+
+(define-minor-mode cursor-chg-mode
+  "Toggle changing cursor color.
+With numeric ARG, turn cursor changing on if ARG is positive.
+When this mode is on, `im-change-cursor-color' control cursor changing."
+  :init-value nil :global t :group 'frames
+  (if cursor-chg-mode
+      (add-hook 'post-command-hook 'im-change-cursor-color)
+    (remove-hook 'post-command-hook 'im-change-cursor-color)))
+
+
+(provide 'im-cursor-chg)
+;;; im-cursor-chg.el ends here
+#+end_src
+
+只要将上面的代码保存为 ~im-cursor-chg.el~ 文件，然后在 Emacs 配置文件(如.emacs)中加入以下配置即可：
+#+begin_src emacs-lisp
+   (with-eval-after-load 'rime
+    (require 'im-cursor-chg)
+    (cursor-chg-mode 1))
+#+end_src
+
+* 基于 rime inline ascii 模式的临时英文模式
+这个功能主要用来实现输入带空格的临时英文的场景。
+
+由于当前实现限制，如果 Rime 配置中没有使用默认的 Shift_L 切换 inline ascii 模式，需要在 emacs-rime 中指定。 两边配置相同才能正常激活。
+#+begin_src emacs-lisp
+;;; support shift-l, shift-r, control-l, control-r
+(setq rime-inline-ascii-trigger 'shift-r)
+#+end_src
+
+在 rime 的个人用户配置中，修改 ~deafult.custom.yaml~ 的内容如下：
+#+begin_src yaml
+patch:
+  ascii_composer: # 设置caps、shift、control等键的作用
+    good_old_caps_lock: true # 若为true，caps只切换大小写
+    switch_key:
+      Shift_L: noop
+      Shift_R: inline_ascii
+      Control_L: noop
+      Control_R: noop
+      Caps_Lock: commit_code
+      Eisu_toggle: clear  
+#+end_src
+
+* 我的 Emacs-rime 配置
+#+begin_src emacs-lisp
+(defconst rime-usr-data-exists-p
+  (file-exists-p "~/emacs-data/rime")
+  "For checking if there is a rime user data.")
+
+(when rime-usr-data-exists-p
+  (require-package 'rime)
+
+  (when (eq system-type 'windows-nt)
+    (setq rime-share-data-dir
+          "~/scoop/apps/msys2/current/mingw64/share/rime-data"))
+  (when (eq system-type 'darwin)
+    (setq rime-librime-root  "~/emacs-data/librime/dist"))
+
+  (setq
+   rime-inline-predicates '(rime-predicate-space-after-cc-p
+                            rime-predicate-current-uppercase-letter-p)
+   rime-translate-keybindings '("C-f" "C-b" "C-n" "C-p" "C-g")
+   rime-inline-ascii-holder ?a
+   default-input-method "rime"
+   rime-cursor "|"
+   rime-show-candidate nil
+   window-min-height 1
+   rime-user-data-dir "~/emacs-data/rime"
+   rime-title "")
+
+  (setq rime-inline-ascii-trigger 'shift-r)
+  
+  (defun rime-toggle-show-candidate ()
+    "Use minibuffer for candidate if current is nil."
+    (interactive)
+    (if (equal rime-show-candidate nil)
+        (setq rime-show-candidate 'minibuffer)
+      (setq rime-show-candidate nil)))
+
+  (global-set-key (kbd "C-\\") 'toggle-input-method)
+  (global-set-key (kbd "s-m") 'rime-force-enable)
+  (global-set-key (kbd "C-`") 'rime-send-keybinding)
+
+  (with-eval-after-load 'rime
+    (require 'im-cursor-chg)
+    (cursor-chg-mode 1)))
+ 
+#+end_src
+
+
