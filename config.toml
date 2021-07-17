@@ -1,5 +1,5 @@
 baseURL = "https://eason0210.github.io/"
-languageCode = "en"
+languageCode = "zh-cn"
 defaultContentLanguage = "zh-cn"                             # en / zh-cn / ... (This field determines which i18n file to use)
 title = "Eason Huang"
 preserveTaxonomyNames = true
@@ -34,7 +34,7 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
   identifier = "home"
   url = "/"
 [[menu.main]]
-  name = "存档"
+  name = "归档"
   weight = 20
   identifier = "archives"
   url = "/post/"
