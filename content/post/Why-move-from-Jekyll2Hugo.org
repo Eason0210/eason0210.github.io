@@ -84,11 +84,15 @@ tags:
   hugo server -D
 #+end_src
 
-通过以下地址在本地浏览器中打开站点：
-  
-http://localhost:1313
+通过 [[http://localhost:1313][http://localhost:1313 ]]在本地浏览器中打开站点。这是编辑 my-first-post.org 或者 my-first-post.md，网站的内容就会自动更新。
 
-* 配置 GitHub CI 自动化构建
+提醒：网站可以正常工作后记得执行以下命令 commit 修改。
+#+begin_src 
+git add .
+git commit -m "init commit."  
+#+end_src
+
+** 部署站点
 执行以下命令，会在站点根目录下的./public/文件夹构建静态站点(-d/--destination 标志可以改变目录位置，或者在 config 文件中设置 publishdir 参数)。
 #+begin_src bash
 hugo -D  
@@ -96,9 +100,10 @@ hugo -D
 
 但是这样很麻烦，每次更新站点内容时，都要手动将 public 文件夹下的内容 push 到 GitHub 上。
 要解决这个问题，实现像 Jekyll 那样，直接 push 要更新的内容，然后 GitHub 自动在后台构建网站，就需要配置 GitHub CI 来自动完成构建的操作。
-
+   
+* 配置 GitHub CI 自动化构建
 ** 创建自动部署的脚本
-创建 ./.github/workflows/ 目录下，并添加 ~gh-pages.yaml~ 文件到 workflows 文件夹下，内容如下：
+在站点的根目录下创建 ./.github/workflows/ 目录，并在当前目录下添加 ~gh-pages.yaml~ 文件，内容如下：
 #+begin_src yaml
 name: github pages
 
