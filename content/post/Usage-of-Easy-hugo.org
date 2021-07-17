@@ -1,0 +1,98 @@
+#+TITLE: 使用 Easy-hugo 管理博客
+#+DATE: 2021-07-17T17:46:27+08:00
+#+DRAFT: false
+#+TAGS[]: Emacs Hugo
+#+CATEGORIES[]: 热爱生活
+
+由于日常主力的编辑器是 Emacs，通过 hugo 维护站点也都是在 Emacs 里面完成。自然的，希望写博客的工作流能够融合进 Emacs 的使用当中。于是，找到了 [[https://github.com/masasam/emacs-easy-hugo][Easy-hugo]] 这个工具。
+
+* 安装 Easy-hugo
+Easy-hugo 的安装与配置都比较简单，官方文档都说的比较清楚了。由于我目前使用的是 Purcell 的Emacs 配置，可以通过下面的配置安装：
+#+begin_src emacs-lisp
+  (when (maybe-require-package 'easy-hugo)
+  (global-set-key (kbd "C-c b") 'easy-hugo)
+  (with-eval-after-load 'easy-hugo
+    (setq easy-hugo-basedir "~/website/eason0210.github.io/")
+    (setq easy-hugo-url "https://eason0210.github.io")
+    (setq easy-hugo-default-ext ".org")))
+
+#+end_src
+
+* 使用 Easy-hugo
+平时需要写博客的时候就按 ~C-c b~ 启动 easy-hugo 的界面。
+- ~n~ 新建 post，编辑完成后， ~C-c b~ , ~p~ 进行预览，效果满意的话，直接 ~C-x g~ 启动 Magit 进行提交，GitHub Action 会自动启动 CI 进行构建更新网站内容。
+- 觉得 post 的名称取得不够好，需要重新命名，可以按 ~R~ ，然后输入新的名字对当前光标所在的 post 进行重命名。
+- 搜索 post， ~f~ 选择 post 名称，如果使用 vertico + orderless 效果会更好。
+- 删除 post， ~d~ 删除不需要的 post。
+   
+Easy-hugo 的大部分功能目前对于我来说暂时是用不到的。
+
+* Easy-hugo 的按键绑定列表
+
+| key       | function                                           |
+|-----------+----------------------------------------------------|
+| RET       | easy-hugo-open                                     |
+| Tab       | easy-hugo-full-help                                |
+| Shift-Tab | easy-hugo-no-help                                  |
+| SPC       | easy-hugo-next-line                                |
+| Shift-SPC | easy-hugo-previous-line                            |
+| ←         | easy-hugo-backward-char                            |
+| →         | easy-hugo-forward-char                             |
+| C-b       | easy-hugo-backward-char                            |
+| C-f       | easy-hugo-forward-char                             |
+| C-n       | easy-hugo-next-line                                |
+| C-p       | easy-hugo-previous-line                            |
+| M-b       | easy-hugo-backward-word                            |
+| M-<       | easy-hugo-beginning-of-buffer                      |
+| .         | easy-hugo-next-postdir                             |
+| ,         | easy-hugo-previous-postdir                         |
+| +         | easy-hugo-next-postdir                             |
+|-----------+----------------------------------------------------|
+| /         | easy-hugo-select-postdir                           |
+| ;         | easy-hugo-select-blog                              |
+| <         | easy-hugo-previous-blog                            |
+| >         | easy-hugo-next-blog                                |
+| ?         | describe-mode                                      |
+| !         | easy-hugo-cancel-firebase-deploy-timer             |
+| A         | easy-hugo-amazon-s3-deploy                         |
+| B         | easy-hugo-firebase-deploy                          |
+| C         | easy-hugo-google-cloud-storage-deploy              |
+| D         | easy-hugo-list-draft                               |
+| F         | easy-hugo-full-help                                |
+| G         | easy-hugo-github-deploy                            |
+| H         | easy-hugo-github-deploy-timer                      |
+| I         | easy-hugo-google-cloud-storage-deploy-timer        |
+| J         | easy-hugo-nth-blog                                 |
+| L         | easy-hugo-firebase-deploy-timer                    |
+| M         | easy-hugo-magit                                    |
+| N         | easy-hugo-no-help                                  |
+| O         | easy-hugo-open-basedir                             |
+| P         | easy-hugo-publish-clever                           |
+| R         | easy-hugo-rename                                   |
+| S         | easy-hugo-sort-char                                |
+| T         | easy-hugo-publish-timer                            |
+| V         | easy-hugo-view-other-window                        |
+| W         | easy-hugo-amazon-s3-deploy-timer                   |
+| a         | easy-hugo-ag                                       |
+| b         | easy-hugo-cancel-github-deploy-timer               |
+| c         | easy-hugo-open-config                              |
+| d         | easy-hugo-delete                                   |
+| e         | easy-hugo-open                                     |
+| f         | easy-hugo-select-filename                          |
+| g         | easy-hugo-refresh                                  |
+| h         | easy-hugo-backward-char                            |
+| i         | easy-hugo-cancel-google-cloud-storage-deploy-timer |
+| j         | easy-hugo-next-line                                |
+| k         | easy-hugo-previous-line                            |
+| l         | easy-hugo-forward-char                             |
+| m         | easy-hugo-cancel-amazon-s3-deploy-timer            |
+| n         | easy-hugo-newpost                                  |
+| o         | easy-hugo-open-other-window                        |
+| p         | easy-hugo-preview                                  |
+| q         | easy-hugo-quit                                     |
+| r         | easy-hugo-refresh                                  |
+| s         | easy-hugo-sort-time                                |
+| t         | easy-hugo-cancel-publish-timer                     |
+| u         | easy-hugo-sort-publishday                          |
+| v         | easy-hugo-view                                     |
+| w         | easy-hugo-newpost                                  |
