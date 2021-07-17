@@ -233,15 +233,3 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
 #  section = ["HTML", "RSS"]
 #  taxonomy = ["HTML", "RSS"]
 #  taxonomyTerm = ["HTML"]
-
-
-# [outputformats]
-# [outputformats.RSS]
-# mediatype = "application/rss"
-# baseName = "atom"
-
-# [frontmatter]
-#   date = [":filename", ":default", ":fileModTime"]
-
-# [permalinks]
-#   post = "/blog/:year/:month/:day/:slug/"
