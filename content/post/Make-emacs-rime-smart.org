@@ -1,10 +1,9 @@
----
-title: "如何让你的 Emacs-rime 更加智能"
-date: 2021-07-15T20:36:16+08:00
-draft: false
-tags: [Emacs, Rime]
-categories: [Tools]
----
+#+TITLE: 如何让你的 Emacs-rime 更加智能
+#+DATE: 2021-07-15T20:36:16+08:00
+#+DRAFT: false
+#+TAGS[]: Emacs Rime
+#+CATEGORIES[]: Tools
+
 在之前的文章中，已经介绍过 [[https://github.com/DogLooksGood/emacs-rime][Emacs-rime]] 在各个平台上的安装。但为了让这个输入法变得更加智能，更加好用，最近更新了 Emacs-rime 的配置，使得它能够在切换为中文时，会自动切换光标的颜色。而且，临时英文模式基于 [[https://github.com/rime/home][Rime]] 的 inline_ascii 模式，能够支持临时模式下输入带空格和符号的长句。
 
 * 自动光标颜色切换
