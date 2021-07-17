@@ -1,0 +1,149 @@
+#+TITLE: 为什么要从 Jekyll 迁移到 Hugo
+#+DATE: 2021-07-17T12:42:52+08:00
+#+DRAFT: false
+#+TAGS[]: Hugo Emacs org-mode
+#+CATEGORIES[]: 热爱生活
+
+之前一直使用 Jekyll 写博客，但 Jekyll 只支持 Markdown 格式，而且 Jekyll 对 Windows 平台的支持很差。即使是在 Mac 平台，安装 Jekyll 也是需要安装一堆依赖，真的是很繁琐。
+
+最近在 [[https://emacs-china.org/t/hexo-hugo/15448/24][Emacs 社区]]中看到很多人都在使用 Hugo ，最吸引人的是，Hugo 是直接支持 org-mode 的，也就是说，可以直接在 Emacs 中通过 org-mode 来写博客了，不需要再转换为 Markdown 格式。而且，Hugo 的安装非常简单，支持 Windows, Mac 和 Linux 平台。
+
+于是，最近花了点时间将我的博客转移到 Hugo 上来，下面简单介绍一些需要注意的地方。
+* 安装 Hugo
+  安装比较简单，直接参考 Hugo [[https://gohugo.io/getting-started/installing/][官网的安装指南]]即可。
+
+** Mac 平台的安装：
+#+begin_src bash
+  brew install hugo
+#+end_src
+
+** Windows 平台的安装：
+#+begin_src bash
+  scoop install hugo
+  # Or install the extended version with:
+  scoop install hugo-extended
+#+end_src
+
+* 创建站点以及主题安装
+  创建站点也是非常简单，可以参考官网的 [[https://gohugo.io/getting-started/quick-start/][QuickStart]] 介绍。
+
+** 创建新站点：
+  #+begin_src bash
+  hugo new site eason0210.github.io
+  #+end_src
+** 添加主题：
+#+begin_src bash
+  cd eason0210.github.io
+  git init
+  git submodule add https://github.com/olOwOlo/hugo-theme-even.git themes/even
+#+end_src
+
+** 配置主题：
+  参考 Even 的[[https://github.com/olOwOlo/hugo-theme-even/blob/master/README-zh.md][官网安装介绍]]。
+  
+*** 修改 ~config.toml~ 文件：
+   在主题的 ~exampleSite~ 目录下有一个 ~config.toml~ 文件，这是网站的主要配置文件，将这个 ~config.toml~ 文件复制到站点的根目录下，根据自己的需求更改即可获得不同的功能以及网站外观。
+
+*** Front Matter 设置：  
+  通过 front-matter 针对每一篇文章单独进行设置。
+  ~themes/even/archetypes/default.md~ 文件列出了所有可用的参数。将该文件复制到站点根目录的 archetypes 文件夹下根据自己的需求进行修改即可。
+  
+  比如我的 default.md 配置如下：
+#+begin_src toml
+---
+title: "{{ replace .Name "-" " " | title }}"
+date: {{ .Date }}
+draft: true
+categories:
+tags:
+---
+
+#+end_src
+
+  默认是没有 default.org 文件的，可以自己创建：
+#+begin_src org
+#+TITLE: {{ replace .Name "-" " " | title }}
+#+DATE: {{ .Date }}
+#+DRAFT: false
+#+TAGS[]:
+#+CATEGORIES[]:
+
+#+end_src
+
+** 添加新的 Post：
+#+begin_src bash
+# With Org-mode
+    hugo new post/my-first-post.org
+# Or with Markdown
+    hugo new post/my-first-post.md
+#+end_src
+注意：使用 Even 主题时，必须是用 post 文件夹，而不能用 posts。
+
+** 启动 Hugo server
+#+begin_src bash
+  hugo server -D
+#+end_src
+
+通过以下地址在本地浏览器中打开站点：
+  
+http://localhost:1313
+
+* 配置 GitHub CI 自动化构建
+执行以下命令，会在站点根目录下的./public/文件夹构建静态站点(-d/--destination 标志可以改变目录位置，或者在 config 文件中设置 publishdir 参数)。
+#+begin_src bash
+hugo -D  
+#+end_src
+
+但是这样很麻烦，每次更新站点内容时，都要手动将 public 文件夹下的内容 push 到 GitHub 上。
+要解决这个问题，实现像 Jekyll 那样，直接 push 要更新的内容，然后 GitHub 自动在后台构建网站，就需要配置 GitHub CI 来自动完成构建的操作。
+
+** 创建自动部署的脚本
+创建 ./.github/workflows/ 目录下，并添加 ~gh-pages.yaml~ 文件到 workflows 文件夹下，内容如下：
+#+begin_src yaml
+name: github pages
+
+on:
+  push:
+    branches:
+      - master  # Set a branch to deploy
+  pull_request:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          # extended: true
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/master'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: hugo
+          publish_dir: ./public
+  
+#+end_src
+
+注意，这里主分支的名称是 ~master~ ， ~public_branch~ 分支的名称是 hugo，可以根据实际情况进行修改。
+
+他的原理是：当你的站点仓库的 master 主分支发生 push 操作时，CI 就会 ubuntu-20.04 上执行下载网站仓库，下载仓库子模块中的主题，然后构建站点到 ./public/ 文件夹，并将文件内容推送 hugo 分支。
+
+** 设置 GitHub Pages 路径
+由于 GitHub Pages 默认是使用 master 分支的，可以在站点仓库的配置界面下将 GitHub Pages 的路径设置为了 hugo 分支的根目录即可。
+
+#+begin_quote
+Enjoy Hugo！
+#+end_quote
+
