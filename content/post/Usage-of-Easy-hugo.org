@@ -9,12 +9,17 @@
 * 安装 Easy-hugo
 Easy-hugo 的安装与配置都比较简单，[[https://github.com/masasam/emacs-easy-hugo][官方文档]]都说的比较清楚了。由于我目前使用的是 [[https://github.com/purcell/emacs.d][Purcell]] 的Emacs 配置，可以通过下面的配置安装：
 #+begin_src emacs-lisp
+(when (executable-find "hugo")
   (when (maybe-require-package 'easy-hugo)
-  (global-set-key (kbd "C-c b") 'easy-hugo)
-  (with-eval-after-load 'easy-hugo
-    (setq easy-hugo-basedir "~/website/eason0210.github.io/")
-    (setq easy-hugo-url "https://eason0210.github.io")
-    (setq easy-hugo-default-ext ".org")))
+    (global-set-key (kbd "C-c b") 'easy-hugo)
+    
+    (with-eval-after-load 'easy-hugo
+      (setq easy-hugo-default-ext ".org")
+      (setq easy-hugo-url "https://eason0210.github.io")
+      (setq easy-hugo-basedir "~/website/eason0210.github.io/")
+      
+      (unless (file-exists-p easy-hugo-basedir)
+        (make-directory easy-hugo-basedir)))))
 
 #+end_src
 
