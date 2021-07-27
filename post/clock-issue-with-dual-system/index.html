@@ -1,26 +1,237 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>Linux Windows 双系统时间不一致 - Eason Huang</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content="no-transform"><meta http-equiv=cache-control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="Eason Huang"><meta name=description content="最近在使用 Windows 10 和 Arch Linux 双系统，但发现从 Linux 系统切换到 Windows 系统的时候，会出现两个系统的时间不一致的情况，一般是相差 8 小时。下面就来分析该问题，并给出"><meta name=keywords content="Hugo,theme,even"><meta name=generator content="Hugo 0.85.0 with theme even"><link rel=canonical href=https://eason0210.github.io/post/clock-issue-with-dual-system/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link href=/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><meta property="og:title" content="Linux Windows 双系统时间不一致"><meta property="og:description" content="最近在使用 Windows 10 和 Arch Linux 双系统，但发现从 Linux 系统切换到 Windows 系统的时候，会出现两个系统的时间不一致的情况，一般是相差 8 小时。下面就来分析该问题，并给出"><meta property="og:type" content="article"><meta property="og:url" content="https://eason0210.github.io/post/clock-issue-with-dual-system/"><meta property="article:section" content="post"><meta property="article:published_time" content="2021-02-22T20:36:16+08:00"><meta property="article:modified_time" content="2021-07-17T09:51:20+08:00"><meta itemprop=name content="Linux Windows 双系统时间不一致"><meta itemprop=description content="最近在使用 Windows 10 和 Arch Linux 双系统，但发现从 Linux 系统切换到 Windows 系统的时候，会出现两个系统的时间不一致的情况，一般是相差 8 小时。下面就来分析该问题，并给出"><meta itemprop=datePublished content="2021-02-22T20:36:16+08:00"><meta itemprop=dateModified content="2021-07-17T09:51:20+08:00"><meta itemprop=wordCount content="955"><meta itemprop=keywords content="Windows,Linux,"><meta name=twitter:card content="summary"><meta name=twitter:title content="Linux Windows 双系统时间不一致"><meta name=twitter:description content="最近在使用 Windows 10 和 Arch Linux 双系统，但发现从 Linux 系统切换到 Windows 系统的时候，会出现两个系统的时间不一致的情况，一般是相差 8 小时。下面就来分析该问题，并给出"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>Peace and freedom</a></div><div class=mobile-navbar-icon><span></span><span></span><span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>最新</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/about/><li class=mobile-menu-item>关于</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>Peace and freedom</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>最新</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/about/>关于</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>Linux Windows 双系统时间不一致</h1><div class=post-meta><span class=post-time>2021-02-22</span><div class=post-category><a href=/categories/develop-tools/>Develop Tools</a></div><span class=more-meta>约 955 字</span>
-<span class=more-meta>预计阅读 2 分钟</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><ul><li><ul><li><a href=#1-原因分析>1. 原因分析</a></li><li><a href=#2-解决办法>2. 解决办法</a></li></ul></li></ul></li></ul></nav></div></div><div class=post-content><p>最近在使用 Windows 10 和 Arch Linux 双系统，但发现从 Linux 系统切换到 Windows 系统的时候，会出现两个系统的时间不一致的情况，一般是相差 8 小时。下面就来分析该问题，并给出解决办法。</p><h3 id=1-原因分析>1. 原因分析</h3><ul><li><p>GMT：Greenwich Mean Time，即格林尼治标准时间，也就是世界时。GMT 以地球自转为基础的时间计量系统，但由于地球自转不均匀，导致 GMT 不精确，现在已经不再作为世界标准时间使用。</p></li><li><p>UTC：Universal Time Coordinated，即协调世界时。UTC 是以原子时秒长为基础，在时刻上尽量接近于 GMT的一种时间计量系统。为确保 UTC 与 GMT 相差不会超过 0.9 秒，在有需要的情况下会在 UTC 内加上正或负闰秒。UTC 现在作为世界标准时间使用。</p></li><li><p>RTC：Real-Time Clock，即实时时钟，在计算机领域作为硬件时钟的简称。</p></li></ul><p>世界上不同地区所在的时区是不同的，这些时区决定了当地的本地时间。比如北京处于东八区，即北京时间为 UTC + 8，
-如果 UTC 时间现在是上午 6 点整，那么北京时间为 14 点整。</p><p>Windows 与 Linux 看待硬件时间的方式不同。Windows 把电脑的硬件时钟（RTC）看成是本地时间，即 RTC = Local Time，Windows 会直接显示硬件时间；而 Linux 则是把电脑的硬件时钟看成 UTC 时间，即 RTC = UTC，那么 Linux 显示的时间就是硬件时间加上时区。</p><h3 id=2-解决办法>2. 解决办法</h3><p>既然知道了问题原因，我们就知道如何去解决，大概思路分为两种，一是让 Windows 认为硬件时钟是 UTC 时间，二是让 Linux 认为硬件时钟是本地时间。</p><h4 id=修改-windows-硬件时钟为-utc-时间>修改 Windows 硬件时钟为 UTC 时间</h4><p>以管理员身份打开 「PowerShell」，输入以下命令：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-bash data-lang=bash>$ Reg add HKLM<span class=se>\S</span>YSTEM<span class=se>\C</span>urrentControlSet<span class=se>\C</span>ontrol<span class=se>\T</span>imeZoneInformation /v RealTimeIsUniversal /t REG_DWORD /d <span class=m>1</span>
-</code></pre></td></tr></table></div></div><p>或者打开「注册表编辑器」，定位到
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>Linux Windows 双系统时间不一致 - Eason Huang</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Eason Huang"><meta name=description content="最近在使用 Windows 10 和 Arch Linux 双系统，但发现从 Linux 系统切换到 Windows 系统的时候，会出现两个系统的时间不一致的情况，一般是相差 8 小时。下面就来分析该问题，并给出"><meta name=keywords content="Hugo,theme,even">
+<meta name=generator content="Hugo 0.86.0 with theme even">
+<link rel=canonical href=https://eason0210.github.io/post/clock-issue-with-dual-system/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="Linux Windows 双系统时间不一致">
+<meta property="og:description" content="最近在使用 Windows 10 和 Arch Linux 双系统，但发现从 Linux 系统切换到 Windows 系统的时候，会出现两个系统的时间不一致的情况，一般是相差 8 小时。下面就来分析该问题，并给出">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://eason0210.github.io/post/clock-issue-with-dual-system/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2021-02-22T20:36:16+08:00">
+<meta property="article:modified_time" content="2021-07-17T09:51:20+08:00">
+<meta itemprop=name content="Linux Windows 双系统时间不一致">
+<meta itemprop=description content="最近在使用 Windows 10 和 Arch Linux 双系统，但发现从 Linux 系统切换到 Windows 系统的时候，会出现两个系统的时间不一致的情况，一般是相差 8 小时。下面就来分析该问题，并给出"><meta itemprop=datePublished content="2021-02-22T20:36:16+08:00">
+<meta itemprop=dateModified content="2021-07-17T09:51:20+08:00">
+<meta itemprop=wordCount content="955">
+<meta itemprop=keywords content="Windows,Linux,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Linux Windows 双系统时间不一致">
+<meta name=twitter:description content="最近在使用 Windows 10 和 Arch Linux 双系统，但发现从 Linux 系统切换到 Windows 系统的时候，会出现两个系统的时间不一致的情况，一般是相差 8 小时。下面就来分析该问题，并给出"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Peace and freedom</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>最新</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>归档</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>标签</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>分类</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>关于</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Peace and freedom</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>最新</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>归档</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>标签</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>分类</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>关于</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>Linux Windows 双系统时间不一致</h1>
+<div class=post-meta>
+<span class=post-time> 2021-02-22 </span>
+<div class=post-category>
+<a href=/categories/develop-tools/> Develop Tools </a>
+</div>
+<span class=more-meta> 约 955 字 </span>
+<span class=more-meta> 预计阅读 2 分钟 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href=#1-原因分析>1. 原因分析</a></li>
+<li><a href=#2-解决办法>2. 解决办法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p>最近在使用 Windows 10 和 Arch Linux 双系统，但发现从 Linux 系统切换到 Windows 系统的时候，会出现两个系统的时间不一致的情况，一般是相差 8 小时。下面就来分析该问题，并给出解决办法。</p>
+<h3 id=1-原因分析>1. 原因分析</h3>
+<ul>
+<li>
+<p>GMT：Greenwich Mean Time，即格林尼治标准时间，也就是世界时。GMT 以地球自转为基础的时间计量系统，但由于地球自转不均匀，导致 GMT 不精确，现在已经不再作为世界标准时间使用。</p>
+</li>
+<li>
+<p>UTC：Universal Time Coordinated，即协调世界时。UTC 是以原子时秒长为基础，在时刻上尽量接近于 GMT的一种时间计量系统。为确保 UTC 与 GMT 相差不会超过 0.9 秒，在有需要的情况下会在 UTC 内加上正或负闰秒。UTC 现在作为世界标准时间使用。</p>
+</li>
+<li>
+<p>RTC：Real-Time Clock，即实时时钟，在计算机领域作为硬件时钟的简称。</p>
+</li>
+</ul>
+<p>世界上不同地区所在的时区是不同的，这些时区决定了当地的本地时间。比如北京处于东八区，即北京时间为 UTC + 8，
+如果 UTC 时间现在是上午 6 点整，那么北京时间为 14 点整。</p>
+<p>Windows 与 Linux 看待硬件时间的方式不同。Windows 把电脑的硬件时钟（RTC）看成是本地时间，即 RTC = Local Time，Windows 会直接显示硬件时间；而 Linux 则是把电脑的硬件时钟看成 UTC 时间，即 RTC = UTC，那么 Linux 显示的时间就是硬件时间加上时区。</p>
+<h3 id=2-解决办法>2. 解决办法</h3>
+<p>既然知道了问题原因，我们就知道如何去解决，大概思路分为两种，一是让 Windows 认为硬件时钟是 UTC 时间，二是让 Linux 认为硬件时钟是本地时间。</p>
+<h4 id=修改-windows-硬件时钟为-utc-时间>修改 Windows 硬件时钟为 UTC 时间</h4>
+<p>以管理员身份打开 「PowerShell」，输入以下命令：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>$ Reg add HKLM<span class=se>\S</span>YSTEM<span class=se>\C</span>urrentControlSet<span class=se>\C</span>ontrol<span class=se>\T</span>imeZoneInformation /v RealTimeIsUniversal /t REG_DWORD /d <span class=m>1</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>或者打开「注册表编辑器」，定位到
 <code>计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation</code>
-目录下，新建一个<code>DWORD</code> 类型，名称为<code>RealTimeIsUniversal</code>的键，并修改键值为 1 即可。</p><h4 id=修改-linux-硬件时钟为本地时间>修改 Linux 硬件时钟为本地时间</h4><p>这里大家可以根据自己 Linux 发行版的方法来修改。我这里给出现在大多数发行版由 <code>timedatectl</code> 来管理时间的修改方法。
-在终端中，输入以下命令：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-bash data-lang=bash>$ timedatectl set-local-rtc <span class=m>1</span> --adjust-system-clock
-</code></pre></td></tr></table></div></div><p>现在，系统时间显示正常了。</p><p>这两种方法中，本人推荐第一种方法，修改 Windows 的时间管理。因为在 Linux 系统中修改后，输入 <code>timedatectl</code> 命令后，会出现警告，提示你使用 RTC 时钟会导致一些程序错误；并且 Windows 也在更改时间管理方式为 UTC 时间。</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
-<span class=item-content>Eason Huang</span></p><p class=copyright-item><span class=item-title>上次更新</span>
-<span class=item-content>2021-07-17
-<a href=https://github.com/Eason0210/eason0210.github.io/commit/0193331b047297ed89423fd4800b52a02a86c04b title="remove date from file name.">(0193331)</a></span></p><p class=copyright-item><span class=item-title>许可协议</span>
-<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span></p></div><footer class=post-footer><div class=post-tags><a href=/tags/windows/>Windows</a>
-<a href=/tags/linux/>Linux</a></div><nav class=post-nav><a class=prev href=/post/install-gccemacs/><i class="iconfont icon-left"></i>
+目录下，新建一个<code>DWORD</code> 类型，名称为<code>RealTimeIsUniversal</code>的键，并修改键值为 1 即可。</p>
+<h4 id=修改-linux-硬件时钟为本地时间>修改 Linux 硬件时钟为本地时间</h4>
+<p>这里大家可以根据自己 Linux 发行版的方法来修改。我这里给出现在大多数发行版由 <code>timedatectl</code> 来管理时间的修改方法。
+在终端中，输入以下命令：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>$ timedatectl set-local-rtc <span class=m>1</span> --adjust-system-clock
+</code></pre></td></tr></table>
+</div>
+</div><p>现在，系统时间显示正常了。</p>
+<p>这两种方法中，本人推荐第一种方法，修改 Windows 的时间管理。因为在 Linux 系统中修改后，输入 <code>timedatectl</code> 命令后，会出现警告，提示你使用 RTC 时钟会导致一些程序错误；并且 Windows 也在更改时间管理方式为 UTC 时间。</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Eason Huang</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2021-07-17
+<a href=https://github.com/Eason0210/eason0210.github.io/commit/0193331b047297ed89423fd4800b52a02a86c04b title="remove date from file name.">(0193331)</a>
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>许可协议</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/windows/>Windows</a>
+<a href=/tags/linux/>Linux</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/install-gccemacs/>
+<i class="iconfont icon-left"></i>
 <span class="prev-text nav-default">GccEmacs 在各个平台上的安装</span>
-<span class="prev-text nav-mobile">上一篇</span></a>
-<a class=next href=/post/git-merge-from-master/><span class="next-text nav-default">更新开源项目 master 分支的最新提交到本地项目</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/git-merge-from-master/>
+<span class="next-text nav-default">更新开源项目 master 分支的最新提交到本地项目</span>
 <span class="next-text nav-mobile">下一篇</span>
-<i class="iconfont icon-right"></i></a></nav></footer></article></div></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:aqua0210@163.com class="iconfont icon-email" title=email></a><a href=https://twitter.com/eason0210 class="iconfont icon-twitter" title=twitter></a><a href=http://github.com/eason0210 class="iconfont icon-github" title=github></a><a href=https://eason0210.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:aqua0210@163.com class="iconfont icon-email" title=email></a>
+<a href=https://twitter.com/eason0210 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://github.com/eason0210 class="iconfont icon-github" title=github></a>
+<a href=https://eason0210.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
 <span class=division>|</span>
-<span class=theme-info>主题 -
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span>
-<span class=copyright-year>&copy;
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<span class=copyright-year>
+&copy;
 2020 -
-2021<span class=heart><i class="iconfont icon-heart"></i></span><span>Eason Huang</span></span></div></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script></body></html>
+2021<span class=heart><i class="iconfont icon-heart"></i></span><span>Eason Huang</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+</body>
+</html>

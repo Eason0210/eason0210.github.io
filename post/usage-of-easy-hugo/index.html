@@ -1,5 +1,131 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>使用 Easy-hugo 管理博客 - Eason Huang</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content="no-transform"><meta http-equiv=cache-control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="Eason Huang"><meta name=description content="由于日常主力的编辑器是 Emacs，通过 hugo 维护站点也都是在 Emacs 里面完成。自然的，希望写博客的工作流能够融合进 Emacs 的使用当中。于是，找到了 Easy-hugo 这个工具"><meta name=keywords content="Hugo,theme,even"><meta name=generator content="Hugo 0.85.0 with theme even"><link rel=canonical href=https://eason0210.github.io/post/usage-of-easy-hugo/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link href=/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><meta property="og:title" content="使用 Easy-hugo 管理博客"><meta property="og:description" content="由于日常主力的编辑器是 Emacs，通过 hugo 维护站点也都是在 Emacs 里面完成。自然的，希望写博客的工作流能够融合进 Emacs 的使用当中。于是，找到了 Easy-hugo 这个工具"><meta property="og:type" content="article"><meta property="og:url" content="https://eason0210.github.io/post/usage-of-easy-hugo/"><meta property="article:section" content="post"><meta property="article:published_time" content="2021-07-17T17:46:27+08:00"><meta property="article:modified_time" content="2021-07-18T23:24:58+08:00"><meta itemprop=name content="使用 Easy-hugo 管理博客"><meta itemprop=description content="由于日常主力的编辑器是 Emacs，通过 hugo 维护站点也都是在 Emacs 里面完成。自然的，希望写博客的工作流能够融合进 Emacs 的使用当中。于是，找到了 Easy-hugo 这个工具"><meta itemprop=datePublished content="2021-07-17T17:46:27+08:00"><meta itemprop=dateModified content="2021-07-18T23:24:58+08:00"><meta itemprop=wordCount content="512"><meta itemprop=keywords content="Emacs,Hugo,"><meta name=twitter:card content="summary"><meta name=twitter:title content="使用 Easy-hugo 管理博客"><meta name=twitter:description content="由于日常主力的编辑器是 Emacs，通过 hugo 维护站点也都是在 Emacs 里面完成。自然的，希望写博客的工作流能够融合进 Emacs 的使用当中。于是，找到了 Easy-hugo 这个工具"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>Peace and freedom</a></div><div class=mobile-navbar-icon><span></span><span></span><span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>最新</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/about/><li class=mobile-menu-item>关于</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>Peace and freedom</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>最新</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/about/>关于</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>使用 Easy-hugo 管理博客</h1><div class=post-meta><span class=post-time>2021-07-17</span><div class=post-category><a href=/categories/%E7%83%AD%E7%88%B1%E7%94%9F%E6%B4%BB/>热爱生活</a></div><span class=more-meta>约 512 字</span>
-<span class=more-meta>预计阅读 2 分钟</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><a href=#headline-1>安装 Easy-hugo</a></li><li><a href=#headline-2>使用 Easy-hugo</a></li><li><a href=#headline-3>Easy-hugo 的按键绑定列表</a></li></ul></nav></div></div><div class=post-content><p>由于日常主力的编辑器是 Emacs，通过 hugo 维护站点也都是在 Emacs 里面完成。自然的，希望写博客的工作流能够融合进 Emacs 的使用当中。于是，找到了 <a href=https://github.com/masasam/emacs-easy-hugo>Easy-hugo</a> 这个工具。</p><div id=outline-container-headline-1 class=outline-2><h2 id=headline-1>安装 Easy-hugo</h2><div id=outline-text-headline-1 class=outline-text-2><p>Easy-hugo 的安装与配置都比较简单，<a href=https://github.com/masasam/emacs-easy-hugo>官方文档</a>都说的比较清楚了。由于我目前使用的是 <a href=https://github.com/purcell/emacs.d>Purcell</a> 的Emacs 配置，可以通过下面的配置安装：</p><div class="src src-emacs-lisp"><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>使用 Easy-hugo 管理博客 - Eason Huang</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Eason Huang"><meta name=description content="由于日常主力的编辑器是 Emacs，通过 hugo 维护站点也都是在 Emacs 里面完成。自然的，希望写博客的工作流能够融合进 Emacs 的使用当中。于是，找到了 Easy-hugo 这个工具"><meta name=keywords content="Hugo,theme,even">
+<meta name=generator content="Hugo 0.86.0 with theme even">
+<link rel=canonical href=https://eason0210.github.io/post/usage-of-easy-hugo/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="使用 Easy-hugo 管理博客">
+<meta property="og:description" content="由于日常主力的编辑器是 Emacs，通过 hugo 维护站点也都是在 Emacs 里面完成。自然的，希望写博客的工作流能够融合进 Emacs 的使用当中。于是，找到了 Easy-hugo 这个工具">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://eason0210.github.io/post/usage-of-easy-hugo/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2021-07-17T17:46:27+08:00">
+<meta property="article:modified_time" content="2021-07-18T23:24:58+08:00">
+<meta itemprop=name content="使用 Easy-hugo 管理博客">
+<meta itemprop=description content="由于日常主力的编辑器是 Emacs，通过 hugo 维护站点也都是在 Emacs 里面完成。自然的，希望写博客的工作流能够融合进 Emacs 的使用当中。于是，找到了 Easy-hugo 这个工具"><meta itemprop=datePublished content="2021-07-17T17:46:27+08:00">
+<meta itemprop=dateModified content="2021-07-18T23:24:58+08:00">
+<meta itemprop=wordCount content="512">
+<meta itemprop=keywords content="Emacs,Hugo,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="使用 Easy-hugo 管理博客">
+<meta name=twitter:description content="由于日常主力的编辑器是 Emacs，通过 hugo 维护站点也都是在 Emacs 里面完成。自然的，希望写博客的工作流能够融合进 Emacs 的使用当中。于是，找到了 Easy-hugo 这个工具"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Peace and freedom</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>最新</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>归档</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>标签</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>分类</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>关于</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Peace and freedom</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>最新</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>归档</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>标签</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>分类</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>关于</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>使用 Easy-hugo 管理博客</h1>
+<div class=post-meta>
+<span class=post-time> 2021-07-17 </span>
+<div class=post-category>
+<a href=/categories/%E7%83%AD%E7%88%B1%E7%94%9F%E6%B4%BB/> 热爱生活 </a>
+</div>
+<span class=more-meta> 约 512 字 </span>
+<span class=more-meta> 预计阅读 2 分钟 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#headline-1>安装 Easy-hugo</a>
+</li>
+<li><a href=#headline-2>使用 Easy-hugo</a>
+</li>
+<li><a href=#headline-3>Easy-hugo 的按键绑定列表</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p>
+由于日常主力的编辑器是 Emacs，通过 hugo 维护站点也都是在 Emacs 里面完成。自然的，希望写博客的工作流能够融合进 Emacs 的使用当中。于是，找到了 <a href=https://github.com/masasam/emacs-easy-hugo>Easy-hugo</a> 这个工具。</p>
+<div id=outline-container-headline-1 class=outline-2>
+<h2 id=headline-1>
+安装 Easy-hugo
+</h2>
+<div id=outline-text-headline-1 class=outline-text-2>
+<p>Easy-hugo 的安装与配置都比较简单，<a href=https://github.com/masasam/emacs-easy-hugo>官方文档</a>都说的比较清楚了。由于我目前使用的是 <a href=https://github.com/purcell/emacs.d>Purcell</a> 的Emacs 配置，可以通过下面的配置安装：</p>
+<div class="src src-emacs-lisp">
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -10,7 +136,9 @@
 </span><span class=lnt> 9
 </span><span class=lnt>10
 </span><span class=lnt>11
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-emacs-lisp data-lang=emacs-lisp><span class=p>(</span><span class=nb>when</span> <span class=p>(</span><span class=nv>executable-find</span> <span class=s>&#34;hugo&#34;</span><span class=p>)</span>
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-emacs-lisp data-lang=emacs-lisp><span class=p>(</span><span class=nb>when</span> <span class=p>(</span><span class=nv>executable-find</span> <span class=s>&#34;hugo&#34;</span><span class=p>)</span>
   <span class=p>(</span><span class=nb>when</span> <span class=p>(</span><span class=nv>maybe-require-package</span> <span class=ss>&#39;easy-hugo</span><span class=p>)</span>
     <span class=p>(</span><span class=nv>global-set-key</span> <span class=p>(</span><span class=nv>kbd</span> <span class=s>&#34;C-c b&#34;</span><span class=p>)</span> <span class=ss>&#39;easy-hugo</span><span class=p>)</span>
     
@@ -20,17 +148,380 @@
       <span class=p>(</span><span class=nb>setq</span> <span class=nv>easy-hugo-basedir</span> <span class=s>&#34;~/website/eason0210.github.io/&#34;</span><span class=p>)</span>
       
       <span class=p>(</span><span class=nb>unless</span> <span class=p>(</span><span class=nf>file-exists-p</span> <span class=nv>easy-hugo-basedir</span><span class=p>)</span>
-        <span class=p>(</span><span class=nv>make-directory</span> <span class=nv>easy-hugo-basedir</span><span class=p>)))))</span></code></pre></td></tr></table></div></div></div></div></div><div id=outline-container-headline-2 class=outline-2><h2 id=headline-2>使用 Easy-hugo</h2><div id=outline-text-headline-2 class=outline-text-2><p>平时需要写博客的时候就按 <code>C-c b</code> 启动 easy-hugo 的界面。</p><ul><li><p><code>n</code> 新建 post，编辑完成后， <code>C-c b</code> , <code>p</code> 进行预览，效果满意的话，直接 <code>C-x g</code> 启动 Magit 进行提交，GitHub Action 会自动启动 CI 进行构建更新网站内容。</p></li><li><p>觉得 post 的名称取得不够好，需要重新命名，可以按 <code>R</code> ，然后输入新的名字对当前光标所在的 post 进行重命名。</p></li><li><p>搜索 post， <code>f</code> 选择 post 名称，如果使用 <a href=https://github.com/minad/vertico>vertico</a> + <a href=https://github.com/oantolin/orderless>orderless</a> 效果会更好。</p></li><li><p>删除 post， <code>d</code> 删除不需要的 post。</p></li></ul><p>Easy-hugo 的大部分功能目前对于我来说暂时是用不到的。</p></div></div><div id=outline-container-headline-3 class=outline-2><h2 id=headline-3>Easy-hugo 的按键绑定列表</h2><div id=outline-text-headline-3 class=outline-text-2><table><thead><tr><th>key</th><th>function</th></tr></thead><tbody><tr><td>RET</td><td>easy-hugo-open</td></tr><tr><td>Tab</td><td>easy-hugo-full-help</td></tr><tr><td>Shift-Tab</td><td>easy-hugo-no-help</td></tr><tr><td>SPC</td><td>easy-hugo-next-line</td></tr><tr><td>Shift-SPC</td><td>easy-hugo-previous-line</td></tr><tr><td>←</td><td>easy-hugo-backward-char</td></tr><tr><td>→</td><td>easy-hugo-forward-char</td></tr><tr><td>C-b</td><td>easy-hugo-backward-char</td></tr><tr><td>C-f</td><td>easy-hugo-forward-char</td></tr><tr><td>C-n</td><td>easy-hugo-next-line</td></tr><tr><td>C-p</td><td>easy-hugo-previous-line</td></tr><tr><td>M-b</td><td>easy-hugo-backward-word</td></tr><tr><td>M-&lt;</td><td>easy-hugo-beginning-of-buffer</td></tr><tr><td>.</td><td>easy-hugo-next-postdir</td></tr><tr><td>,</td><td>easy-hugo-previous-postdir</td></tr><tr><td>+</td><td>easy-hugo-next-postdir</td></tr></tbody><tbody><tr><td>/</td><td>easy-hugo-select-postdir</td></tr><tr><td>;</td><td>easy-hugo-select-blog</td></tr><tr><td>&lt;</td><td>easy-hugo-previous-blog</td></tr><tr><td>></td><td>easy-hugo-next-blog</td></tr><tr><td>?</td><td>describe-mode</td></tr><tr><td>!</td><td>easy-hugo-cancel-firebase-deploy-timer</td></tr><tr><td>A</td><td>easy-hugo-amazon-s3-deploy</td></tr><tr><td>B</td><td>easy-hugo-firebase-deploy</td></tr><tr><td>C</td><td>easy-hugo-google-cloud-storage-deploy</td></tr><tr><td>D</td><td>easy-hugo-list-draft</td></tr><tr><td>F</td><td>easy-hugo-full-help</td></tr><tr><td>G</td><td>easy-hugo-github-deploy</td></tr><tr><td>H</td><td>easy-hugo-github-deploy-timer</td></tr><tr><td>I</td><td>easy-hugo-google-cloud-storage-deploy-timer</td></tr><tr><td>J</td><td>easy-hugo-nth-blog</td></tr><tr><td>L</td><td>easy-hugo-firebase-deploy-timer</td></tr><tr><td>M</td><td>easy-hugo-magit</td></tr><tr><td>N</td><td>easy-hugo-no-help</td></tr><tr><td>O</td><td>easy-hugo-open-basedir</td></tr><tr><td>P</td><td>easy-hugo-publish-clever</td></tr><tr><td>R</td><td>easy-hugo-rename</td></tr><tr><td>S</td><td>easy-hugo-sort-char</td></tr><tr><td>T</td><td>easy-hugo-publish-timer</td></tr><tr><td>V</td><td>easy-hugo-view-other-window</td></tr><tr><td>W</td><td>easy-hugo-amazon-s3-deploy-timer</td></tr><tr><td>a</td><td>easy-hugo-ag</td></tr><tr><td>b</td><td>easy-hugo-cancel-github-deploy-timer</td></tr><tr><td>c</td><td>easy-hugo-open-config</td></tr><tr><td>d</td><td>easy-hugo-delete</td></tr><tr><td>e</td><td>easy-hugo-open</td></tr><tr><td>f</td><td>easy-hugo-select-filename</td></tr><tr><td>g</td><td>easy-hugo-refresh</td></tr><tr><td>h</td><td>easy-hugo-backward-char</td></tr><tr><td>i</td><td>easy-hugo-cancel-google-cloud-storage-deploy-timer</td></tr><tr><td>j</td><td>easy-hugo-next-line</td></tr><tr><td>k</td><td>easy-hugo-previous-line</td></tr><tr><td>l</td><td>easy-hugo-forward-char</td></tr><tr><td>m</td><td>easy-hugo-cancel-amazon-s3-deploy-timer</td></tr><tr><td>n</td><td>easy-hugo-newpost</td></tr><tr><td>o</td><td>easy-hugo-open-other-window</td></tr><tr><td>p</td><td>easy-hugo-preview</td></tr><tr><td>q</td><td>easy-hugo-quit</td></tr><tr><td>r</td><td>easy-hugo-refresh</td></tr><tr><td>s</td><td>easy-hugo-sort-time</td></tr><tr><td>t</td><td>easy-hugo-cancel-publish-timer</td></tr><tr><td>u</td><td>easy-hugo-sort-publishday</td></tr><tr><td>v</td><td>easy-hugo-view</td></tr><tr><td>w</td><td>easy-hugo-newpost</td></tr></tbody></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
-<span class=item-content>Eason Huang</span></p><p class=copyright-item><span class=item-title>上次更新</span>
-<span class=item-content>2021-07-18
-<a href=https://github.com/Eason0210/eason0210.github.io/commit/a1248625957110ca0648b12125a6d7214c9a4316 title="update Usage-of-Easy-hugo.org">(a124862)</a></span></p><p class=copyright-item><span class=item-title>许可协议</span>
-<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span></p></div><footer class=post-footer><div class=post-tags><a href=/tags/emacs/>Emacs</a>
-<a href=/tags/hugo/>Hugo</a></div><nav class=post-nav><a class=next href=/post/why-move-from-jekyll2hugo/><span class="next-text nav-default">为什么要从 Jekyll 迁移到 Hugo</span>
+        <span class=p>(</span><span class=nv>make-directory</span> <span class=nv>easy-hugo-basedir</span><span class=p>)))))</span></code></pre></td></tr></table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id=outline-container-headline-2 class=outline-2>
+<h2 id=headline-2>
+使用 Easy-hugo
+</h2>
+<div id=outline-text-headline-2 class=outline-text-2>
+<p>平时需要写博客的时候就按 <code>C-c b</code> 启动 easy-hugo 的界面。</p>
+<ul>
+<li>
+<p><code>n</code> 新建 post，编辑完成后， <code>C-c b</code> , <code>p</code> 进行预览，效果满意的话，直接 <code>C-x g</code> 启动 Magit 进行提交，GitHub Action 会自动启动 CI 进行构建更新网站内容。</p>
+</li>
+<li>
+<p>觉得 post 的名称取得不够好，需要重新命名，可以按 <code>R</code> ，然后输入新的名字对当前光标所在的 post 进行重命名。</p>
+</li>
+<li>
+<p>搜索 post， <code>f</code> 选择 post 名称，如果使用 <a href=https://github.com/minad/vertico>vertico</a> + <a href=https://github.com/oantolin/orderless>orderless</a> 效果会更好。</p>
+</li>
+<li>
+<p>删除 post， <code>d</code> 删除不需要的 post。</p>
+</li>
+</ul>
+<p>Easy-hugo 的大部分功能目前对于我来说暂时是用不到的。</p>
+</div>
+</div>
+<div id=outline-container-headline-3 class=outline-2>
+<h2 id=headline-3>
+Easy-hugo 的按键绑定列表
+</h2>
+<div id=outline-text-headline-3 class=outline-text-2>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RET</td>
+<td>easy-hugo-open</td>
+</tr>
+<tr>
+<td>Tab</td>
+<td>easy-hugo-full-help</td>
+</tr>
+<tr>
+<td>Shift-Tab</td>
+<td>easy-hugo-no-help</td>
+</tr>
+<tr>
+<td>SPC</td>
+<td>easy-hugo-next-line</td>
+</tr>
+<tr>
+<td>Shift-SPC</td>
+<td>easy-hugo-previous-line</td>
+</tr>
+<tr>
+<td>←</td>
+<td>easy-hugo-backward-char</td>
+</tr>
+<tr>
+<td>→</td>
+<td>easy-hugo-forward-char</td>
+</tr>
+<tr>
+<td>C-b</td>
+<td>easy-hugo-backward-char</td>
+</tr>
+<tr>
+<td>C-f</td>
+<td>easy-hugo-forward-char</td>
+</tr>
+<tr>
+<td>C-n</td>
+<td>easy-hugo-next-line</td>
+</tr>
+<tr>
+<td>C-p</td>
+<td>easy-hugo-previous-line</td>
+</tr>
+<tr>
+<td>M-b</td>
+<td>easy-hugo-backward-word</td>
+</tr>
+<tr>
+<td>M-&lt;</td>
+<td>easy-hugo-beginning-of-buffer</td>
+</tr>
+<tr>
+<td>.</td>
+<td>easy-hugo-next-postdir</td>
+</tr>
+<tr>
+<td>,</td>
+<td>easy-hugo-previous-postdir</td>
+</tr>
+<tr>
+<td>+</td>
+<td>easy-hugo-next-postdir</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td>/</td>
+<td>easy-hugo-select-postdir</td>
+</tr>
+<tr>
+<td>;</td>
+<td>easy-hugo-select-blog</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>easy-hugo-previous-blog</td>
+</tr>
+<tr>
+<td>></td>
+<td>easy-hugo-next-blog</td>
+</tr>
+<tr>
+<td>?</td>
+<td>describe-mode</td>
+</tr>
+<tr>
+<td>!</td>
+<td>easy-hugo-cancel-firebase-deploy-timer</td>
+</tr>
+<tr>
+<td>A</td>
+<td>easy-hugo-amazon-s3-deploy</td>
+</tr>
+<tr>
+<td>B</td>
+<td>easy-hugo-firebase-deploy</td>
+</tr>
+<tr>
+<td>C</td>
+<td>easy-hugo-google-cloud-storage-deploy</td>
+</tr>
+<tr>
+<td>D</td>
+<td>easy-hugo-list-draft</td>
+</tr>
+<tr>
+<td>F</td>
+<td>easy-hugo-full-help</td>
+</tr>
+<tr>
+<td>G</td>
+<td>easy-hugo-github-deploy</td>
+</tr>
+<tr>
+<td>H</td>
+<td>easy-hugo-github-deploy-timer</td>
+</tr>
+<tr>
+<td>I</td>
+<td>easy-hugo-google-cloud-storage-deploy-timer</td>
+</tr>
+<tr>
+<td>J</td>
+<td>easy-hugo-nth-blog</td>
+</tr>
+<tr>
+<td>L</td>
+<td>easy-hugo-firebase-deploy-timer</td>
+</tr>
+<tr>
+<td>M</td>
+<td>easy-hugo-magit</td>
+</tr>
+<tr>
+<td>N</td>
+<td>easy-hugo-no-help</td>
+</tr>
+<tr>
+<td>O</td>
+<td>easy-hugo-open-basedir</td>
+</tr>
+<tr>
+<td>P</td>
+<td>easy-hugo-publish-clever</td>
+</tr>
+<tr>
+<td>R</td>
+<td>easy-hugo-rename</td>
+</tr>
+<tr>
+<td>S</td>
+<td>easy-hugo-sort-char</td>
+</tr>
+<tr>
+<td>T</td>
+<td>easy-hugo-publish-timer</td>
+</tr>
+<tr>
+<td>V</td>
+<td>easy-hugo-view-other-window</td>
+</tr>
+<tr>
+<td>W</td>
+<td>easy-hugo-amazon-s3-deploy-timer</td>
+</tr>
+<tr>
+<td>a</td>
+<td>easy-hugo-ag</td>
+</tr>
+<tr>
+<td>b</td>
+<td>easy-hugo-cancel-github-deploy-timer</td>
+</tr>
+<tr>
+<td>c</td>
+<td>easy-hugo-open-config</td>
+</tr>
+<tr>
+<td>d</td>
+<td>easy-hugo-delete</td>
+</tr>
+<tr>
+<td>e</td>
+<td>easy-hugo-open</td>
+</tr>
+<tr>
+<td>f</td>
+<td>easy-hugo-select-filename</td>
+</tr>
+<tr>
+<td>g</td>
+<td>easy-hugo-refresh</td>
+</tr>
+<tr>
+<td>h</td>
+<td>easy-hugo-backward-char</td>
+</tr>
+<tr>
+<td>i</td>
+<td>easy-hugo-cancel-google-cloud-storage-deploy-timer</td>
+</tr>
+<tr>
+<td>j</td>
+<td>easy-hugo-next-line</td>
+</tr>
+<tr>
+<td>k</td>
+<td>easy-hugo-previous-line</td>
+</tr>
+<tr>
+<td>l</td>
+<td>easy-hugo-forward-char</td>
+</tr>
+<tr>
+<td>m</td>
+<td>easy-hugo-cancel-amazon-s3-deploy-timer</td>
+</tr>
+<tr>
+<td>n</td>
+<td>easy-hugo-newpost</td>
+</tr>
+<tr>
+<td>o</td>
+<td>easy-hugo-open-other-window</td>
+</tr>
+<tr>
+<td>p</td>
+<td>easy-hugo-preview</td>
+</tr>
+<tr>
+<td>q</td>
+<td>easy-hugo-quit</td>
+</tr>
+<tr>
+<td>r</td>
+<td>easy-hugo-refresh</td>
+</tr>
+<tr>
+<td>s</td>
+<td>easy-hugo-sort-time</td>
+</tr>
+<tr>
+<td>t</td>
+<td>easy-hugo-cancel-publish-timer</td>
+</tr>
+<tr>
+<td>u</td>
+<td>easy-hugo-sort-publishday</td>
+</tr>
+<tr>
+<td>v</td>
+<td>easy-hugo-view</td>
+</tr>
+<tr>
+<td>w</td>
+<td>easy-hugo-newpost</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Eason Huang</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2021-07-18
+<a href=https://github.com/Eason0210/eason0210.github.io/commit/a1248625957110ca0648b12125a6d7214c9a4316 title="update Usage-of-Easy-hugo.org">(a124862)</a>
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>许可协议</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/emacs/>Emacs</a>
+<a href=/tags/hugo/>Hugo</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/install-emacs-rime-with-msys2/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">基于 msys2 安装 Emacs-rime</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/why-move-from-jekyll2hugo/>
+<span class="next-text nav-default">为什么要从 Jekyll 迁移到 Hugo</span>
 <span class="next-text nav-mobile">下一篇</span>
-<i class="iconfont icon-right"></i></a></nav></footer></article></div></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:aqua0210@163.com class="iconfont icon-email" title=email></a><a href=https://twitter.com/eason0210 class="iconfont icon-twitter" title=twitter></a><a href=http://github.com/eason0210 class="iconfont icon-github" title=github></a><a href=https://eason0210.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:aqua0210@163.com class="iconfont icon-email" title=email></a>
+<a href=https://twitter.com/eason0210 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://github.com/eason0210 class="iconfont icon-github" title=github></a>
+<a href=https://eason0210.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
 <span class=division>|</span>
-<span class=theme-info>主题 -
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span>
-<span class=copyright-year>&copy;
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<span class=copyright-year>
+&copy;
 2020 -
-2021<span class=heart><i class="iconfont icon-heart"></i></span><span>Eason Huang</span></span></div></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script></body></html>
+2021<span class=heart><i class="iconfont icon-heart"></i></span><span>Eason Huang</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+</body>
+</html>

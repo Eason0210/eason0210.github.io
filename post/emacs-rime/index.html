@@ -1,5 +1,137 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>Windows 10 安装emacs-rime - Eason Huang</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content="no-transform"><meta http-equiv=cache-control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="Eason Huang"><meta name=description content="emacs-rime是RIME输入法的Emacs UI前端，所有行为都通过RIME配置文件来配置。但是Emacs-rime在Windwos系统"><meta name=keywords content="Hugo,theme,even"><meta name=generator content="Hugo 0.85.0 with theme even"><link rel=canonical href=https://eason0210.github.io/post/emacs-rime/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link href=/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><meta property="og:title" content="Windows 10 安装emacs-rime"><meta property="og:description" content="emacs-rime是RIME输入法的Emacs UI前端，所有行为都通过RIME配置文件来配置。但是Emacs-rime在Windwos系统"><meta property="og:type" content="article"><meta property="og:url" content="https://eason0210.github.io/post/emacs-rime/"><meta property="article:section" content="post"><meta property="article:published_time" content="2020-04-25T20:36:16+08:00"><meta property="article:modified_time" content="2021-07-17T09:51:20+08:00"><meta itemprop=name content="Windows 10 安装emacs-rime"><meta itemprop=description content="emacs-rime是RIME输入法的Emacs UI前端，所有行为都通过RIME配置文件来配置。但是Emacs-rime在Windwos系统"><meta itemprop=datePublished content="2020-04-25T20:36:16+08:00"><meta itemprop=dateModified content="2021-07-17T09:51:20+08:00"><meta itemprop=wordCount content="1672"><meta itemprop=keywords content="Emacs,"><meta name=twitter:card content="summary"><meta name=twitter:title content="Windows 10 安装emacs-rime"><meta name=twitter:description content="emacs-rime是RIME输入法的Emacs UI前端，所有行为都通过RIME配置文件来配置。但是Emacs-rime在Windwos系统"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>Peace and freedom</a></div><div class=mobile-navbar-icon><span></span><span></span><span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>最新</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/about/><li class=mobile-menu-item>关于</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>Peace and freedom</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>最新</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/about/>关于</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>Windows 10 安装emacs-rime</h1><div class=post-meta><span class=post-time>2020-04-25</span><div class=post-category><a href=/categories/tools/>Tools</a></div><span class=more-meta>约 1672 字</span>
-<span class=more-meta>预计阅读 4 分钟</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><ul><li><ul><li><a href=#安装rime输入法>安装RIME输入法</a></li><li><a href=#配置rime输入法>配置RIME输入法</a></li><li><a href=#安装依赖>安装依赖</a></li><li><a href=#编译librime>编译librime</a></li><li><a href=#编译-librime-emacsdll>编译 librime-emacs.dll</a></li><li><a href=#安装emacs-rime>安装emacs-rime</a></li><li><a href=#emacs-rime的优点>emacs-rime的优点</a></li></ul></li></ul></li></ul></nav></div></div><div class=post-content><p>emacs-rime是RIME输入法的Emacs UI前端，所有行为都通过RIME配置文件来配置。但是Emacs-rime在Windwos系统下比较难安装，最近有人更新了Windows下编译emacs-rime的脚本，可以成功在Windows上使用。</p><h3 id=安装rime输入法>安装RIME输入法</h3><p>通过<a href=https://rime.im/>RIME官网</a>安装，Windows下名字叫小狼豪。</p><h3 id=配置rime输入法>配置RIME输入法</h3><h4 id=默认使用简体>默认使用简体</h4><p>创建配置文件 %appdata%/Rime/luna_pinyin.custom.yaml，内容填上：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>Windows 10 安装emacs-rime - Eason Huang</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Eason Huang"><meta name=description content="emacs-rime是RIME输入法的Emacs UI前端，所有行为都通过RIME配置文件来配置。但是Emacs-rime在Windwos系统"><meta name=keywords content="Hugo,theme,even">
+<meta name=generator content="Hugo 0.86.0 with theme even">
+<link rel=canonical href=https://eason0210.github.io/post/emacs-rime/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<link href=/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="Windows 10 安装emacs-rime">
+<meta property="og:description" content="emacs-rime是RIME输入法的Emacs UI前端，所有行为都通过RIME配置文件来配置。但是Emacs-rime在Windwos系统">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://eason0210.github.io/post/emacs-rime/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2020-04-25T20:36:16+08:00">
+<meta property="article:modified_time" content="2021-07-17T09:51:20+08:00">
+<meta itemprop=name content="Windows 10 安装emacs-rime">
+<meta itemprop=description content="emacs-rime是RIME输入法的Emacs UI前端，所有行为都通过RIME配置文件来配置。但是Emacs-rime在Windwos系统"><meta itemprop=datePublished content="2020-04-25T20:36:16+08:00">
+<meta itemprop=dateModified content="2021-07-17T09:51:20+08:00">
+<meta itemprop=wordCount content="1672">
+<meta itemprop=keywords content="Emacs,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Windows 10 安装emacs-rime">
+<meta name=twitter:description content="emacs-rime是RIME输入法的Emacs UI前端，所有行为都通过RIME配置文件来配置。但是Emacs-rime在Windwos系统"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Peace and freedom</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>最新</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>归档</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>标签</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>分类</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>关于</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Peace and freedom</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>最新</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>归档</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>标签</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>分类</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>关于</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>Windows 10 安装emacs-rime</h1>
+<div class=post-meta>
+<span class=post-time> 2020-04-25 </span>
+<div class=post-category>
+<a href=/categories/tools/> Tools </a>
+</div>
+<span class=more-meta> 约 1672 字 </span>
+<span class=more-meta> 预计阅读 4 分钟 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href=#安装rime输入法>安装RIME输入法</a></li>
+<li><a href=#配置rime输入法>配置RIME输入法</a></li>
+<li><a href=#安装依赖>安装依赖</a></li>
+<li><a href=#编译librime>编译librime</a></li>
+<li><a href=#编译-librime-emacsdll>编译 librime-emacs.dll</a></li>
+<li><a href=#安装emacs-rime>安装emacs-rime</a></li>
+<li><a href=#emacs-rime的优点>emacs-rime的优点</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p>emacs-rime是RIME输入法的Emacs UI前端，所有行为都通过RIME配置文件来配置。但是Emacs-rime在Windwos系统下比较难安装，最近有人更新了Windows下编译emacs-rime的脚本，可以成功在Windows上使用。</p>
+<h3 id=安装rime输入法>安装RIME输入法</h3>
+<p>通过<a href=https://rime.im/>RIME官网</a>安装，Windows下名字叫小狼豪。</p>
+<h3 id=配置rime输入法>配置RIME输入法</h3>
+<h4 id=默认使用简体>默认使用简体</h4>
+<p>创建配置文件 %appdata%/Rime/luna_pinyin.custom.yaml，内容填上：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -11,7 +143,9 @@
 </span><span class=lnt>10
 </span><span class=lnt>11
 </span><span class=lnt>12
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-yaml data-lang=yaml><span class=c># luna_pinyin.custom.yaml</span><span class=w>
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=c># luna_pinyin.custom.yaml</span><span class=w>
 </span><span class=w>
 </span><span class=w></span><span class=nt>patch</span><span class=p>:</span><span class=w>
 </span><span class=w>  </span><span class=nt>switches</span><span class=p>:</span><span class=w>                   </span><span class=c># 注意缩进</span><span class=w>
@@ -23,11 +157,25 @@
 </span><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>simplification</span><span class=w>
 </span><span class=w>      </span><span class=nt>reset</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>                </span><span class=c># 增加这一行：默认启用「繁→簡」转换。</span><span class=w>
 </span><span class=w>      </span><span class=nt>states</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=l>漢字, 汉字 ]</span><span class=w>
-</span></code></pre></td></tr></table></div></div><h4 id=修改默认后选词数量>修改默认后选词数量</h4><p>创建配置文件 %appdata%/Rime/default.custom.yaml，内容填上：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id=修改默认后选词数量>修改默认后选词数量</h4>
+<p>创建配置文件 %appdata%/Rime/default.custom.yaml，内容填上：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-yaml data-lang=yaml><span class=nt>patch</span><span class=p>:</span><span class=w>
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>patch</span><span class=p>:</span><span class=w>
 </span><span class=w>  </span><span class=nt>&#34;menu/page_size&#34;: </span><span class=m>6</span><span class=w>
-</span></code></pre></td></tr></table></div></div><h4 id=配置模糊音>配置模糊音</h4><p>对于拼音发音不标准的人，可以在 %appdata%/Rime/default.custom.yaml 配置文件中继续追加下面配置(我本人不用)</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id=配置模糊音>配置模糊音</h4>
+<p>对于拼音发音不标准的人，可以在 %appdata%/Rime/default.custom.yaml 配置文件中继续追加下面配置(我本人不用)</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -64,7 +212,9 @@
 </span><span class=lnt>35
 </span><span class=lnt>36
 </span><span class=lnt>37
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-yaml data-lang=yaml><span class=w>  </span><span class=nt>&#39;speller/algebra&#39;</span><span class=p>:</span><span class=w>
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=w>  </span><span class=nt>&#39;speller/algebra&#39;</span><span class=p>:</span><span class=w>
 </span><span class=w>    </span>- <span class=l>erase/^xx$/                     </span><span class=w> </span><span class=c># 第一行保留</span><span class=w>
 </span><span class=w>
 </span><span class=w>    </span><span class=c># 模糊音定義</span><span class=w>
@@ -101,18 +251,62 @@
 </span><span class=w>    </span>- <span class=l>derive/ong$/on/                 </span><span class=w> </span><span class=c># zhonguo =&gt; zhong guo</span><span class=w>
 </span><span class=w>    </span>- <span class=l>derive/ao$/oa/                  </span><span class=w> </span><span class=c># hoa =&gt; hao</span><span class=w>
 </span><span class=w>    </span>- <span class=l>derive/([iu])a(o|ng?)$/a$1$2/   </span><span class=w> </span><span class=c># tain =&gt; tian</span><span class=w>
-</span></code></pre></td></tr></table></div></div><h4 id=添加搜狗词库>添加搜狗词库</h4><p>网上搜索文件 luna_pinyin.sogou.dict.yaml，放到目录 %appdata%/Rime 下
-然后在 %appdata%/Rime/default.custom.yaml 文件中添加下面配置：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-yaml data-lang=yaml><span class=nt>translator/dictionary</span><span class=p>:</span><span class=w> </span><span class=l>luna_pinyin.sogou</span><span class=w>
-</span></code></pre></td></tr></table></div></div><p>重新部署即可体验词库。</p><h3 id=安装依赖>安装依赖</h3><p>因为<a href=https://github.com/tumashu/posframe>posframe</a>可以让后选词显示在光标处，所以建议安装</p><h3 id=编译librime>编译librime</h3><p>这步可以偷懒，直接用编译好的<a href=https://github.com/merrickluo/liberime/releases/download/v0.0.3/liberime-v0.0.3-windows-x86_64.zip>liberime</a>。
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id=添加搜狗词库>添加搜狗词库</h4>
+<p>网上搜索文件 luna_pinyin.sogou.dict.yaml，放到目录 %appdata%/Rime 下
+然后在 %appdata%/Rime/default.custom.yaml 文件中添加下面配置：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>translator/dictionary</span><span class=p>:</span><span class=w> </span><span class=l>luna_pinyin.sogou</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>重新部署即可体验词库。</p>
+<h3 id=安装依赖>安装依赖</h3>
+<p>因为<a href=https://github.com/tumashu/posframe>posframe</a>可以让后选词显示在光标处，所以建议安装</p>
+<h3 id=编译librime>编译librime</h3>
+<p>这步可以偷懒，直接用编译好的<a href=https://github.com/merrickluo/liberime/releases/download/v0.0.3/liberime-v0.0.3-windows-x86_64.zip>liberime</a>。
 解压后，只要将下图的几个文件拷贝到emacs安装目录/bin就可以了。
-<img src=%7B%7Bsite.url%7D%7D/pics/emacs-rime/liberime-win1.png alt=emacs-rime></p><p>如果安装目录已经有的dll，用系统自带的也行，那么只要拷贝librime.dll即可。</p><p>同时将解压的文件夹中的rime-data文件留着后续配置emacs时作为<code>rime-share-data-dir</code></p><h3 id=编译-librime-emacsdll>编译 librime-emacs.dll</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-bash data-lang=bash>git clone https://github.com/DogLooksGood/emacs-rime
-</code></pre></td></tr></table></div></div><p>安装好gcc，直接用cmd shell cd 到 emac-rime直接gcc： 先将 librime.dll rime_levers_api.h rime_api.h （librime就是上述解压出来的，其他两个在librime的src下面，见下图）复制到emacs-rime项目下，执行以下命令：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-bash data-lang=bash>gcc lib.c -o librime-emacs.dll -O2 -shared -I. -I/path/to/emacs/include -L. -llibrime
-</code></pre></td></tr></table></div></div><p>比如的我的路径是：<code>D:\emacs-28.0.50\include</code> 则执行以下命令：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-bash data-lang=bash>gcc lib.c -o librime-emacs.dll -O2 -shared -I. -ID:<span class=se>\e</span>macs-28.0.50<span class=se>\i</span>nclude -L. -llibrime
-</code></pre></td></tr></table></div></div><p>编译如果报错，一般是某个.h文件未找到，加上-I路径即可；librime.dll找不到，在-L后面加上路径即可。</p><p><img src=%7B%7Bsite.url%7D%7D/pics/emacs-rime/librime-win1.png alt=emacs-rime></p><h3 id=安装emacs-rime>安装emacs-rime</h3><p>把 emacs-rime 目录放到 <code>load-path</code> 下，增加下面配置:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+<img src=%7B%7Bsite.url%7D%7D/pics/emacs-rime/liberime-win1.png alt=emacs-rime></p>
+<p>如果安装目录已经有的dll，用系统自带的也行，那么只要拷贝librime.dll即可。</p>
+<p>同时将解压的文件夹中的rime-data文件留着后续配置emacs时作为<code>rime-share-data-dir</code></p>
+<h3 id=编译-librime-emacsdll>编译 librime-emacs.dll</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git clone https://github.com/DogLooksGood/emacs-rime
+</code></pre></td></tr></table>
+</div>
+</div><p>安装好gcc，直接用cmd shell cd 到 emac-rime直接gcc： 先将 librime.dll rime_levers_api.h rime_api.h （librime就是上述解压出来的，其他两个在librime的src下面，见下图）复制到emacs-rime项目下，执行以下命令：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>gcc lib.c -o librime-emacs.dll -O2 -shared -I. -I/path/to/emacs/include -L. -llibrime
+</code></pre></td></tr></table>
+</div>
+</div><p>比如的我的路径是：<code>D:\emacs-28.0.50\include</code> 则执行以下命令：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>gcc lib.c -o librime-emacs.dll -O2 -shared -I. -ID:<span class=se>\e</span>macs-28.0.50<span class=se>\i</span>nclude -L. -llibrime
+</code></pre></td></tr></table>
+</div>
+</div><p>编译如果报错，一般是某个.h文件未找到，加上-I路径即可；librime.dll找不到，在-L后面加上路径即可。</p>
+<p><img src=%7B%7Bsite.url%7D%7D/pics/emacs-rime/librime-win1.png alt=emacs-rime></p>
+<h3 id=安装emacs-rime>安装emacs-rime</h3>
+<p>把 emacs-rime 目录放到 <code>load-path</code> 下，增加下面配置:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -127,7 +321,9 @@
 </span><span class=lnt>13
 </span><span class=lnt>14
 </span><span class=lnt>15
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-elisp data-lang=elisp><span class=c1>;;; Require</span>
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=c1>;;; Require</span>
 <span class=p>(</span><span class=nb>require</span> <span class=ss>&#39;rime</span><span class=p>)</span>
 
 <span class=c1>;;; Code:</span>
@@ -142,18 +338,83 @@
 
 <span class=p>(</span><span class=nb>setq</span> <span class=nv>default-input-method</span> <span class=s>&#34;rime&#34;</span>
   <span class=nv>rime-show-candidate</span> <span class=ss>&#39;posframe</span><span class=p>)</span>
-</code></pre></td></tr></table></div></div><p>上面的配置分别设置emacs-rime读取RIME配置的路径、UI细节和使用posframe来显示候选词。</p><p>配置上主要是要设置两个路径：
+</code></pre></td></tr></table>
+</div>
+</div><p>上面的配置分别设置emacs-rime读取RIME配置的路径、UI细节和使用posframe来显示候选词。</p>
+<p>配置上主要是要设置两个路径：
 <code>rime-user-data-dir</code> 如果不设置，默认是<code>~/.emacs.d/rime</code>, 这里直接拷贝小狼毫的用户配置文件即可。一般是在 %appdata%下的Rime文件夹。
-<code>rime-share-data-dir</code>设置为上述第一步解压出来的rime-data文件夹，我只保留了opencc这个文件夹。</p><h3 id=emacs-rime的优点>emacs-rime的优点</h3><ol><li>只是RIME的前端，代码量比较小，有问题还可以提交个补丁；</li><li>中英文混合输入的体验很好，英文输入完成后，按回车或者空格就可以继续输入中文；</li><li>UI默认配色不错，看着很现代；</li><li>与Emacs集成，主题直接适配Emacs主题，而且配合翻译功能，体验更好。</li></ol></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
-<span class=item-content>Eason Huang</span></p><p class=copyright-item><span class=item-title>上次更新</span>
-<span class=item-content>2021-07-17
-<a href=https://github.com/Eason0210/eason0210.github.io/commit/0193331b047297ed89423fd4800b52a02a86c04b title="remove date from file name.">(0193331)</a></span></p><p class=copyright-item><span class=item-title>许可协议</span>
-<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span></p></div><footer class=post-footer><div class=post-tags><a href=/tags/emacs/>Emacs</a></div><nav class=post-nav><a class=prev href=/post/emacs-macro/><i class="iconfont icon-left"></i>
+<code>rime-share-data-dir</code>设置为上述第一步解压出来的rime-data文件夹，我只保留了opencc这个文件夹。</p>
+<h3 id=emacs-rime的优点>emacs-rime的优点</h3>
+<ol>
+<li>只是RIME的前端，代码量比较小，有问题还可以提交个补丁；</li>
+<li>中英文混合输入的体验很好，英文输入完成后，按回车或者空格就可以继续输入中文；</li>
+<li>UI默认配色不错，看着很现代；</li>
+<li>与Emacs集成，主题直接适配Emacs主题，而且配合翻译功能，体验更好。</li>
+</ol>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Eason Huang</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2021-07-17
+<a href=https://github.com/Eason0210/eason0210.github.io/commit/0193331b047297ed89423fd4800b52a02a86c04b title="remove date from file name.">(0193331)</a>
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>许可协议</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/emacs/>Emacs</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/emacs-macro/>
+<i class="iconfont icon-left"></i>
 <span class="prev-text nav-default">Emacs宏在批量化生成代码中的应用</span>
-<span class="prev-text nav-mobile">上一篇</span></a></nav></footer></article></div></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:aqua0210@163.com class="iconfont icon-email" title=email></a><a href=https://twitter.com/eason0210 class="iconfont icon-twitter" title=twitter></a><a href=http://github.com/eason0210 class="iconfont icon-github" title=github></a><a href=https://eason0210.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:aqua0210@163.com class="iconfont icon-email" title=email></a>
+<a href=https://twitter.com/eason0210 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://github.com/eason0210 class="iconfont icon-github" title=github></a>
+<a href=https://eason0210.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
 <span class=division>|</span>
-<span class=theme-info>主题 -
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span>
-<span class=copyright-year>&copy;
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<span class=copyright-year>
+&copy;
 2020 -
-2021<span class=heart><i class="iconfont icon-heart"></i></span><span>Eason Huang</span></span></div></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script></body></html>
+2021<span class=heart><i class="iconfont icon-heart"></i></span><span>Eason Huang</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+</body>
+</html>
