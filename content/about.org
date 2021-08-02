@@ -10,20 +10,31 @@
 同时，希望能够跟志同道合的朋友一起分享我的收获。
 
 另外，我也会分享一些在生活中的感想与体会。
-#+end_quote
+#+end_quote 
 
-#+begin_src clojure
-  (def Eason-Huang
-    (doto (Programmer.)
-      (.alias "Eason0210" "Aqua")
-      (.jobLocation "Shanghai")
-      (.homepage "https://eason0210.github.io")
-      (.university "ChongQing JiaoTong University")
-      (.languages [:C++ :Haskell :Clojure])
-      (.favorites
-        {:field ["Hack Emacs" "Linux OS" "Web"]
-         :game  ["Heroes of The Storm" "WOW"]
-         :misc  ["Reading" "Music" "Play guitar"]})))
+#+begin_src haskell
+data Programmer = Programmer
+  { name        :: String
+  , alias       :: [String]
+  , location    :: String
+  , homepage    :: String
+  , university  :: String
+  , languages   :: [String]
+  , favorFields :: [String]
+  , hobbies     :: [String]
+  }
+  deriving (Show)
+
+aboutMe = Programmer
+  { name        = "Eason Huang"
+  , alias       = ["Eason0210","Aqua"]
+  , location    = "Shanghai"
+  , homepage    = "https://eason0210.github.io"
+  , university  = "ChongQing JiaoTong University"
+  , languages   = ["Haskell", "C++"]
+  , favorFields = ["Hack Emacs", "Linux OS", "Web"]
+  , hobbies     = ["Reading", "Music", "Play guitar"]
+  }
 #+end_src
 
 * 我的座右铭
