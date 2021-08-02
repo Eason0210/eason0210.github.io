@@ -14,27 +14,29 @@
 
 #+begin_src haskell
 data Programmer = Programmer
-  { name        :: String
-  , alias       :: [String]
-  , location    :: String
-  , homepage    :: String
-  , university  :: String
-  , languages   :: [String]
-  , favorFields :: [String]
-  , hobbies     :: [String]
+  { name :: String,
+    alias :: [String],
+    location :: String,
+    homepage :: String,
+    university :: String,
+    languages :: [String],
+    favorFields :: [String],
+    hobbies :: [String]
   }
   deriving (Show)
 
-aboutMe = Programmer
-  { name        = "Eason Huang"
-  , alias       = ["Eason0210","Aqua"]
-  , location    = "Shanghai"
-  , homepage    = "https://eason0210.github.io"
-  , university  = "ChongQing JiaoTong University"
-  , languages   = ["Haskell", "C++"]
-  , favorFields = ["Hack Emacs", "Linux OS", "Web"]
-  , hobbies     = ["Reading", "Music", "Play guitar"]
-  }
+aboutMe :: Programmer
+aboutMe =
+  Programmer
+    { name = "Eason Huang",
+      alias = ["Eason0210", "Aqua"],
+      location = "Shanghai",
+      homepage = "https://eason0210.github.io",
+      university = "ChongQing JiaoTong University",
+      languages = ["Haskell", "C++"],
+      favorFields = ["Hack Emacs", "Linux OS", "Web"],
+      hobbies = ["Reading", "Music", "Play guitar"]
+    }
 #+end_src
 
 * 我的座右铭
