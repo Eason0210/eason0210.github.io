@@ -12,7 +12,7 @@
 <meta name=apple-mobile-web-app-capable content="yes">
 <meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
 <meta name=author content="Eason Huang"><meta name=description content="欢迎来到我的世界。 在这里，我会记录不断探索最新技术过程中积累的一些操作技巧，以及我的一些想法和心得。 同时，希望能够跟志同道合的朋友一起分享我"><meta name=keywords content="Hugo,theme,even">
-<meta name=generator content="Hugo 0.86.0 with theme even">
+<meta name=generator content="Hugo 0.86.1 with theme even">
 <link rel=canonical href=https://eason0210.github.io/about/>
 <link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
@@ -25,11 +25,11 @@
 <meta property="og:description" content="欢迎来到我的世界。 在这里，我会记录不断探索最新技术过程中积累的一些操作技巧，以及我的一些想法和心得。 同时，希望能够跟志同道合的朋友一起分享我">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://eason0210.github.io/about/"><meta property="article:section" content>
-<meta property="article:modified_time" content="2021-07-17T02:03:18+08:00">
+<meta property="article:modified_time" content="2021-08-02T13:17:19+08:00">
 <meta itemprop=name content="About Me">
 <meta itemprop=description content="欢迎来到我的世界。 在这里，我会记录不断探索最新技术过程中积累的一些操作技巧，以及我的一些想法和心得。 同时，希望能够跟志同道合的朋友一起分享我">
-<meta itemprop=dateModified content="2021-07-17T02:03:18+08:00">
-<meta itemprop=wordCount content="248">
+<meta itemprop=dateModified content="2021-08-02T13:17:19+08:00">
+<meta itemprop=wordCount content="308">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="About Me">
 <meta name=twitter:description content="欢迎来到我的世界。 在这里，我会记录不断探索最新技术过程中积累的一些操作技巧，以及我的一些想法和心得。 同时，希望能够跟志同道合的朋友一起分享我"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
@@ -96,7 +96,7 @@
 <p>
 另外，我也会分享一些在生活中的感想与体会。</p>
 </blockquote>
-<div class="src src-clojure">
+<div class="src src-haskell">
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -110,19 +110,41 @@
 </span><span class=lnt> 9
 </span><span class=lnt>10
 </span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
 </span></code></pre></td>
 <td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure>  <span class=p>(</span><span class=k>def </span><span class=nv>Eason-Huang</span>
-    <span class=p>(</span><span class=nb>doto </span><span class=p>(</span><span class=nf>Programmer.</span><span class=p>)</span>
-      <span class=p>(</span><span class=nf>.alias</span> <span class=s>&#34;Eason0210&#34;</span> <span class=s>&#34;Aqua&#34;</span><span class=p>)</span>
-      <span class=p>(</span><span class=nf>.jobLocation</span> <span class=s>&#34;Shanghai&#34;</span><span class=p>)</span>
-      <span class=p>(</span><span class=nf>.homepage</span> <span class=s>&#34;https://eason0210.github.io&#34;</span><span class=p>)</span>
-      <span class=p>(</span><span class=nf>.university</span> <span class=s>&#34;ChongQing JiaoTong University&#34;</span><span class=p>)</span>
-      <span class=p>(</span><span class=nf>.languages</span> <span class=p>[</span><span class=ss>:C++</span> <span class=ss>:Haskell</span> <span class=ss>:Clojure</span><span class=p>])</span>
-      <span class=p>(</span><span class=nf>.favorites</span>
-        <span class=p>{</span><span class=ss>:field</span> <span class=p>[</span><span class=s>&#34;Hack Emacs&#34;</span> <span class=s>&#34;Linux OS&#34;</span> <span class=s>&#34;Web&#34;</span><span class=p>]</span>
-         <span class=ss>:game</span>  <span class=p>[</span><span class=s>&#34;Heroes of The Storm&#34;</span> <span class=s>&#34;WOW&#34;</span><span class=p>]</span>
-         <span class=ss>:misc</span>  <span class=p>[</span><span class=s>&#34;Reading&#34;</span> <span class=s>&#34;Music&#34;</span> <span class=s>&#34;Play guitar&#34;</span><span class=p>]})))</span></code></pre></td></tr></table>
+<pre tabindex=0 class=chroma><code class=language-haskell data-lang=haskell><span class=kr>data</span> <span class=kt>Programmer</span> <span class=ow>=</span> <span class=kt>Programmer</span>
+  <span class=p>{</span> <span class=n>name</span>        <span class=ow>::</span> <span class=kt>String</span>
+  <span class=p>,</span> <span class=n>alias</span>       <span class=ow>::</span> <span class=p>[</span><span class=kt>String</span><span class=p>]</span>
+  <span class=p>,</span> <span class=n>location</span>    <span class=ow>::</span> <span class=kt>String</span>
+  <span class=p>,</span> <span class=n>homepage</span>    <span class=ow>::</span> <span class=kt>String</span>
+  <span class=p>,</span> <span class=n>university</span>  <span class=ow>::</span> <span class=kt>String</span>
+  <span class=p>,</span> <span class=n>languages</span>   <span class=ow>::</span> <span class=p>[</span><span class=kt>String</span><span class=p>]</span>
+  <span class=p>,</span> <span class=n>favorFields</span> <span class=ow>::</span> <span class=p>[</span><span class=kt>String</span><span class=p>]</span>
+  <span class=p>,</span> <span class=n>hobbies</span>     <span class=ow>::</span> <span class=p>[</span><span class=kt>String</span><span class=p>]</span>
+  <span class=p>}</span>
+  <span class=kr>deriving</span> <span class=p>(</span><span class=kt>Show</span><span class=p>)</span>
+
+<span class=nf>aboutMe</span> <span class=ow>=</span> <span class=kt>Programmer</span>
+  <span class=p>{</span> <span class=n>name</span>        <span class=ow>=</span> <span class=s>&#34;Eason Huang&#34;</span>
+  <span class=p>,</span> <span class=n>alias</span>       <span class=ow>=</span> <span class=p>[</span><span class=s>&#34;Eason0210&#34;</span><span class=p>,</span><span class=s>&#34;Aqua&#34;</span><span class=p>]</span>
+  <span class=p>,</span> <span class=n>location</span>    <span class=ow>=</span> <span class=s>&#34;Shanghai&#34;</span>
+  <span class=p>,</span> <span class=n>homepage</span>    <span class=ow>=</span> <span class=s>&#34;https://eason0210.github.io&#34;</span>
+  <span class=p>,</span> <span class=n>university</span>  <span class=ow>=</span> <span class=s>&#34;ChongQing JiaoTong University&#34;</span>
+  <span class=p>,</span> <span class=n>languages</span>   <span class=ow>=</span> <span class=p>[</span><span class=s>&#34;Haskell&#34;</span><span class=p>,</span> <span class=s>&#34;C++&#34;</span><span class=p>]</span>
+  <span class=p>,</span> <span class=n>favorFields</span> <span class=ow>=</span> <span class=p>[</span><span class=s>&#34;Hack Emacs&#34;</span><span class=p>,</span> <span class=s>&#34;Linux OS&#34;</span><span class=p>,</span> <span class=s>&#34;Web&#34;</span><span class=p>]</span>
+  <span class=p>,</span> <span class=n>hobbies</span>     <span class=ow>=</span> <span class=p>[</span><span class=s>&#34;Reading&#34;</span><span class=p>,</span> <span class=s>&#34;Music&#34;</span><span class=p>,</span> <span class=s>&#34;Play guitar&#34;</span><span class=p>]</span>
+  <span class=p>}</span></code></pre></td></tr></table>
 </div>
 </div>
 </div>
