@@ -1,0 +1,27 @@
+#+TITLE: Arch Linux KDE 无法启动程序
+#+DATE: 2021-08-07T11:07:04+08:00
+#+DRAFT: false
+#+TAGS[]: Linux KDE
+#+CATEGORIES[]: develop-tools
+隔了一段时间没有使用 Arch Linux 系统，启动的时候发现在 KDE 桌面上没法启动任何的应用程序，甚至终端都没法启动了。经过查询，原来这是和 hostName 有关。
+* 解决方法
+** 启动终端
+由于任何程序都没法启动了，要解决问题的第一步就是要想办法启动终端。可以通过下面的方法启动：
+
+在开始菜单，点 ~离开..~ 切换用户，然后会提示相应的快捷键，我这里是 ~Ctrl + Alt + f2~ , 然后输入用户名和密码即可通过终端登录系统了。
+
+** 设置主机名
+#+begin_src bash
+hostnamectl set-hostname arch # 设置主机名为 arch
+#+end_src
+** 添加本地域名解析
+#+begin_src bash
+sudo vim /etc/hosts  
+#+end_src
+添加以下内容：
+#+begin_src 
+127.0.0.1 localhost
+::1       localhost
+127.0.0.1 arch.localdomain  arch  
+#+end_src
+在 vim 中按 ~:wq~ 保存后，执行 ~shutdown now~ 关闭计算机，然后重启，即可正常启动软件了。
