@@ -1,0 +1,337 @@
+#+TITLE: Arch Linux 上安装与体验 XMonad
+#+DATE: 2021-08-15T15:38:21+08:00
+#+DRAFT: false
+#+TAGS[]: Arch Linux Haskell XMonad HiDPI
+#+CATEGORIES[]: 热爱生活 
+
+之前一直是使用的 KDE 桌面的 Arch Linux，使用体验上感觉和 Windows 系统差不多。最近在学习 Haskell 过程中，了解到有一款窗口管理软件叫 XMonad。听名字就有 Haskell 的味道，于是决定在 Arch Linux 尝试体验一番。
+
+* 通过自动脚本安装 Xmonad 和相关依赖
+刚开始也尝试过按照官方的安装指南手动安装 XMonad，但是尝试了几次都没成功，于是在网上找到了一个很棒的配置 [[https://github.com/Axarva/dotfiles-2.0][Axarva/dotfiles-2.0]]。直接按照仓库说明，使用脚本就可以自动安装。而且作者还提供了安装的指导视频。
+
+需要注意的地方是：
+1. 作者的这个配置目前只适配了 1366X768 和 1920X1080 这两种分辨率的屏幕。
+   - 我的屏幕是 2560X1440 的，安装好以后，还需要在终端启动 ~tint2conf~ 进行微调。
+   - 这是我调整后的个人项目，[[https://github.com/Eason0210/dotfiles-2.0][Eason0210/dotfiles-2.0]]。
+   
+2. 需要提前安装字体 ~MuseoSans-300~ ，不然后续需要手动修改。
+3. 图标都需要使用 [[https://www.nerdfonts.com/font-downloads][Nerd Font]]，右上角时间的按钮我使用了 ~Caskaydia Cove Nerd Font~
+
+   Nerd font 都可以通过包管理器安装上述的字体，比如：
+   #+begin_src bash
+   sudo pacman -S nerd-fonts-cascadia-code  
+   #+end_src
+
+* 使用体验
+** 优点：
+1. XMonad 启动速度非常快，再也不动忍受 KDE 缓慢的加载过程了。
+2. ~Mod + Number~ 快捷键切换工作空间(虚拟桌面) 非常方便， ~Mod + Space~ 循环切换不同的布局。
+3. 通过 [[https://github.com/Axarva/tint2-1][tint2]] + ~Nerd Font~ 实现的图标很简洁，很美观，而且可以自己根据需要进行修改。
+4. 需要增加功能可以直接修改 ~$HOME/.config/xmonad.hs~ 即可，顺便还可以学习 Haskell 的应用。
+** 缺点：
+1. 原来 KDE 很方便的 GUI 的功能都没了，很多系统方面的配置，都得自行解决。
+   
+   比如，输入法 Fcitx5 的自动启动，原来是直接将 ~fcitx5.desktop~ 加入到 ~$HOME/.config/autostart~ 文件夹下即可，而且是可以通过 KDE 的设置界面完成的。
+
+   在 XMonad 下需要加入 xmonad.hs 配置文件中实现：
+   #+begin_src haskell
+   myStartupHook = do
+     spawnOnce "exec ~/bin/bartoggle"
+     spawnOnce "exec ~/bin/eww daemon"
+     spawn "xsetroot -cursor_name left_ptr"
+     spawn "exec ~/bin/lock.sh"
+     spawnOnce "feh --bg-scale ~/wallpapers/Sierra.jpg"
+     spawnOnce "picom --experimental-backends"
+     spawnOnce "greenclip daemon"
+     spawnOnce "dunst"
+     spawnOnce "exec /usr/bin/fcitx5"
+     spawnOnce "exec /usr/bin/qv2ray %u"
+   #+end_src
+2. 系统分辨率设置以及高分辨率的缩放都没有界面可以设置，下文单独介绍如何配置。
+3. 没有状态栏，刚开始有点不适应，比如按了 ~mod + C~ 关闭网易云音乐后, 声音还会继续播放，开始还以为是软件 Bug。   
+
+#+begin_quote
+总的来说， Xmonad 的体验非常棒，符合我个人的使用品味。
+#+end_quote
+* 通过 Stack 安装 Xmonad（可选，但是推荐）
+由于我在 Arch Linux 上是通过 [[https://github.com/haskell/ghcup-hs][GHCup]] 来管理 Haskell 开发环境的安装的，如果直接使用包管理来安装 Xmonad 的话，会安装很多 Haskell 包，需要关闭 ~GHCup~ 下的开发环境，非常不方便。而且 Arch Linux 是滚动更新的，更新非常频繁，会造成 xmonad 在重新编译时出问题。综合考虑后，决定按照[[https://github.com/xmonad/xmonad/blob/master/INSTALL.md][官方的安装文档]]安装最新版本的 Xmonad，并通过 git 来管理 xmonad 的配置文件， ~xmonad~ 和 ~xmonad-contrib~ 通过 git 子模块的方式增加，这样就可以定期更新官方仓库。
+
+由于之前通过自动脚本，已经安装过相关依赖，这里不需要再重复，直接安装 Xmonad：
+
+#+begin_src bash
+  git clone https://github.com/Axarva/dotfiles-2.0
+  mkdir -p ~/.config/xmonad && cd ~/.config/xmonad
+  cp ~/dotfiles-2.0/xmonad/xmonad.hs ~/.config/xmonad
+  git init
+  git submodule add https://github.com/xmonad/xmonad
+  git submodule add https://github.com/xmonad/xmonad-contrib
+  git add .
+  git commit -m "init commit"
+  # Build using Stack
+  ghcup install stack 2.7.3
+  # Create a new project
+  stack init
+ 
+#+end_src 
+
+这时可以通过如下命令查看文件目录结构：
+#+begin_src bash
+$ ls
+xmonad  xmonad-contrib  stack.yaml  xmonad.hs
+#+end_src
+
+开始使用 ~stack~ 安装 xmonad:
+#+begin_src bash
+stack install
+#+end_src
+编译安装完成后，会自动创建链接到 ~$HOME/.local/bin~ 目录下，只要将该目录加入 ~$PATH~ 即可。
+
+比如，在 ~.zshenv~ 或者 ~.zshrc~ 中加入以下内容:
+#+begin_src bash
+export PATH=/home/aqua/.local/bin:$PATH
+#+end_src
+
+最后一步，让 Xmonad 能够自动使用 ~stack ghc~ 进行编译，在项目目录下加入一个名字为 ~build~ 脚本文件. 文件内容如下：
+#+begin_src bash
+#!/bin/sh
+
+exec stack ghc --  \
+  --make xmonad.hs \
+  -i               \
+  -ilib            \
+  -fforce-recomp   \
+  -main-is main    \
+  -v0              \
+  -o "$1"
+#+end_src
+
+不要忘记给 build 文件增加 ~+x~ 执行权限： ~chmod +x build~
+
+经过测试，在最新版本下， ~dotfiles-2.0~ 的配置完全可以正常工作，太棒了。以后慢慢熟悉配置以后，再优化配置，进而使用新版本的功能。
+
+在终端下执行 ~xmonad --recompile~ ，如果能成功编译，祝贺你，你的 Xmonad 可以运行起来了。
+
+这是我目前的 XMonad 配置项目： https://github.com/Eason0210/xmonad-config 。
+* 使用 SDDM 登录 xmonad
+由于我的 KDE 默认是使用 [[https://wiki.archlinux.org/title/SDDM][SSDM]](Simple Desktop Display Manager)。这是一个用于 X11 和 Wayland 窗口系统的显示管理器（图形登录程序和会话管理器）。
+
+首先，在 ~/usr/share/xsessions~ 路径下创建一个 ~xmonad.destop~ 文件，内容如下：
+#+begin_src bash
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Xmonad
+Comment=Lightweight X11 tiled window manager written in Haskell
+Exec=xmonad
+Icon=xmonad
+Terminal=false
+StartupNotify=false
+Categories=Application;
+#+end_src
+
+然后在 ~$HOME/.xinitrc~ 文件中增加以下内容：
+#+begin_src bash
+#!/bin/sh
+if [ -x /usr/bin/nm-applet ] ; then
+   nm-applet --sm-disable &
+fi
+
+exec xmonad
+#+end_src
+
+其中 ~nm-applet~ 是用于网络链接，并在状态栏显示网络链接图标。如果没有，可以自行安装，获取去取该项内容。
+
+** 自动登录
+刚开始不建议设置为自动登录，一切正常后再设置为自动登录，这样万一 ~Xmonad~ 无法登录的时候，还可以通过 KDE 进入系统。
+
+不然的话就只能通过 ~grub~ 在系统启动时按 ~e~ 然后在 ~linux~ 那行末尾加入 ~linux single~ 来通过命令行启动 linux 内核进行急救了。
+
+要启动自动登录，只要修改 ~/etc/sddm.conf.d/~ 目录下的 ~kde_settings~ 文件，内容如下：
+#+begin_src bash
+[Autologin]
+Relogin=false
+Session=xmonad
+User=aqua
+# 这里省略了其他不相关的内容
+#+end_src
+
+* 高分屏 HiDPI 下字体的缩放
+默认，系统是不进行缩放的，这样在 2K 屏幕下，应用的字体会非常小，完全没法使用。经过一番查询，其实设置很简单，在 [[https://wiki.archlinux.org/title/HiDPI#Chromium_/_Google_Chrome][Arch Wiki]] 中就有介绍，只要在 ~$HOME/.Xresource~ 中加入以下配置即可：
+#+begin_src bash
+Xft.dpi: 144
+! These might also be useful depending on your monitor and personal preference:
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+#+end_src
+~Xft.dpi~ 的值设置为 ~96~ 乘以需要缩放的比例即可，比如 2K 屏幕需要缩放 ~1.5~ 倍，就是 ~96 X 1.5 = 144~ , 如果需要缩放 ~2~ 倍，就设置为 ~192~ 即可。
+
+* 网易云音乐的相关问题
+网易云音乐在 Linux 下的安装包有好几个 bug，上游一直都没有修复。
+1. 无法使用 Fcitx5 输入法输入中文
+2. 最小化到状态栏后，无法呼出程序
+3. 界面字体不会跟送系统设置进行缩放
+
+这几个问题，折腾了很久，最后找到一个相对完美的解决方案：
+根据 [[https://wiki.archlinux.org/title/Fcitx5_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E6%97%A0%E6%B3%95%E8%B0%83%E5%87%BA%E8%BE%93%E5%85%A5%E6%B3%95][Fcitx5 的 Arch Wiki]] 的建议，安装下面这个版本，可以正常使用中文输入法。
+#+begin_src 
+sudo pacman -S netease-cloud-music-imfix
+#+end_src
+这样就解决了上述的前两个问题。
+
+至于第三个问题，需要在修改 desktop 文件并加上 ~--force-device-scale-factor=1.5~ 来临时解决. 这个文件通常为 ~/usr/share/application~ 目录下的 ~netease-cloud-music.desktop~
+
+只要修改下面这个行的内容即可：
+#+begin_src bash
+Exec=netease-cloud-music --force-device-scale-factor=1.5 %U  
+#+end_src
+
+* 系统字体设置
+原来在 KDE 下字体设置都是可以在 GUI 下面完成的，在 XMonad 下需要通过以下的方法设置：
+具体内容可以参考 Arch Wiki 的 [[https://wiki.archlinux.org/title/Font_configuration][Font config]] 部分和 [[https://wiki.archlinux.org/title/Font_configuration/Examples][Font configuration/Examples]]
+
+我个人的设置如下：
+
+#+begin_src xml
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+    <match target="font">
+        <edit name="embeddedbitmap" mode="assign">
+            <bool>false</bool>
+        </edit>
+    </match>
+    <match>
+        <test qual="any" name="family">
+            <string>serif</string>
+        </test>
+        <edit name="family" mode="prepend" binding="strong">
+            <string>PT Serif</string>
+        </edit>
+    </match>
+    <match target="pattern">
+        <test qual="any" name="family">
+            <string>sans-serif</string>
+        </test>
+        <edit name="family" mode="prepend" binding="strong">
+            <string>PT Sans</string>
+        </edit>
+    </match>
+    <match target="pattern">
+        <test qual="any" name="family">
+            <string>monospace</string>
+        </test>
+        <edit name="family" mode="prepend" binding="strong">
+            <string>SF Mono</string>
+        </edit>
+    </match>
+    <match>
+        <test name="lang" compare="contains">
+            <string>zh</string>
+        </test>
+        <test name="family">
+            <string>serif</string>
+        </test>
+        <edit name="family" mode="prepend">
+            <string>Source Han Serif CN</string>
+        </edit>
+    </match>
+    <match>
+        <test name="lang" compare="contains">
+            <string>zh</string>
+        </test>
+        <test name="family">
+            <string>sans-serif</string>
+        </test>
+        <edit name="family" mode="prepend">
+            <string>WenQuanYi Micro Hei</string>
+        </edit>
+    </match>
+    <match>
+        <test name="lang" compare="contains">
+            <string>zh</string>
+        </test>
+        <test name="family">
+            <string>monospace</string>
+        </test>
+        <edit name="family" mode="prepend">
+            <string>SF Mono</string>
+        </edit>
+    </match>
+
+    <!--WenQuanYi Zen Hei -> WenQuanYi Micro Hei -->
+    <match target="pattern">
+        <test qual="any" name="family">
+            <string>WenQuanYi Zen Hei</string>
+        </test>
+        <edit name="family" mode="assign" binding="same">
+            <string>WenQuanYi Micro Hei</string>
+        </edit>
+    </match>
+    <match target="pattern">
+        <test qual="any" name="family">
+            <string>WenQuanYi Zen Hei Lite</string>
+        </test>
+        <edit name="family" mode="assign" binding="same">
+            <string>WenQuanYi Micro Hei Lite</string>
+        </edit>
+    </match>
+    <match target="pattern">
+        <test qual="any" name="family">
+            <string>WenQuanYi Zen Hei Mono</string>
+        </test>
+        <edit name="family" mode="assign" binding="same">
+            <string>WenQuanYi Micro Hei Mono</string>
+        </edit>
+    </match>
+
+    <!--Microsoft YaHei, SimHei, SimSun -> WenQuanYi Micro Hei -->
+    <match target="pattern">
+        <test qual="any" name="family">
+            <string>Microsoft YaHei</string>
+        </test>
+        <edit name="family" mode="assign" binding="same">
+            <string>WenQuanYi Micro Hei</string>
+        </edit>
+    </match>
+    <match target="pattern">
+        <test qual="any" name="family">
+            <string>SimHei</string>
+        </test>
+        <edit name="family" mode="assign" binding="same">
+            <string>WenQuanYi Micro Hei</string>
+        </edit>
+    </match>
+    <match target="pattern">
+        <test qual="any" name="family">
+            <string>SimSun</string>
+        </test>
+        <edit name="family" mode="assign" binding="same">
+            <string>WenQuanYi Micro Hei</string>
+        </edit>
+    </match>
+    <match target="pattern">
+        <test qual="any" name="family">
+            <string>SimSun-18030</string>
+        </test>
+        <edit name="family" mode="assign" binding="same">
+            <string>WenQuanYi Micro Hei</string>
+        </edit>
+    </match>
+</fontconfig>  
+#+end_src
+
+* 总结
+
+#+begin_quote
+通过上述的一系列设置，在 xmonad 下的使用就很顺滑了，字体的显示也非常清晰了。
+
+Enjoy！
+#+end_quote
+
+
+   
+
