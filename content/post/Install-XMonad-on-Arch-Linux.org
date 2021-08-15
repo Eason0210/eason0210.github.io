@@ -112,9 +112,9 @@ exec stack ghc --  \
 在终端下执行 ~xmonad --recompile~ ，如果能成功编译，祝贺你，你的 Xmonad 可以运行起来了。
 
 这是我目前的 XMonad 配置项目： https://github.com/Eason0210/xmonad-config 。
-* 使用 SDDM 登录 xmonad
-由于我的 KDE 默认是使用 [[https://wiki.archlinux.org/title/SDDM][SSDM]](Simple Desktop Display Manager)。这是一个用于 X11 和 Wayland 窗口系统的显示管理器（图形登录程序和会话管理器）。
-
+* 使用 SDDM 登录系统
+由于我的 KDE 默认是使用 [[https://wiki.archlinux.org/title/SDDM][SSDM]](Simple Desktop Display Manager)，就直接使用它进行 XMoand 的登录。这是一个用于 X11 和 Wayland 窗口系统的显示管理器（图形登录程序和会话管理器）。
+** 手动登录
 首先，在 ~/usr/share/xsessions~ 路径下创建一个 ~xmonad.destop~ 文件，内容如下：
 #+begin_src bash
 [Desktop Entry]
@@ -141,6 +141,7 @@ exec xmonad
 
 其中 ~nm-applet~ 是用于网络链接，并在状态栏显示网络链接图标。如果没有，可以自行安装，获取去取该项内容。
 
+重启系统后，就可以在登录界面左下角选择 Xmonad 这个 ~session~ ，并输入用户名和密码登录系统。 
 ** 自动登录
 刚开始不建议设置为自动登录，一切正常后再设置为自动登录，这样万一 ~Xmonad~ 无法登录的时候，还可以通过 KDE 进入系统。
 
