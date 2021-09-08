@@ -1,0 +1,73 @@
+#+TITLE: 在 MacOS 安装 Nix
+#+DATE: 2021-09-07T21:20:16+08:00
+#+DRAFT: false
+#+TAGS[]: Mac Nix
+#+CATEGORIES[]: Tools
+
+早在两年前就已经尝试过 NixOS，体验很好，通过一份配置文件就可以实现不同的电脑部署一样的配置。最近在学习 Haskell 的过程中，发现其自带的包管理器不是很方便，于是就想起来 Nix。Nix 和 NixOS 不一样，它是一个包管理器，可以用于 Linux 和 Mac 平台。
+
+* 安装 Nix
+其实，Nix 的安装很简单，参考[[https://nixos.org/manual/nix/stable/#sect-macos-installation][官方的安装说明]]即可。
+
+由于我的 MacBook 是 2019 款的，使用的是 Intel CPU，系统版本为 MacOS Big Sur 11.5.2，直接在终端中执行以下命令即可：
+#+begin_src bash
+curl -L https://nixos.org/nix/install | sh -s -- --darwin-use-unencrypted-nix-store-volume  
+#+end_src
+等待安装完成后，重启终端。执行以下命令查看是否已经成功安装。
+#+begin_src bash
+nix-env --query --installed  
+#+end_src
+正常情况下，将会看到类似下面的结果：
+#+begin_src 
+nix-2.3.15
+nss-cacert-3.66
+(END)  
+#+end_src
+
+* 安装 Home Manager
+  由于直接通过 ~nix-env~ 安装软件不是很方便，于是绝对采用社区中比较流行的 [[https://github.com/nix-community/home-manager][Home Manager]]。
+
+1. 首先检查以下命令的结果是否正常。
+#+begin_src bash
+echo $NIX_PATH # 显示 Nix 的路径
+cat .nix-channels # 显示当前的 channels
+#+end_src
+
+2. 添加 Home Manager channel.
+#+begin_src bash
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --update  
+#+end_src
+3. 安装 Home Manager
+#+begin_src 
+nix-shell '<home-manager>' -A install  
+#+end_src
+
+4. 编辑 Home Manager 配置，进行软件的安装
+执行 ~vim $HOME/.config/nixpkgs/home.nix~ ，编辑 home.nix，这是 Home manager 的配置文件，以后软件的安装以及配置的管理都是可以通过这个文件完成。
+
+可以通过执行 ~man home-configuration.nix~ 查看所有可以使用的选项。
+
+比如：我们安装 ~bat~ 并将其主题修改为 ~ansi~
+#+begin_src nix
+  { config, pkgs, ... }:
+  {
+    # Let Home Manager install and manage itself.
+    programs.home-manager.enable = true;
+  
+    programs.bat.enable = true;
+    programs.bat.config = {
+      theme = "ansi";
+    };
+    # ...
+    # ...这里省略了其他的一些默认配置
+    # ...
+    home.stateVersion = "21.11";
+  }
+#+end_src
+
+* 通过 nix-darwin 管理 nix 配置
+[[https://github.com/LnL7/nix-darwin][Nix-darwin]] is Nix modules for darwin, ~/etc/nixos/configuration.nix~ for macOS.
+
+安装步骤参考官方说明即可。
+
