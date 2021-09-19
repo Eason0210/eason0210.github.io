@@ -32,6 +32,8 @@ Easy-hugo 的安装与配置都比较简单，[[https://github.com/masasam/emacs
    
 Easy-hugo 的大部分功能目前对于我来说暂时是用不到的。
 
+2021-09-20 更新：目前已经不再使用 easy-hugo, 因为写博客并不是很频繁，而且 easy-hugo 在预览时经常需要重启，还不如直接在终端中执行 ~hugo server -D~ 更方便。
+
 * Easy-hugo 的按键绑定列表
 
 | key       | function                                           |
