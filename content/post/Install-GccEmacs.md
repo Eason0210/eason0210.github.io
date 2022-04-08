@@ -5,18 +5,35 @@ date: 2021-02-23T20:36:16+08:00
 tags: [Emacs, GccEmacs, Native-comp]
 categories: [Develop Tools]
 ---
-`GccEmacs` 最近已经逐渐成熟，几个月前已经加入了 Emacs 仓库的 `feature/nativecomp` 分支，未来还将合并到 `Master` 分支。但由于 Emacs 的历史包袱太重，维护者对加入新功能是保持比较谨慎的态度，也许是人手不足，对 `GccEmacs` 加入 `Master` 分支推进的很慢，以至于 `GccEmacs` 的维护者都有“[意见](https://lists.gnu.org/archive/html/emacs-devel/2021-02/msg00878.html)”了。
-
-进入正题，下面针对三大平台分别介绍 `GccEmacs` 的安装：
+ Emacs 28.1 最近已经发布，内置了对 `--native-compilation`的支持。只要安装 28.1 就能体验 native-comp 特性。
+ 这里主要介绍在不同平台如何安装 `GccEmacs`，以获得更好的体验。
 
 ### Apple Mac OS
-这里以 Intel 平台的 Mac OS (Big Sur 11.2) 为例：
-Mac 平台比较推荐直接使用 [Emacs plus](https://github.com/d12frosted/homebrew-emacs-plus), 通过以下命令安装：
-``` bash
-brew install emacs-plus@28 --with-native-comp
-```
-注意：第一次启动 Emacs 时，建议在终端中执行 `emacs -q` 启动纯净版本的 Emacs, 并执行一些命令，使得 Emacs 开始编译内置的包。完成后再正常启动 Emacs 。
+这里以 Intel 平台的 Mac OS (Monterey 12.3.1) 为例：
 
+#### 通过脚本自动编译：
+这种方法的好处是比较灵活，可以根据需要编译不同的 commit 或者 tag，而且所有需要的内容都打包到 Emacs.app 中，包括源代码。
+```bash
+git clone https://github.com/jimeh/build-emacs-for-macos
+cd build-emacs-for-macos
+brew bundle
+brew services start dbus
+
+./build-emacs-for-macos --native-full-aot
+cd builds
+tar -xjvf Emacs.2022-xx-xx.xxxxxxx.master.macOS-12.x86_64.tbz
+```
+拷贝 Emacs.app 到 `/Applications/Emacs.app`
+
+软链接 `emacs` 到 `/usr/local/bin`，方便有时需要终端启动。
+```bash
+ln -s /Applications/Emacs.app/Contents/MacOS/bin/emacs /usr/local/bin/emacs
+```
+#### 直接使用 [Emacs plus](https://github.com/d12frosted/homebrew-emacs-plus) 安装：
+
+``` bash
+brew install emacs-plus@29 --with-native-comp
+```
 ### Gnu/Linux
 Linux 发行版本较多，不同发行版的安装方式都不相同，这里以 `ArchLinux` 为例说明：
 ``` bash
@@ -56,15 +73,11 @@ scoop install msys2
   mingw-w64-x86_64-harfbuzz
 ```
 #### 下载 Emacs 源代码
-github mirror:
+Github 镜像:
 ```bash
 git clone --depth=1 https://github.com/emacs-mirror/emacs.git
 ```
-gitee mirror:
-```bash
-git clone --depth=1 https://gitee.com/mirrors/emacs.git
-```
-official git repo:
+官方 Git 仓库:
 ```bash
 git clone --depth=1  https://git.savannah.gnu.org/git/emacs.git
 ```
@@ -74,25 +87,21 @@ git clone --depth=1  https://git.savannah.gnu.org/git/emacs.git
 ```bash
    ./autogen.sh
    ./configure --with-native-compilation --without-dbus
-   make -j$(nproc)
+   make -j$(nproc) NATIVE_FULL_AOT=1
 
-   make install prefix=/d/Dev_Tools/emacs28-native
-   cp $( pacman -Ql mingw-w64-x86_64-{libtiff,giflib,libpng,libjpeg-turbo,librsvg,libxml2,gnutls} | grep bin/.*\.dll$ | awk '{print $2}' ) /D/Dev_Tools/emacs28-native/bin
+   make install prefix=/c/opt/emacs
+   cp $( pacman -Ql mingw-w64-x86_64-{libtiff,giflib,libpng,libjpeg-turbo,librsvg,libxml2,gnutls} | grep bin/.*\.dll$ | awk '{print $2}' ) /c/opt/emacs/bin
 
 ```
 注意：
 
 1. `make -j$(nproc)` 中的 `$(nproc)` 会自动获取当前系统的 CPU 核心数；你也可以自己手动输入，比如`make -j12` 就是使用 12 核心进行编译。
 2. `make NATIVE_FULL_AOT=1` 会强制把所有 el 文件提前编译成 eln, 但编译时间会大幅增加。
-3. `make install` 的时候如果不指定 `prefix` 的话是会直接安装到 msys2 目录下，不讲究的话可以这样用。如果需要卸载的话在源码目录里面 `make uninstall`就可以了。个人建议安装到指定目录, 比如我这里是安装到 `D:\Dev_Tools\emacs28-native`, 注意在路径中使用斜杠"/", 而不是反斜杠"\\"。
+3. `make install` 的时候如果不指定 `prefix` 的话是会直接安装到 msys2 目录下，不讲究的话可以这样用。如果需要卸载的话在源码目录里面 `make uninstall`就可以了。个人建议安装到指定目录, 比如我这里是安装到 `c:\opt\emacs`, 注意在路径中使用斜杠"/", 而不是反斜杠"\\"。
 3. 如果编译过程出错了，记得`make clean`之后重新`configure`再`make` 。
-4. 启动 Emacs 时会自动编译 eln, 但会出现下面这个错误，不过不影响使用，原因未知。  
-
-```bash
-Warning: arch-dependent data dir '%emacs_dir%/libexec/emacs/28.0.50/x86_64-w64-mingw32/': No such file or directory
-
-```
 
 ### 使用体验
-目前在 Mac 和 Linux 上的使用体验是最好的，Windows 也完全可以正常使用了，不过速度的提升不是特别的明显。
-期待 `Gccemacs` 早日加入 `Master` 分支。
+目前 native-compilation 的 Emacs 已经很成熟了，已经集成到 Emacs 28.1 版本中，但我还是推荐自己编译，提前编译好所有的内置包，这样启动时才不会卡顿。
+另外，我使用 [Borg](https://github.com/emacscollective/borg)管理第三方包，可以在终端中执行`make all`提前编译个人配置中的全部包为`.eln`, 这样在启动Emacs 的时候就再也不需要等待编译了，再也不会卡顿。
+
+附上我的个人配置文件：https://github.com/Eason0210/emacs.d
