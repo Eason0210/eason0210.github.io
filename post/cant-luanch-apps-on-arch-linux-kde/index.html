@@ -1,261 +1,34 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>Arch Linux KDE 无法启动程序 - Eason Huang</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="Eason Huang"><meta name=description content="隔了一段时间没有使用 Arch Linux 系统，启动的时候发现在 KDE 桌面上没法启动任何的应用程序，甚至终端都没法启动了。经过查询，原来这是和 hostName 有关。 解决方法 启动"><meta name=keywords content="Hugo,theme,even">
-<meta name=generator content="Hugo 0.88.1 with theme even">
-<link rel=canonical href=https://eason0210.github.io/post/cant-luanch-apps-on-arch-linux-kde/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<link href=/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<meta property="og:title" content="Arch Linux KDE 无法启动程序">
-<meta property="og:description" content="隔了一段时间没有使用 Arch Linux 系统，启动的时候发现在 KDE 桌面上没法启动任何的应用程序，甚至终端都没法启动了。经过查询，原来这是和 hostName 有关。 解决方法 启动">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://eason0210.github.io/post/cant-luanch-apps-on-arch-linux-kde/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2021-08-07T11:07:04+08:00">
-<meta property="article:modified_time" content="2021-08-07T11:39:54+08:00">
-<meta itemprop=name content="Arch Linux KDE 无法启动程序">
-<meta itemprop=description content="隔了一段时间没有使用 Arch Linux 系统，启动的时候发现在 KDE 桌面上没法启动任何的应用程序，甚至终端都没法启动了。经过查询，原来这是和 hostName 有关。 解决方法 启动"><meta itemprop=datePublished content="2021-08-07T11:07:04+08:00">
-<meta itemprop=dateModified content="2021-08-07T11:39:54+08:00">
-<meta itemprop=wordCount content="257">
-<meta itemprop=keywords content="Linux,KDE,"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="Arch Linux KDE 无法启动程序">
-<meta name=twitter:description content="隔了一段时间没有使用 Arch Linux 系统，启动的时候发现在 KDE 桌面上没法启动任何的应用程序，甚至终端都没法启动了。经过查询，原来这是和 hostName 有关。 解决方法 启动"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
-</head>
-<body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Peace and freedom</a>
-</div>
-<div class=mobile-navbar-icon>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>Arch Linux KDE 无法启动程序 - Eason Huang</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content="no-transform"><meta http-equiv=cache-control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="Eason Huang"><meta name=description content="隔了一段时间没有使用 Arch Linux 系统，启动的时候发现在 KDE 桌面上没法启动任何的应用程序，甚至终端都没法启动了。经过查询，原来这是和 hostName 有关。 解决方法 启动"><meta name=keywords content="Hugo,theme,even"><meta name=generator content="Hugo 0.96.0 with theme even"><link rel=canonical href=https://eason0210.github.io/post/cant-luanch-apps-on-arch-linux-kde/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link href=/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><meta property="og:title" content="Arch Linux KDE 无法启动程序"><meta property="og:description" content="隔了一段时间没有使用 Arch Linux 系统，启动的时候发现在 KDE 桌面上没法启动任何的应用程序，甚至终端都没法启动了。经过查询，原来这是和 hostName 有关。 解决方法 启动"><meta property="og:type" content="article"><meta property="og:url" content="https://eason0210.github.io/post/cant-luanch-apps-on-arch-linux-kde/"><meta property="article:section" content="post"><meta property="article:published_time" content="2021-08-07T11:07:04+08:00"><meta property="article:modified_time" content="2021-08-07T11:39:54+08:00"><meta itemprop=name content="Arch Linux KDE 无法启动程序"><meta itemprop=description content="隔了一段时间没有使用 Arch Linux 系统，启动的时候发现在 KDE 桌面上没法启动任何的应用程序，甚至终端都没法启动了。经过查询，原来这是和 hostName 有关。 解决方法 启动"><meta itemprop=datePublished content="2021-08-07T11:07:04+08:00"><meta itemprop=dateModified content="2021-08-07T11:39:54+08:00"><meta itemprop=wordCount content="257"><meta itemprop=keywords content="Linux,KDE,"><meta name=twitter:card content="summary"><meta name=twitter:title content="Arch Linux KDE 无法启动程序"><meta name=twitter:description content="隔了一段时间没有使用 Arch Linux 系统，启动的时候发现在 KDE 桌面上没法启动任何的应用程序，甚至终端都没法启动了。经过查询，原来这是和 hostName 有关。 解决方法 启动"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>Peace and freedom</a></div><div class=mobile-navbar-icon><span></span>
 <span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>最新</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>归档</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>标签</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>分类</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>关于</li>
-</a>
-</ul>
-</nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Peace and freedom</a>
-</div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>最新</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>归档</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>标签</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>分类</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>关于</a>
-</li>
-</ul>
-</nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>Arch Linux KDE 无法启动程序</h1>
-<div class=post-meta>
-<span class=post-time> 2021-08-07 </span>
-<div class=post-category>
-<a href=/categories/develop-tools/> develop-tools </a>
-</div>
-<span class=more-meta> 约 257 字 </span>
-<span class=more-meta> 预计阅读 1 分钟 </span>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title>文章目录</h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#headline-1>解决方法</a>
-<ul>
-<li><a href=#headline-2>启动终端</a>
-</li>
-<li><a href=#headline-3>设置主机名</a>
-</li>
-<li><a href=#headline-4>添加本地域名解析</a>
-</li>
-</ul>
-</li>
-</ul>
-</nav>
-</div>
-</div>
-<div class=post-content>
-<p>隔了一段时间没有使用 Arch Linux 系统，启动的时候发现在 KDE 桌面上没法启动任何的应用程序，甚至终端都没法启动了。经过查询，原来这是和 hostName 有关。</p>
-<div id=outline-container-headline-1 class=outline-2>
-<h2 id=headline-1>
-解决方法
-</h2>
-<div id=outline-text-headline-1 class=outline-text-2>
-<div id=outline-container-headline-2 class=outline-3>
-<h3 id=headline-2>
-启动终端
-</h3>
-<div id=outline-text-headline-2 class=outline-text-3>
-<p>由于任何程序都没法启动了，要解决问题的第一步就是要想办法启动终端。可以通过下面的方法启动：</p>
-<p>
-在开始菜单，点 <code>离开..</code> 切换用户，然后会提示相应的快捷键，我这里是 <code>Ctrl + Alt + f2</code> , 然后输入用户名和密码即可通过终端登录系统了。</p>
-</div>
-</div>
-<div id=outline-container-headline-3 class=outline-3>
-<h3 id=headline-3>
-设置主机名
-</h3>
-<div id=outline-text-headline-3 class=outline-text-3>
-<div class="src src-bash">
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>hostnamectl set-hostname arch <span class=c1># 设置主机名为 arch</span></code></pre></td></tr></table>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id=outline-container-headline-4 class=outline-3>
-<h3 id=headline-4>
-添加本地域名解析
-</h3>
-<div id=outline-text-headline-4 class=outline-text-3>
-<div class="src src-bash">
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo vim /etc/hosts</code></pre></td></tr></table>
-</div>
-</div>
-</div>
-<p>添加以下内容：</p>
-<div class="src src-text">
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>最新</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/about/><li class=mobile-menu-item>关于</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>Peace and freedom</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>最新</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/about/>关于</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>Arch Linux KDE 无法启动程序</h1><div class=post-meta><span class=post-time>2021-08-07</span><div class=post-category><a href=/categories/develop-tools/>develop-tools</a></div><span class=more-meta>约 257 字</span>
+<span class=more-meta>预计阅读 1 分钟</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><a href=#headline-1>解决方法</a><ul><li><a href=#headline-2>启动终端</a></li><li><a href=#headline-3>设置主机名</a></li><li><a href=#headline-4>添加本地域名解析</a></li></ul></li></ul></nav></div></div><div class=post-content><p>隔了一段时间没有使用 Arch Linux 系统，启动的时候发现在 KDE 桌面上没法启动任何的应用程序，甚至终端都没法启动了。经过查询，原来这是和 hostName 有关。</p><div id=outline-container-headline-1 class=outline-2><h2 id=headline-1>解决方法</h2><div id=outline-text-headline-1 class=outline-text-2><div id=outline-container-headline-2 class=outline-3><h3 id=headline-2>启动终端</h3><div id=outline-text-headline-2 class=outline-text-3><p>由于任何程序都没法启动了，要解决问题的第一步就是要想办法启动终端。可以通过下面的方法启动：</p><p>在开始菜单，点 <code>离开..</code> 切换用户，然后会提示相应的快捷键，我这里是 <code>Ctrl + Alt + f2</code> , 然后输入用户名和密码即可通过终端登录系统了。</p></div></div><div id=outline-container-headline-3 class=outline-3><h3 id=headline-3>设置主机名</h3><div id=outline-text-headline-3 class=outline-text-3><div class="src src-bash"><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>hostnamectl set-hostname arch <span class=c1># 设置主机名为 arch</span></span></span></code></pre></td></tr></table></div></div></div></div></div><div id=outline-container-headline-4 class=outline-3><h3 id=headline-4>添加本地域名解析</h3><div id=outline-text-headline-4 class=outline-text-3><div class="src src-bash"><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo vim /etc/hosts</span></span></code></pre></td></tr></table></div></div></div><p>添加以下内容：</p><div class="src src-text"><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-text data-lang=text>127.0.0.1 localhost
-::1       localhost
-127.0.0.1 arch.localdomain  arch</code></pre></td></tr></table>
-</div>
-</div>
-</div>
-<p>在 vim 中按 <code>:wq</code> 保存后，执行 <code>shutdown now</code> 关闭计算机，然后重启，即可正常启动软件了。</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title>文章作者</span>
-<span class=item-content>Eason Huang</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>上次更新</span>
-<span class=item-content>
-2021-08-07
-<a href=https://github.com/Eason0210/eason0210.github.io/commit/e60d6591ccd8e9ce3504736e78a56546e15a425d title="add post: Can't luanch apps on Arch Linux KDE.">(e60d659)</a>
-</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>许可协议</span>
-<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
-</p>
-</div>
-<footer class=post-footer>
-<div class=post-tags>
-<a href=/tags/linux/>Linux</a>
-<a href=/tags/kde/>KDE</a>
-</div>
-<nav class=post-nav>
-<a class=prev href=/post/install-xmonad-on-arch-linux/>
-<i class="iconfont icon-left"></i>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>127.0.0.1 localhost
+</span></span><span class=line><span class=cl>::1       localhost
+</span></span><span class=line><span class=cl>127.0.0.1 arch.localdomain  arch</span></span></code></pre></td></tr></table></div></div></div><p>在 vim 中按 <code>:wq</code> 保存后，执行 <code>shutdown now</code> 关闭计算机，然后重启，即可正常启动软件了。</p></div></div></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>Eason Huang</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2021-08-07
+<a href=https://github.com/Eason0210/eason0210.github.io/commit/e60d6591ccd8e9ce3504736e78a56546e15a425d title="add post: Can't luanch apps on Arch Linux KDE.">(e60d659)</a></span></p><p class=copyright-item><span class=item-title>许可协议</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span></p></div><footer class=post-footer><div class=post-tags><a href=/tags/linux/>Linux</a>
+<a href=/tags/kde/>KDE</a></div><nav class=post-nav><a class=prev href=/post/install-xmonad-on-arch-linux/><i class="iconfont icon-left"></i>
 <span class="prev-text nav-default">Arch Linux 上安装与体验 XMonad</span>
-<span class="prev-text nav-mobile">上一篇</span>
-</a>
-<a class=next href=/post/install-emacs-rime-with-msys2/>
-<span class="next-text nav-default">基于 msys2 安装 Emacs-rime</span>
+<span class="prev-text nav-mobile">上一篇</span></a>
+<a class=next href=/post/install-emacs-rime-with-msys2/><span class="next-text nav-default">基于 msys2 安装 Emacs-rime</span>
 <span class="next-text nav-mobile">下一篇</span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
-</div>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=mailto:aqua0210@163.com class="iconfont icon-email" title=email></a>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:aqua0210@163.com class="iconfont icon-email" title=email></a>
 <a href=https://twitter.com/eason0210 class="iconfont icon-twitter" title=twitter></a>
 <a href=http://github.com/eason0210 class="iconfont icon-github" title=github></a>
-<a href=https://eason0210.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
-</span>
+<a href=https://eason0210.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动</span>
 <span class=division>|</span>
-<span class=theme-info>
-主题 -
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<span class=copyright-year>
-&copy;
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span>
+<span class=copyright-year>&copy;
 2020 -
-2021<span class=heart><i class="iconfont icon-heart"></i></span><span>Eason Huang</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Eason Huang</span></span></div></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-</body>
-</html>
+<script type=text/javascript src=/js/main.min.64437849d125a2d603b3e71d6de5225d641a32d17168a58106e0b61852079683.js></script></body></html>

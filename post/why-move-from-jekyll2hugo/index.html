@@ -1,412 +1,57 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>为什么要从 Jekyll 迁移到 Hugo - Eason Huang</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="Eason Huang"><meta name=description content="之前一直使用 Jekyll 写博客，但 Jekyll 只支持 Markdown 格式，而且 Jekyll 对 Windows 平台的支持很差。即使是在 Mac 平台，安装 Jekyll 也是需要安装一堆依赖，真的是很繁琐。 最近在 Emacs 社区中看"><meta name=keywords content="Hugo,theme,even">
-<meta name=generator content="Hugo 0.88.1 with theme even">
-<link rel=canonical href=https://eason0210.github.io/post/why-move-from-jekyll2hugo/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<link href=/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<meta property="og:title" content="为什么要从 Jekyll 迁移到 Hugo">
-<meta property="og:description" content="之前一直使用 Jekyll 写博客，但 Jekyll 只支持 Markdown 格式，而且 Jekyll 对 Windows 平台的支持很差。即使是在 Mac 平台，安装 Jekyll 也是需要安装一堆依赖，真的是很繁琐。 最近在 Emacs 社区中看">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://eason0210.github.io/post/why-move-from-jekyll2hugo/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2021-07-17T12:42:52+08:00">
-<meta property="article:modified_time" content="2021-07-17T15:56:04+08:00">
-<meta itemprop=name content="为什么要从 Jekyll 迁移到 Hugo">
-<meta itemprop=description content="之前一直使用 Jekyll 写博客，但 Jekyll 只支持 Markdown 格式，而且 Jekyll 对 Windows 平台的支持很差。即使是在 Mac 平台，安装 Jekyll 也是需要安装一堆依赖，真的是很繁琐。 最近在 Emacs 社区中看"><meta itemprop=datePublished content="2021-07-17T12:42:52+08:00">
-<meta itemprop=dateModified content="2021-07-17T15:56:04+08:00">
-<meta itemprop=wordCount content="1202">
-<meta itemprop=keywords content="Hugo,Emacs,org-mode,"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="为什么要从 Jekyll 迁移到 Hugo">
-<meta name=twitter:description content="之前一直使用 Jekyll 写博客，但 Jekyll 只支持 Markdown 格式，而且 Jekyll 对 Windows 平台的支持很差。即使是在 Mac 平台，安装 Jekyll 也是需要安装一堆依赖，真的是很繁琐。 最近在 Emacs 社区中看"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
-</head>
-<body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Peace and freedom</a>
-</div>
-<div class=mobile-navbar-icon>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>为什么要从 Jekyll 迁移到 Hugo - Eason Huang</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content="no-transform"><meta http-equiv=cache-control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="Eason Huang"><meta name=description content="之前一直使用 Jekyll 写博客，但 Jekyll 只支持 Markdown 格式，而且 Jekyll 对 Windows 平台的支持很差。即使是在 Mac 平台，安装 Jekyll 也是需要安装一堆依赖，真的是很繁琐。 最近在 Emacs 社区中看"><meta name=keywords content="Hugo,theme,even"><meta name=generator content="Hugo 0.96.0 with theme even"><link rel=canonical href=https://eason0210.github.io/post/why-move-from-jekyll2hugo/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link href=/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><meta property="og:title" content="为什么要从 Jekyll 迁移到 Hugo"><meta property="og:description" content="之前一直使用 Jekyll 写博客，但 Jekyll 只支持 Markdown 格式，而且 Jekyll 对 Windows 平台的支持很差。即使是在 Mac 平台，安装 Jekyll 也是需要安装一堆依赖，真的是很繁琐。 最近在 Emacs 社区中看"><meta property="og:type" content="article"><meta property="og:url" content="https://eason0210.github.io/post/why-move-from-jekyll2hugo/"><meta property="article:section" content="post"><meta property="article:published_time" content="2021-07-17T12:42:52+08:00"><meta property="article:modified_time" content="2021-07-17T15:56:04+08:00"><meta itemprop=name content="为什么要从 Jekyll 迁移到 Hugo"><meta itemprop=description content="之前一直使用 Jekyll 写博客，但 Jekyll 只支持 Markdown 格式，而且 Jekyll 对 Windows 平台的支持很差。即使是在 Mac 平台，安装 Jekyll 也是需要安装一堆依赖，真的是很繁琐。 最近在 Emacs 社区中看"><meta itemprop=datePublished content="2021-07-17T12:42:52+08:00"><meta itemprop=dateModified content="2021-07-17T15:56:04+08:00"><meta itemprop=wordCount content="1202"><meta itemprop=keywords content="Hugo,Emacs,org-mode,"><meta name=twitter:card content="summary"><meta name=twitter:title content="为什么要从 Jekyll 迁移到 Hugo"><meta name=twitter:description content="之前一直使用 Jekyll 写博客，但 Jekyll 只支持 Markdown 格式，而且 Jekyll 对 Windows 平台的支持很差。即使是在 Mac 平台，安装 Jekyll 也是需要安装一堆依赖，真的是很繁琐。 最近在 Emacs 社区中看"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>Peace and freedom</a></div><div class=mobile-navbar-icon><span></span>
 <span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>最新</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>归档</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>标签</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>分类</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>关于</li>
-</a>
-</ul>
-</nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Peace and freedom</a>
-</div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>最新</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>归档</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>标签</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>分类</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>关于</a>
-</li>
-</ul>
-</nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>为什么要从 Jekyll 迁移到 Hugo</h1>
-<div class=post-meta>
-<span class=post-time> 2021-07-17 </span>
-<div class=post-category>
-<a href=/categories/%E7%83%AD%E7%88%B1%E7%94%9F%E6%B4%BB/> 热爱生活 </a>
-</div>
-<span class=more-meta> 约 1202 字 </span>
-<span class=more-meta> 预计阅读 3 分钟 </span>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title>文章目录</h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#headline-1>安装 Hugo</a>
-<ul>
-<li><a href=#headline-2>Mac 平台的安装：</a>
-</li>
-<li><a href=#headline-3>Windows 平台的安装：</a>
-</li>
-</ul>
-</li>
-<li><a href=#headline-4>创建站点以及主题安装</a>
-<ul>
-<li><a href=#headline-5>创建新站点：</a>
-</li>
-<li><a href=#headline-6>添加主题：</a>
-</li>
-<li><a href=#headline-7>配置主题：</a>
-<ul>
-<li><a href=#headline-8>修改 <code>config.toml</code> 文件：</a>
-</li>
-<li><a href=#headline-9>Front Matter 设置： </a>
-</li>
-</ul>
-</li>
-<li><a href=#headline-10>添加新的 Post：</a>
-</li>
-<li><a href=#headline-11>启动 Hugo server</a>
-</li>
-<li><a href=#headline-12>部署站点</a>
-</li>
-</ul>
-</li>
-<li><a href=#headline-13>配置 GitHub CI 自动化构建</a>
-<ul>
-<li><a href=#headline-14>创建自动部署的脚本</a>
-</li>
-<li><a href=#headline-15>设置 GitHub Pages 路径</a>
-</li>
-</ul>
-</li>
-</ul>
-</nav>
-</div>
-</div>
-<div class=post-content>
-<p>
-之前一直使用 <a href=https://jekyllrb.com>Jekyll</a> 写博客，但 Jekyll 只支持 Markdown 格式，而且 Jekyll 对 Windows 平台的支持很差。即使是在 Mac 平台，安装 Jekyll 也是需要安装一堆依赖，真的是很繁琐。</p>
-<p>
-最近在 <a href=https://emacs-china.org/t/hexo-hugo/15448/24>Emacs 社区</a>中看到很多人都在使用 <a href=https://gohugo.io>Hugo</a> ，最吸引人的是，Hugo 是直接支持 <a href=https://orgmode.org>org-mode</a> 的，也就是说，可以直接在 Emacs 中通过 org-mode 来写博客了，不需要再转换为 <a href=http://markdown.p2hp.com/index.html>Markdown</a> 格式。而且，Hugo 的安装非常简单，支持 Windows, Mac 和 Linux 平台。</p>
-<p>
-于是，最近花了点时间将我的博客转移到 Hugo 上来，下面简单介绍一些需要注意的地方。</p>
-<div id=outline-container-headline-1 class=outline-2>
-<h2 id=headline-1>
-安装 Hugo
-</h2>
-<div id=outline-text-headline-1 class=outline-text-2>
-<p>安装比较简单，直接参考 Hugo <a href=https://gohugo.io/getting-started/installing/>官网的安装指南</a>即可。</p>
-<div id=outline-container-headline-2 class=outline-3>
-<h3 id=headline-2>
-Mac 平台的安装：
-</h3>
-<div id=outline-text-headline-2 class=outline-text-3>
-<div class="src src-bash">
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>  brew install hugo</code></pre></td></tr></table>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id=outline-container-headline-3 class=outline-3>
-<h3 id=headline-3>
-Windows 平台的安装：
-</h3>
-<div id=outline-text-headline-3 class=outline-text-3>
-<div class="src src-bash">
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>最新</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/about/><li class=mobile-menu-item>关于</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>Peace and freedom</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>最新</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/about/>关于</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>为什么要从 Jekyll 迁移到 Hugo</h1><div class=post-meta><span class=post-time>2021-07-17</span><div class=post-category><a href=/categories/%E7%83%AD%E7%88%B1%E7%94%9F%E6%B4%BB/>热爱生活</a></div><span class=more-meta>约 1202 字</span>
+<span class=more-meta>预计阅读 3 分钟</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><a href=#headline-1>安装 Hugo</a><ul><li><a href=#headline-2>Mac 平台的安装：</a></li><li><a href=#headline-3>Windows 平台的安装：</a></li></ul></li><li><a href=#headline-4>创建站点以及主题安装</a><ul><li><a href=#headline-5>创建新站点：</a></li><li><a href=#headline-6>添加主题：</a></li><li><a href=#headline-7>配置主题：</a><ul><li><a href=#headline-8>修改 <code>config.toml</code> 文件：</a></li><li><a href=#headline-9>Front Matter 设置：</a></li></ul></li><li><a href=#headline-10>添加新的 Post：</a></li><li><a href=#headline-11>启动 Hugo server</a></li><li><a href=#headline-12>部署站点</a></li></ul></li><li><a href=#headline-13>配置 GitHub CI 自动化构建</a><ul><li><a href=#headline-14>创建自动部署的脚本</a></li><li><a href=#headline-15>设置 GitHub Pages 路径</a></li></ul></li></ul></nav></div></div><div class=post-content><p>之前一直使用 <a href=https://jekyllrb.com>Jekyll</a> 写博客，但 Jekyll 只支持 Markdown 格式，而且 Jekyll 对 Windows 平台的支持很差。即使是在 Mac 平台，安装 Jekyll 也是需要安装一堆依赖，真的是很繁琐。</p><p>最近在 <a href=https://emacs-china.org/t/hexo-hugo/15448/24>Emacs 社区</a>中看到很多人都在使用 <a href=https://gohugo.io>Hugo</a> ，最吸引人的是，Hugo 是直接支持 <a href=https://orgmode.org>org-mode</a> 的，也就是说，可以直接在 Emacs 中通过 org-mode 来写博客了，不需要再转换为 <a href=http://markdown.p2hp.com/index.html>Markdown</a> 格式。而且，Hugo 的安装非常简单，支持 Windows, Mac 和 Linux 平台。</p><p>于是，最近花了点时间将我的博客转移到 Hugo 上来，下面简单介绍一些需要注意的地方。</p><div id=outline-container-headline-1 class=outline-2><h2 id=headline-1>安装 Hugo</h2><div id=outline-text-headline-1 class=outline-text-2><p>安装比较简单，直接参考 Hugo <a href=https://gohugo.io/getting-started/installing/>官网的安装指南</a>即可。</p><div id=outline-container-headline-2 class=outline-3><h3 id=headline-2>Mac 平台的安装：</h3><div id=outline-text-headline-2 class=outline-text-3><div class="src src-bash"><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>  brew install hugo</span></span></code></pre></td></tr></table></div></div></div></div></div><div id=outline-container-headline-3 class=outline-3><h3 id=headline-3>Windows 平台的安装：</h3><div id=outline-text-headline-3 class=outline-text-3><div class="src src-bash"><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>  scoop install hugo
-  <span class=c1># Or install the extended version with:</span>
-  scoop install hugo-extended</code></pre></td></tr></table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id=outline-container-headline-4 class=outline-2>
-<h2 id=headline-4>
-创建站点以及主题安装
-</h2>
-<div id=outline-text-headline-4 class=outline-text-2>
-<p>创建站点也是非常简单，可以参考官网的 <a href=https://gohugo.io/getting-started/quick-start/>QuickStart</a> 介绍。</p>
-<div id=outline-container-headline-5 class=outline-3>
-<h3 id=headline-5>
-创建新站点：
-</h3>
-<div id=outline-text-headline-5 class=outline-text-3>
-<div class="src src-bash">
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>hugo new site eason0210.github.io</code></pre></td></tr></table>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id=outline-container-headline-6 class=outline-3>
-<h3 id=headline-6>
-添加主题：
-</h3>
-<div id=outline-text-headline-6 class=outline-text-3>
-<div class="src src-bash">
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>  scoop install hugo
+</span></span><span class=line><span class=cl>  <span class=c1># Or install the extended version with:</span>
+</span></span><span class=line><span class=cl>  scoop install hugo-extended</span></span></code></pre></td></tr></table></div></div></div></div></div></div></div><div id=outline-container-headline-4 class=outline-2><h2 id=headline-4>创建站点以及主题安装</h2><div id=outline-text-headline-4 class=outline-text-2><p>创建站点也是非常简单，可以参考官网的 <a href=https://gohugo.io/getting-started/quick-start/>QuickStart</a> 介绍。</p><div id=outline-container-headline-5 class=outline-3><h3 id=headline-5>创建新站点：</h3><div id=outline-text-headline-5 class=outline-text-3><div class="src src-bash"><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>hugo new site eason0210.github.io</span></span></code></pre></td></tr></table></div></div></div></div></div><div id=outline-container-headline-6 class=outline-3><h3 id=headline-6>添加主题：</h3><div id=outline-text-headline-6 class=outline-text-3><div class="src src-bash"><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>  <span class=nb>cd</span> eason0210.github.io
-  git init
-  git submodule add https://github.com/olOwOlo/hugo-theme-even.git themes/even</code></pre></td></tr></table>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id=outline-container-headline-7 class=outline-3>
-<h3 id=headline-7>
-配置主题：
-</h3>
-<div id=outline-text-headline-7 class=outline-text-3>
-<p>Hugo 官方提供了大量的<a href=https://themes.gohugo.io>主题</a>供用户选择。
-这里我使用的是 Even 这个主题，安装很简单，具体操作可以参考 Even 的<a href=https://github.com/olOwOlo/hugo-theme-even/blob/master/README-zh.md>官网安装介绍</a>。</p>
-<div id=outline-container-headline-8 class=outline-4>
-<h4 id=headline-8>
-修改 <code>config.toml</code> 文件：
-</h4>
-<div id=outline-text-headline-8 class=outline-text-4>
-<p>在主题的 <code>exampleSite</code> 目录下有一个 <code>config.toml</code> 文件，这是网站的主要配置文件，将这个 <code>config.toml</code> 文件复制到站点的根目录下，根据自己的需求更改即可获得不同的功能以及网站外观。</p>
-</div>
-</div>
-<div id=outline-container-headline-9 class=outline-4>
-<h4 id=headline-9>
-Front Matter 设置：
-</h4>
-<div id=outline-text-headline-9 class=outline-text-4>
-<p>通过 <a href=https://gohugo.io/content-management/front-matter/>front-matter</a> 针对每一篇文章单独进行设置。
-<code>themes/even/archetypes/default.md</code> 文件列出了所有可用的参数。将该文件复制到站点根目录的 archetypes 文件夹下根据自己的需求进行修改即可。</p>
-<p>
-比如我的 default.md 配置如下：</p>
-<div class="src src-toml">
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>  <span class=nb>cd</span> eason0210.github.io
+</span></span><span class=line><span class=cl>  git init
+</span></span><span class=line><span class=cl>  git submodule add https://github.com/olOwOlo/hugo-theme-even.git themes/even</span></span></code></pre></td></tr></table></div></div></div></div></div><div id=outline-container-headline-7 class=outline-3><h3 id=headline-7>配置主题：</h3><div id=outline-text-headline-7 class=outline-text-3><p>Hugo 官方提供了大量的<a href=https://themes.gohugo.io>主题</a>供用户选择。
+这里我使用的是 Even 这个主题，安装很简单，具体操作可以参考 Even 的<a href=https://github.com/olOwOlo/hugo-theme-even/blob/master/README-zh.md>官网安装介绍</a>。</p><div id=outline-container-headline-8 class=outline-4><h4 id=headline-8>修改 <code>config.toml</code> 文件：</h4><div id=outline-text-headline-8 class=outline-text-4><p>在主题的 <code>exampleSite</code> 目录下有一个 <code>config.toml</code> 文件，这是网站的主要配置文件，将这个 <code>config.toml</code> 文件复制到站点的根目录下，根据自己的需求更改即可获得不同的功能以及网站外观。</p></div></div><div id=outline-container-headline-9 class=outline-4><h4 id=headline-9>Front Matter 设置：</h4><div id=outline-text-headline-9 class=outline-text-4><p>通过 <a href=https://gohugo.io/content-management/front-matter/>front-matter</a> 针对每一篇文章单独进行设置。
+<code>themes/even/archetypes/default.md</code> 文件列出了所有可用的参数。将该文件复制到站点根目录的 archetypes 文件夹下根据自己的需求进行修改即可。</p><p>比如我的 default.md 配置如下：</p><div class="src src-toml"><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
 </span><span class=lnt>7
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-toml data-lang=toml><span class=nx>---</span>
-<span class=nx>title</span><span class=err>:</span> <span class=s2>&#34;{{ replace .Name &#34;</span><span class=nx>-</span><span class=s2>&#34; &#34;</span> <span class=s2>&#34; | title }}&#34;</span>
-<span class=nx>date</span><span class=err>:</span> <span class=p>{{</span> <span class=p>.</span><span class=nx>Date</span> <span class=p>}}</span>
-<span class=nx>draft</span><span class=err>:</span> <span class=kc>true</span>
-<span class=nx>categories</span><span class=err>:</span>
-<span class=nx>tags</span><span class=err>:</span>
-<span class=nx>---</span></code></pre></td></tr></table>
-</div>
-</div>
-</div>
-<p>
-默认是没有 default.org 文件的，可以自己创建：</p>
-<div class="src src-org">
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-toml data-lang=toml><span class=line><span class=cl><span class=nx>---</span>
+</span></span><span class=line><span class=cl><span class=nx>title</span><span class=err>:</span> <span class=s2>&#34;{{ replace .Name &#34;</span><span class=nx>-</span><span class=s2>&#34; &#34;</span> <span class=s2>&#34; | title }}&#34;</span>
+</span></span><span class=line><span class=cl><span class=nx>date</span><span class=err>:</span> <span class=p>{{</span> <span class=p>.</span><span class=nx>Date</span> <span class=p>}}</span>
+</span></span><span class=line><span class=cl><span class=nx>draft</span><span class=err>:</span> <span class=kc>true</span>
+</span></span><span class=line><span class=cl><span class=nx>categories</span><span class=err>:</span>
+</span></span><span class=line><span class=cl><span class=nx>tags</span><span class=err>:</span>
+</span></span><span class=line><span class=cl><span class=nx>---</span></span></span></code></pre></td></tr></table></div></div></div><p>默认是没有 default.org 文件的，可以自己创建：</p><div class="src src-org"><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-org data-lang=org><span class=cs>#+TITLE</span><span class=c>: {{ replace .Name &#34;-&#34; &#34; &#34; | title }}</span>
-<span class=cs>#+DATE</span><span class=c>: {{ .Date }}</span>
-<span class=cs>#+DRAFT</span><span class=c>: false</span>
-#+TAGS[]:
-#+CATEGORIES[]:</code></pre></td></tr></table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id=outline-container-headline-10 class=outline-3>
-<h3 id=headline-10>
-添加新的 Post：
-</h3>
-<div id=outline-text-headline-10 class=outline-text-3>
-<div class="src src-bash">
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-org data-lang=org><span class=line><span class=cl><span class=cs>#+TITLE</span><span class=c>: {{ replace .Name &#34;-&#34; &#34; &#34; | title }}</span>
+</span></span><span class=line><span class=cl><span class=cs>#+DATE</span><span class=c>: {{ .Date }}</span>
+</span></span><span class=line><span class=cl><span class=cs>#+DRAFT</span><span class=c>: false</span>
+</span></span><span class=line><span class=cl>#+TAGS[]:
+</span></span><span class=line><span class=cl>#+CATEGORIES[]:</span></span></code></pre></td></tr></table></div></div></div></div></div></div></div><div id=outline-container-headline-10 class=outline-3><h3 id=headline-10>添加新的 Post：</h3><div id=outline-text-headline-10 class=outline-text-3><div class="src src-bash"><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># With Org-mode</span>
-    hugo new post/my-first-post.org
-<span class=c1># Or with Markdown</span>
-    hugo new post/my-first-post.md</code></pre></td></tr></table>
-</div>
-</div>
-</div>
-<p>注意：使用 Even 主题时，必须是用 post 文件夹，而不能用 posts。</p>
-</div>
-</div>
-<div id=outline-container-headline-11 class=outline-3>
-<h3 id=headline-11>
-启动 Hugo server
-</h3>
-<div id=outline-text-headline-11 class=outline-text-3>
-<div class="src src-bash">
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>  hugo server -D</code></pre></td></tr></table>
-</div>
-</div>
-</div>
-<p>
-通过 <a href=http://localhost:1313><a href=http://localhost:1313>http://localhost:1313</a> </a>在本地浏览器中打开站点。这是编辑 my-first-post.org 或者 my-first-post.md，网站的内容就会自动更新。</p>
-<p>
-提醒：网站可以正常工作后记得执行以下命令 commit 修改。</p>
-<div class="src src-text">
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># With Org-mode</span>
+</span></span><span class=line><span class=cl>    hugo new post/my-first-post.org
+</span></span><span class=line><span class=cl><span class=c1># Or with Markdown</span>
+</span></span><span class=line><span class=cl>    hugo new post/my-first-post.md</span></span></code></pre></td></tr></table></div></div></div><p>注意：使用 Even 主题时，必须是用 post 文件夹，而不能用 posts。</p></div></div><div id=outline-container-headline-11 class=outline-3><h3 id=headline-11>启动 Hugo server</h3><div id=outline-text-headline-11 class=outline-text-3><div class="src src-bash"><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>  hugo server -D</span></span></code></pre></td></tr></table></div></div></div><p>通过 <a href=http://localhost:1313><a href=http://localhost:1313>http://localhost:1313</a> </a>在本地浏览器中打开站点。这是编辑 my-first-post.org 或者 my-first-post.md，网站的内容就会自动更新。</p><p>提醒：网站可以正常工作后记得执行以下命令 commit 修改。</p><div class="src src-text"><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-text data-lang=text>git add .
-git commit -m &#34;init commit.&#34;</code></pre></td></tr></table>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id=outline-container-headline-12 class=outline-3>
-<h3 id=headline-12>
-部署站点
-</h3>
-<div id=outline-text-headline-12 class=outline-text-3>
-<p>执行以下命令，会在站点根目录下的./public/文件夹构建静态站点(-d/–destination 标志可以改变目录位置，或者在 config 文件中设置 publishdir 参数)。</p>
-<div class="src src-bash">
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>hugo -D</code></pre></td></tr></table>
-</div>
-</div>
-</div>
-<p>
-但是这样很麻烦，每次更新站点内容时，都要手动将 public 文件夹下的内容 push 到 GitHub 上。
-要解决这个问题，实现像 Jekyll 那样，直接 push 要更新的内容，然后 GitHub 自动在后台构建网站，就需要配置 GitHub CI 来自动完成构建的操作。</p>
-</div>
-</div>
-</div>
-</div>
-<div id=outline-container-headline-13 class=outline-2>
-<h2 id=headline-13>
-配置 GitHub CI 自动化构建
-</h2>
-<div id=outline-text-headline-13 class=outline-text-2>
-<div id=outline-container-headline-14 class=outline-3>
-<h3 id=headline-14>
-创建自动部署的脚本
-</h3>
-<div id=outline-text-headline-14 class=outline-text-3>
-<p>在站点的根目录下创建 ./.github/workflows/ 目录，并在当前目录下添加 <code>gh-pages.yaml</code> 文件，内容如下：</p>
-<div class="src src-yaml">
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>git add .
+</span></span><span class=line><span class=cl>git commit -m &#34;init commit.&#34;</span></span></code></pre></td></tr></table></div></div></div></div></div><div id=outline-container-headline-12 class=outline-3><h3 id=headline-12>部署站点</h3><div id=outline-text-headline-12 class=outline-text-3><p>执行以下命令，会在站点根目录下的./public/文件夹构建静态站点(-d/–destination 标志可以改变目录位置，或者在 config 文件中设置 publishdir 参数)。</p><div class="src src-bash"><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>hugo -D</span></span></code></pre></td></tr></table></div></div></div><p>但是这样很麻烦，每次更新站点内容时，都要手动将 public 文件夹下的内容 push 到 GitHub 上。
+要解决这个问题，实现像 Jekyll 那样，直接 push 要更新的内容，然后 GitHub 自动在后台构建网站，就需要配置 GitHub CI 来自动完成构建的操作。</p></div></div></div></div><div id=outline-container-headline-13 class=outline-2><h2 id=headline-13>配置 GitHub CI 自动化构建</h2><div id=outline-text-headline-13 class=outline-text-2><div id=outline-container-headline-14 class=outline-3><h3 id=headline-14>创建自动部署的脚本</h3><div id=outline-text-headline-14 class=outline-text-3><p>在站点的根目录下创建 ./.github/workflows/ 目录，并在当前目录下添加 <code>gh-pages.yaml</code> 文件，内容如下：</p><div class="src src-yaml"><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -439,134 +84,59 @@ git commit -m &#34;init commit.&#34;</code></pre></td></tr></table>
 </span><span class=lnt>31
 </span><span class=lnt>32
 </span><span class=lnt>33
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>github pages</span><span class=w>
-</span><span class=w>
-</span><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span>- <span class=l>master </span><span class=w> </span><span class=c># Set a branch to deploy</span><span class=w>
-</span><span class=w>  </span><span class=nt>pull_request</span><span class=p>:</span><span class=w>
-</span><span class=w>
-</span><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>deploy</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-20.04</span><span class=w>
-</span><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span>- <span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v2</span><span class=w>
-</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
-</span><span class=w>          </span><span class=nt>submodules</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>  </span><span class=c># Fetch Hugo themes (true OR recursive)</span><span class=w>
-</span><span class=w>          </span><span class=nt>fetch-depth</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w>    </span><span class=c># Fetch all history for .GitInfo and .Lastmod</span><span class=w>
-</span><span class=w>
-</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Setup Hugo</span><span class=w>
-</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-hugo@v2</span><span class=w>
-</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
-</span><span class=w>          </span><span class=nt>hugo-version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;latest&#39;</span><span class=w>
-</span><span class=w>          </span><span class=c># extended: true</span><span class=w>
-</span><span class=w>
-</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build</span><span class=w>
-</span><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>hugo --minify</span><span class=w>
-</span><span class=w>
-</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy</span><span class=w>
-</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-gh-pages@v3</span><span class=w>
-</span><span class=w>        </span><span class=nt>if</span><span class=p>:</span><span class=w> </span><span class=l>github.ref == &#39;refs/heads/master&#39;</span><span class=w>
-</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
-</span><span class=w>          </span><span class=nt>github_token</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.GITHUB_TOKEN }}</span><span class=w>
-</span><span class=w>          </span><span class=nt>publish_branch</span><span class=p>:</span><span class=w> </span><span class=l>hugo</span><span class=w>
-</span><span class=w>          </span><span class=nt>publish_dir</span><span class=p>:</span><span class=w> </span><span class=l>./public</span></code></pre></td></tr></table>
-</div>
-</div>
-</div>
-<p>
-注意，这里主分支的名称是 <code>master</code> ， <code>public_branch</code> 分支的名称是 hugo，可以根据实际情况进行修改。</p>
-<p>
-他的原理是：当你的站点仓库的 master 主分支发生 push 操作时，CI 就会 ubuntu-20.04 上执行下载网站仓库，下载仓库子模块中的主题，然后构建站点到 ./public/ 文件夹，并将文件内容推送 hugo 分支。</p>
-</div>
-</div>
-<div id=outline-container-headline-15 class=outline-3>
-<h3 id=headline-15>
-设置 GitHub Pages 路径
-</h3>
-<div id=outline-text-headline-15 class=outline-text-3>
-<p>由于 GitHub Pages 默认是使用 master 分支的，可以在站点仓库的配置界面下将 GitHub Pages 的路径设置为 hugo 分支的根目录即可。</p>
-<blockquote>
-<p>Enjoy Hugo！</p>
-</blockquote>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title>文章作者</span>
-<span class=item-content>Eason Huang</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>上次更新</span>
-<span class=item-content>
-2021-07-17
-<a href=https://github.com/Eason0210/eason0210.github.io/commit/c2e8969d7682c803c2568c09698f21b95ec2ac2c title="update why-move-from-Jekyll2hugo.org">(c2e8969)</a>
-</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>许可协议</span>
-<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
-</p>
-</div>
-<footer class=post-footer>
-<div class=post-tags>
-<a href=/tags/hugo/>Hugo</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>github pages</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>master </span><span class=w> </span><span class=c># Set a branch to deploy</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>pull_request</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>deploy</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-20.04</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>submodules</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>  </span><span class=c># Fetch Hugo themes (true OR recursive)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>fetch-depth</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w>    </span><span class=c># Fetch all history for .GitInfo and .Lastmod</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Setup Hugo</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-hugo@v2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>hugo-version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;latest&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=c># extended: true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>hugo --minify</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-gh-pages@v3</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>if</span><span class=p>:</span><span class=w> </span><span class=l>github.ref == &#39;refs/heads/master&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>github_token</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.GITHUB_TOKEN }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>publish_branch</span><span class=p>:</span><span class=w> </span><span class=l>hugo</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>publish_dir</span><span class=p>:</span><span class=w> </span><span class=l>./public</span></span></span></code></pre></td></tr></table></div></div></div><p>注意，这里主分支的名称是 <code>master</code> ， <code>public_branch</code> 分支的名称是 hugo，可以根据实际情况进行修改。</p><p>他的原理是：当你的站点仓库的 master 主分支发生 push 操作时，CI 就会 ubuntu-20.04 上执行下载网站仓库，下载仓库子模块中的主题，然后构建站点到 ./public/ 文件夹，并将文件内容推送 hugo 分支。</p></div></div><div id=outline-container-headline-15 class=outline-3><h3 id=headline-15>设置 GitHub Pages 路径</h3><div id=outline-text-headline-15 class=outline-text-3><p>由于 GitHub Pages 默认是使用 master 分支的，可以在站点仓库的配置界面下将 GitHub Pages 的路径设置为 hugo 分支的根目录即可。</p><blockquote><p>Enjoy Hugo！</p></blockquote></div></div></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>Eason Huang</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2021-07-17
+<a href=https://github.com/Eason0210/eason0210.github.io/commit/c2e8969d7682c803c2568c09698f21b95ec2ac2c title="update why-move-from-Jekyll2hugo.org">(c2e8969)</a></span></p><p class=copyright-item><span class=item-title>许可协议</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span></p></div><footer class=post-footer><div class=post-tags><a href=/tags/hugo/>Hugo</a>
 <a href=/tags/emacs/>Emacs</a>
-<a href=/tags/org-mode/>org-mode</a>
-</div>
-<nav class=post-nav>
-<a class=prev href=/post/usage-of-easy-hugo/>
-<i class="iconfont icon-left"></i>
+<a href=/tags/org-mode/>org-mode</a></div><nav class=post-nav><a class=prev href=/post/usage-of-easy-hugo/><i class="iconfont icon-left"></i>
 <span class="prev-text nav-default">使用 Easy-hugo 管理博客</span>
-<span class="prev-text nav-mobile">上一篇</span>
-</a>
-<a class=next href=/post/make-emacs-rime-smart/>
-<span class="next-text nav-default">如何让你的 Emacs-rime 更加智能</span>
+<span class="prev-text nav-mobile">上一篇</span></a>
+<a class=next href=/post/make-emacs-rime-smart/><span class="next-text nav-default">如何让你的 Emacs-rime 更加智能</span>
 <span class="next-text nav-mobile">下一篇</span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
-</div>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=mailto:aqua0210@163.com class="iconfont icon-email" title=email></a>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:aqua0210@163.com class="iconfont icon-email" title=email></a>
 <a href=https://twitter.com/eason0210 class="iconfont icon-twitter" title=twitter></a>
 <a href=http://github.com/eason0210 class="iconfont icon-github" title=github></a>
-<a href=https://eason0210.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
-</span>
+<a href=https://eason0210.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动</span>
 <span class=division>|</span>
-<span class=theme-info>
-主题 -
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<span class=copyright-year>
-&copy;
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span>
+<span class=copyright-year>&copy;
 2020 -
-2021<span class=heart><i class="iconfont icon-heart"></i></span><span>Eason Huang</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Eason Huang</span></span></div></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-</body>
-</html>
+<script type=text/javascript src=/js/main.min.64437849d125a2d603b3e71d6de5225d641a32d17168a58106e0b61852079683.js></script></body></html>

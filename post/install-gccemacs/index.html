@@ -1,170 +1,36 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>GccEmacs 在各个平台上的安装 - Eason Huang</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="Eason Huang"><meta name=description content="GccEmacs 最近已经逐渐成熟，几个月前已经加入了 Emacs 仓库的 feature/nativecomp 分支，未来还将合并到 Master 分支。但由于 Emacs 的历史包袱太重，维护者对加入新功能是保持比较谨慎的态度，"><meta name=keywords content="Hugo,theme,even">
-<meta name=generator content="Hugo 0.88.1 with theme even">
-<link rel=canonical href=https://eason0210.github.io/post/install-gccemacs/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<link href=/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<meta property="og:title" content="GccEmacs 在各个平台上的安装">
-<meta property="og:description" content="GccEmacs 最近已经逐渐成熟，几个月前已经加入了 Emacs 仓库的 feature/nativecomp 分支，未来还将合并到 Master 分支。但由于 Emacs 的历史包袱太重，维护者对加入新功能是保持比较谨慎的态度，">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://eason0210.github.io/post/install-gccemacs/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2021-02-23T20:36:16+08:00">
-<meta property="article:modified_time" content="2021-07-17T09:51:20+08:00">
-<meta itemprop=name content="GccEmacs 在各个平台上的安装">
-<meta itemprop=description content="GccEmacs 最近已经逐渐成熟，几个月前已经加入了 Emacs 仓库的 feature/nativecomp 分支，未来还将合并到 Master 分支。但由于 Emacs 的历史包袱太重，维护者对加入新功能是保持比较谨慎的态度，"><meta itemprop=datePublished content="2021-02-23T20:36:16+08:00">
-<meta itemprop=dateModified content="2021-07-17T09:51:20+08:00">
-<meta itemprop=wordCount content="985">
-<meta itemprop=keywords content="Emacs,GccEmacs,Native-comp,"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="GccEmacs 在各个平台上的安装">
-<meta name=twitter:description content="GccEmacs 最近已经逐渐成熟，几个月前已经加入了 Emacs 仓库的 feature/nativecomp 分支，未来还将合并到 Master 分支。但由于 Emacs 的历史包袱太重，维护者对加入新功能是保持比较谨慎的态度，"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
-</head>
-<body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Peace and freedom</a>
-</div>
-<div class=mobile-navbar-icon>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>GccEmacs 在各个平台上的安装 - Eason Huang</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content="no-transform"><meta http-equiv=cache-control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="Eason Huang"><meta name=description content="Emacs 28.1 最近已经发布，内置了对 --native-compilation的支持。只要安装 28.1 就能体验 native-comp 特性。 这里主要介绍在不同平台如何安装 GccEm"><meta name=keywords content="Hugo,theme,even"><meta name=generator content="Hugo 0.96.0 with theme even"><link rel=canonical href=https://eason0210.github.io/post/install-gccemacs/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link href=/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><meta property="og:title" content="GccEmacs 在各个平台上的安装"><meta property="og:description" content="Emacs 28.1 最近已经发布，内置了对 --native-compilation的支持。只要安装 28.1 就能体验 native-comp 特性。 这里主要介绍在不同平台如何安装 GccEm"><meta property="og:type" content="article"><meta property="og:url" content="https://eason0210.github.io/post/install-gccemacs/"><meta property="article:section" content="post"><meta property="article:published_time" content="2021-02-23T20:36:16+08:00"><meta property="article:modified_time" content="2022-04-08T22:15:10+08:00"><meta itemprop=name content="GccEmacs 在各个平台上的安装"><meta itemprop=description content="Emacs 28.1 最近已经发布，内置了对 --native-compilation的支持。只要安装 28.1 就能体验 native-comp 特性。 这里主要介绍在不同平台如何安装 GccEm"><meta itemprop=datePublished content="2021-02-23T20:36:16+08:00"><meta itemprop=dateModified content="2022-04-08T22:15:10+08:00"><meta itemprop=wordCount content="1073"><meta itemprop=keywords content="Emacs,GccEmacs,Native-comp,"><meta name=twitter:card content="summary"><meta name=twitter:title content="GccEmacs 在各个平台上的安装"><meta name=twitter:description content="Emacs 28.1 最近已经发布，内置了对 --native-compilation的支持。只要安装 28.1 就能体验 native-comp 特性。 这里主要介绍在不同平台如何安装 GccEm"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>Peace and freedom</a></div><div class=mobile-navbar-icon><span></span>
 <span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>最新</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>归档</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>标签</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>分类</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>关于</li>
-</a>
-</ul>
-</nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Peace and freedom</a>
-</div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>最新</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>归档</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>标签</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>分类</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>关于</a>
-</li>
-</ul>
-</nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>GccEmacs 在各个平台上的安装</h1>
-<div class=post-meta>
-<span class=post-time> 2021-02-23 </span>
-<div class=post-category>
-<a href=/categories/develop-tools/> Develop Tools </a>
-</div>
-<span class=more-meta> 约 985 字 </span>
-<span class=more-meta> 预计阅读 2 分钟 </span>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title>文章目录</h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href=#apple-mac-os>Apple Mac OS</a></li>
-<li><a href=#gnulinux>Gnu/Linux</a></li>
-<li><a href=#windows-10>Windows 10</a></li>
-<li><a href=#使用体验>使用体验</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</nav>
-</div>
-</div>
-<div class=post-content>
-<p><code>GccEmacs</code> 最近已经逐渐成熟，几个月前已经加入了 Emacs 仓库的 <code>feature/nativecomp</code> 分支，未来还将合并到 <code>Master</code> 分支。但由于 Emacs 的历史包袱太重，维护者对加入新功能是保持比较谨慎的态度，也许是人手不足，对 <code>GccEmacs</code> 加入 <code>Master</code> 分支推进的很慢，以至于 <code>GccEmacs</code> 的维护者都有“<a href=https://lists.gnu.org/archive/html/emacs-devel/2021-02/msg00878.html>意见</a>”了。</p>
-<p>进入正题，下面针对三大平台分别介绍 <code>GccEmacs</code> 的安装：</p>
-<h3 id=apple-mac-os>Apple Mac OS</h3>
-<p>这里以 Intel 平台的 Mac OS (Big Sur 11.2) 为例：
-Mac 平台比较推荐直接使用 <a href=https://github.com/d12frosted/homebrew-emacs-plus>Emacs plus</a>, 通过以下命令安装：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>brew install emacs-plus@28 --with-native-comp
-</code></pre></td></tr></table>
-</div>
-</div><p>注意：第一次启动 Emacs 时，建议在终端中执行 <code>emacs -q</code> 启动纯净版本的 Emacs, 并执行一些命令，使得 Emacs 开始编译内置的包。完成后再正常启动 Emacs 。</p>
-<h3 id=gnulinux>Gnu/Linux</h3>
-<p>Linux 发行版本较多，不同发行版的安装方式都不相同，这里以 <code>ArchLinux</code> 为例说明：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo pacman -S emacs-native-comp-git
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=windows-10>Windows 10</h3>
-<p>Windows 系统目前还没有预先编译的版本，只能安装 <a href=https://www.msys2.org/>Msys2</a> 进行编译安装。
-提醒：建议在环境变量中设置 <code>HOME</code> 变量为 <code>C:\Users\Aqua\</code>, 这里的 <code>Aqua</code> 是我的 Windows 系统用户名。</p>
-<h4 id=安装-msys2>安装 Msys2</h4>
-<p>推荐使用 <a href=https://scoop.sh/>Scoop</a> 进行软件的安装，更加方便，而且不会污染 <code>Path</code>.
-如果安装了 Scoop, 可以执行下面的命令安装 Msys2:</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>scoop install msys2
-</code></pre></td></tr></table>
-</div>
-</div><p>进入 msys2 根目录下的<code>/etc/pacman.d/</code>里面，将3个 mirrorlist 文件中 TUNA 和 USTC 的源的顺序提到前面，这样下载速度就非常快了。
-然后进入 mingw64 终端，安装好 Msys2 后进入 Mingw64 终端，先执行 <code>pacman -Syu</code> 更新系统到最新。</p>
-<h4 id=安装依赖>安装依赖</h4>
-<p>在 Mingw64 终端中执行以下命令安装依赖。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>最新</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/about/><li class=mobile-menu-item>关于</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>Peace and freedom</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>最新</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/about/>关于</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>GccEmacs 在各个平台上的安装</h1><div class=post-meta><span class=post-time>2021-02-23</span><div class=post-category><a href=/categories/develop-tools/>Develop Tools</a></div><span class=more-meta>约 1073 字</span>
+<span class=more-meta>预计阅读 3 分钟</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><ul><li><ul><li><a href=#apple-mac-os>Apple Mac OS</a></li><li><a href=#gnulinux>Gnu/Linux</a></li><li><a href=#windows-10>Windows 10</a></li><li><a href=#使用体验>使用体验</a></li></ul></li></ul></li></ul></nav></div></div><div class=post-content><p>Emacs 28.1 最近已经发布，内置了对 <code>--native-compilation</code>的支持。只要安装 28.1 就能体验 native-comp 特性。
+这里主要介绍在不同平台如何安装 <code>GccEmacs</code>，以获得更好的体验。</p><h3 id=apple-mac-os>Apple Mac OS</h3><p>这里以 Intel 平台的 Mac OS (Monterey 12.3.1) 为例：</p><h4 id=通过脚本自动编译>通过脚本自动编译：</h4><p>这种方法的好处是比较灵活，可以根据需要编译不同的 commit 或者 tag，而且所有需要的内容都打包到 Emacs.app 中，包括源代码。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git clone https://github.com/jimeh/build-emacs-for-macos
+</span></span><span class=line><span class=cl><span class=nb>cd</span> build-emacs-for-macos
+</span></span><span class=line><span class=cl>brew bundle
+</span></span><span class=line><span class=cl>brew services start dbus
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>./build-emacs-for-macos --native-full-aot
+</span></span><span class=line><span class=cl><span class=nb>cd</span> builds
+</span></span><span class=line><span class=cl>tar -xjvf Emacs.2022-xx-xx.xxxxxxx.master.macOS-12.x86_64.tbz
+</span></span></code></pre></td></tr></table></div></div><p>拷贝 Emacs.app 到 <code>/Applications/Emacs.app</code></p><p>软链接 <code>emacs</code> 到 <code>/usr/local/bin</code>，方便有时需要终端启动。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ln -s /Applications/Emacs.app/Contents/MacOS/bin/emacs /usr/local/bin/emacs
+</span></span></code></pre></td></tr></table></div></div><h4 id=直接使用-emacs-plushttpsgithubcomd12frostedhomebrew-emacs-plus-安装>直接使用 <a href=https://github.com/d12frosted/homebrew-emacs-plus>Emacs plus</a> 安装：</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>brew install emacs-plus@29 --with-native-comp
+</span></span></code></pre></td></tr></table></div></div><h3 id=gnulinux>Gnu/Linux</h3><p>Linux 发行版本较多，不同发行版的安装方式都不相同，这里以 <code>ArchLinux</code> 为例说明：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo pacman -S emacs-native-comp-git
+</span></span></code></pre></td></tr></table></div></div><h3 id=windows-10>Windows 10</h3><p>Windows 系统目前还没有预先编译的版本，只能安装 <a href=https://www.msys2.org/>Msys2</a> 进行编译安装。
+提醒：建议在环境变量中设置 <code>HOME</code> 变量为 <code>C:\Users\Aqua\</code>, 这里的 <code>Aqua</code> 是我的 Windows 系统用户名。</p><h4 id=安装-msys2>安装 Msys2</h4><p>推荐使用 <a href=https://scoop.sh/>Scoop</a> 进行软件的安装，更加方便，而且不会污染 <code>Path</code>.
+如果安装了 Scoop, 可以执行下面的命令安装 Msys2:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>scoop install msys2
+</span></span></code></pre></td></tr></table></div></div><p>进入 msys2 根目录下的<code>/etc/pacman.d/</code>里面，将3个 mirrorlist 文件中 TUNA 和 USTC 的源的顺序提到前面，这样下载速度就非常快了。
+然后进入 mingw64 终端，安装好 Msys2 后进入 Mingw64 终端，先执行 <code>pacman -Syu</code> 更新系统到最新。</p><h4 id=安装依赖>安装依赖</h4><p>在 Mingw64 终端中执行以下命令安装依赖。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -178,166 +44,58 @@ Mac 平台比较推荐直接使用 <a href=https://github.com/d12frosted/homebre
 </span><span class=lnt>12
 </span><span class=lnt>13
 </span><span class=lnt>14
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>  pacman -S --needed base-devel gcc git<span class=se>\
-</span><span class=se></span>  mingw-w64-x86_64-toolchain <span class=se>\
-</span><span class=se></span>  mingw-w64-x86_64-xpm-nox <span class=se>\
-</span><span class=se></span>  mingw-w64-x86_64-libtiff <span class=se>\
-</span><span class=se></span>  mingw-w64-x86_64-giflib <span class=se>\
-</span><span class=se></span>  mingw-w64-x86_64-libpng <span class=se>\
-</span><span class=se></span>  mingw-w64-x86_64-libjpeg-turbo <span class=se>\
-</span><span class=se></span>  mingw-w64-x86_64-librsvg <span class=se>\
-</span><span class=se></span>  mingw-w64-x86_64-lcms2 <span class=se>\
-</span><span class=se></span>  mingw-w64-x86_64-jansson <span class=se>\
-</span><span class=se></span>  mingw-w64-x86_64-libxml2 <span class=se>\
-</span><span class=se></span>  mingw-w64-x86_64-gnutls <span class=se>\
-</span><span class=se></span>  mingw-w64-x86_64-zlib <span class=se>\
-</span><span class=se></span>  mingw-w64-x86_64-harfbuzz
-</code></pre></td></tr></table>
-</div>
-</div><h4 id=下载-emacs-源代码>下载 Emacs 源代码</h4>
-<p>github mirror:</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git clone --depth<span class=o>=</span><span class=m>1</span> https://github.com/emacs-mirror/emacs.git
-</code></pre></td></tr></table>
-</div>
-</div><p>gitee mirror:</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git clone --depth<span class=o>=</span><span class=m>1</span> https://gitee.com/mirrors/emacs.git
-</code></pre></td></tr></table>
-</div>
-</div><p>official git repo:</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git clone --depth<span class=o>=</span><span class=m>1</span>  https://git.savannah.gnu.org/git/emacs.git
-</code></pre></td></tr></table>
-</div>
-</div><h4 id=编译-emacs>编译 Emacs</h4>
-<p>进入源代码目录，然后通过以下命令编译 Emacs 的源码。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>  pacman -S --needed base-devel gcc git<span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  mingw-w64-x86_64-toolchain <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  mingw-w64-x86_64-xpm-nox <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  mingw-w64-x86_64-libtiff <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  mingw-w64-x86_64-giflib <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  mingw-w64-x86_64-libpng <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  mingw-w64-x86_64-libjpeg-turbo <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  mingw-w64-x86_64-librsvg <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  mingw-w64-x86_64-lcms2 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  mingw-w64-x86_64-jansson <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  mingw-w64-x86_64-libxml2 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  mingw-w64-x86_64-gnutls <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  mingw-w64-x86_64-zlib <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  mingw-w64-x86_64-harfbuzz
+</span></span></code></pre></td></tr></table></div></div><h4 id=下载-emacs-源代码>下载 Emacs 源代码</h4><p>Github 镜像:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git clone --depth<span class=o>=</span><span class=m>1</span> https://github.com/emacs-mirror/emacs.git
+</span></span></code></pre></td></tr></table></div></div><p>官方 Git 仓库:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git clone --depth<span class=o>=</span><span class=m>1</span>  https://git.savannah.gnu.org/git/emacs.git
+</span></span></code></pre></td></tr></table></div></div><h4 id=编译-emacs>编译 Emacs</h4><p>进入源代码目录，然后通过以下命令编译 Emacs 的源码。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span><span class=lnt>7
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>   ./autogen.sh
-   ./configure --with-native-compilation --without-dbus
-   make -j<span class=k>$(</span>nproc<span class=k>)</span>
-
-   make install <span class=nv>prefix</span><span class=o>=</span>/d/Dev_Tools/emacs28-native
-   cp <span class=k>$(</span> pacman -Ql mingw-w64-x86_64-<span class=o>{</span>libtiff,giflib,libpng,libjpeg-turbo,librsvg,libxml2,gnutls<span class=o>}</span> <span class=p>|</span> grep bin/.*<span class=se>\.</span>dll$ <span class=p>|</span> awk <span class=s1>&#39;{print $2}&#39;</span> <span class=k>)</span> /D/Dev_Tools/emacs28-native/bin
-
-</code></pre></td></tr></table>
-</div>
-</div><p>注意：</p>
-<ol>
-<li><code>make -j$(nproc)</code> 中的 <code>$(nproc)</code> 会自动获取当前系统的 CPU 核心数；你也可以自己手动输入，比如<code>make -j12</code> 就是使用 12 核心进行编译。</li>
-<li><code>make NATIVE_FULL_AOT=1</code> 会强制把所有 el 文件提前编译成 eln, 但编译时间会大幅增加。</li>
-<li><code>make install</code> 的时候如果不指定 <code>prefix</code> 的话是会直接安装到 msys2 目录下，不讲究的话可以这样用。如果需要卸载的话在源码目录里面 <code>make uninstall</code>就可以了。个人建议安装到指定目录, 比如我这里是安装到 <code>D:\Dev_Tools\emacs28-native</code>, 注意在路径中使用斜杠"/", 而不是反斜杠"\"。</li>
-<li>如果编译过程出错了，记得<code>make clean</code>之后重新<code>configure</code>再<code>make</code> 。</li>
-<li>启动 Emacs 时会自动编译 eln, 但会出现下面这个错误，不过不影响使用，原因未知。</li>
-</ol>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>Warning: arch-dependent data dir <span class=s1>&#39;%emacs_dir%/libexec/emacs/28.0.50/x86_64-w64-mingw32/&#39;</span>: No such file or directory
-
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=使用体验>使用体验</h3>
-<p>目前在 Mac 和 Linux 上的使用体验是最好的，Windows 也完全可以正常使用了，不过速度的提升不是特别的明显。
-期待 <code>Gccemacs</code> 早日加入 <code>Master</code> 分支。</p>
-</div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title>文章作者</span>
-<span class=item-content>Eason Huang</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>上次更新</span>
-<span class=item-content>
-2021-07-17
-<a href=https://github.com/Eason0210/eason0210.github.io/commit/0193331b047297ed89423fd4800b52a02a86c04b title="remove date from file name.">(0193331)</a>
-</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>许可协议</span>
-<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
-</p>
-</div>
-<footer class=post-footer>
-<div class=post-tags>
-<a href=/tags/emacs/>Emacs</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>   ./autogen.sh
+</span></span><span class=line><span class=cl>   ./configure --with-native-compilation --without-dbus
+</span></span><span class=line><span class=cl>   make -j<span class=k>$(</span>nproc<span class=k>)</span> <span class=nv>NATIVE_FULL_AOT</span><span class=o>=</span><span class=m>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>   make install <span class=nv>prefix</span><span class=o>=</span>/c/opt/emacs
+</span></span><span class=line><span class=cl>   cp <span class=k>$(</span> pacman -Ql mingw-w64-x86_64-<span class=o>{</span>libtiff,giflib,libpng,libjpeg-turbo,librsvg,libxml2,gnutls<span class=o>}</span> <span class=p>|</span> grep bin/.*<span class=se>\.</span>dll$ <span class=p>|</span> awk <span class=s1>&#39;{print $2}&#39;</span> <span class=k>)</span> /c/opt/emacs/bin
+</span></span></code></pre></td></tr></table></div></div><p>注意：</p><ol><li><code>make -j$(nproc)</code> 中的 <code>$(nproc)</code> 会自动获取当前系统的 CPU 核心数；你也可以自己手动输入，比如<code>make -j12</code> 就是使用 12 核心进行编译。</li><li><code>make NATIVE_FULL_AOT=1</code> 会强制把所有 el 文件提前编译成 eln, 但编译时间会大幅增加。</li><li><code>make install</code> 的时候如果不指定 <code>prefix</code> 的话是会直接安装到 msys2 目录下，不讲究的话可以这样用。如果需要卸载的话在源码目录里面 <code>make uninstall</code>就可以了。个人建议安装到指定目录, 比如我这里是安装到 <code>c:\opt\emacs</code>, 注意在路径中使用斜杠"/", 而不是反斜杠"\"。</li><li>如果编译过程出错了，记得<code>make clean</code>之后重新<code>configure</code>再<code>make</code> 。</li></ol><h3 id=使用体验>使用体验</h3><p>目前 native-compilation 的 Emacs 已经很成熟了，已经集成到 Emacs 28.1 版本中，但我还是推荐自己编译，提前编译好所有的内置包，这样启动时才不会卡顿。
+另外，我使用 <a href=https://github.com/emacscollective/borg>Borg</a>管理第三方包，可以在终端中执行<code>make all</code>提前编译个人配置中的全部包为<code>.eln</code>, 这样在启动Emacs 的时候就再也不需要等待编译了，再也不会卡顿。</p><p>附上我的个人配置文件：https://github.com/Eason0210/emacs.d</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>Eason Huang</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2022-04-08
+<a href=https://github.com/Eason0210/eason0210.github.io/commit/654b94aad93740d98342b92536c15298dc95a78a title="Update post: Install-GccEmacs">(654b94a)</a></span></p><p class=copyright-item><span class=item-title>许可协议</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span></p></div><footer class=post-footer><div class=post-tags><a href=/tags/emacs/>Emacs</a>
 <a href=/tags/gccemacs/>GccEmacs</a>
-<a href=/tags/native-comp/>Native-comp</a>
-</div>
-<nav class=post-nav>
-<a class=prev href=/post/using-emacs-on-archlinux-with-wsl2/>
-<i class="iconfont icon-left"></i>
+<a href=/tags/native-comp/>Native-comp</a></div><nav class=post-nav><a class=prev href=/post/using-emacs-on-archlinux-with-wsl2/><i class="iconfont icon-left"></i>
 <span class="prev-text nav-default">在 WSL2 上安装 Archlinux 并运行 Emacs</span>
-<span class="prev-text nav-mobile">上一篇</span>
-</a>
-<a class=next href=/post/clock-issue-with-dual-system/>
-<span class="next-text nav-default">Linux Windows 双系统时间不一致</span>
+<span class="prev-text nav-mobile">上一篇</span></a>
+<a class=next href=/post/clock-issue-with-dual-system/><span class="next-text nav-default">Linux Windows 双系统时间不一致</span>
 <span class="next-text nav-mobile">下一篇</span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
-</div>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=mailto:aqua0210@163.com class="iconfont icon-email" title=email></a>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:aqua0210@163.com class="iconfont icon-email" title=email></a>
 <a href=https://twitter.com/eason0210 class="iconfont icon-twitter" title=twitter></a>
 <a href=http://github.com/eason0210 class="iconfont icon-github" title=github></a>
-<a href=https://eason0210.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
-</span>
+<a href=https://eason0210.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动</span>
 <span class=division>|</span>
-<span class=theme-info>
-主题 -
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<span class=copyright-year>
-&copy;
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span>
+<span class=copyright-year>&copy;
 2020 -
-2021<span class=heart><i class="iconfont icon-heart"></i></span><span>Eason Huang</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Eason Huang</span></span></div></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-</body>
-</html>
+<script type=text/javascript src=/js/main.min.64437849d125a2d603b3e71d6de5225d641a32d17168a58106e0b61852079683.js></script></body></html>
