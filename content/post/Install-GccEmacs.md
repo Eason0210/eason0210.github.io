@@ -49,10 +49,12 @@ Windows 系统可以通过[GNU官网下载](https://alpha.gnu.org/gnu/emacs/pret
 然后进入 mingw64 终端，安装好 Msys2 后进入 Mingw64 终端，先执行 `pacman -Syu` 更新系统到最新。
 
 #### 安装依赖
+详细说明请参考 Emacs 官方仓库的[安装文档](https://github.com/emacs-mirror/emacs/blob/master/nt/INSTALL.W64)
+
 在 Mingw64 终端中执行以下命令安装依赖。
 
 ```bash
-  pacman -S --needed base-devel gcc git\
+  pacman -S --needed base-devel gcc git \
   mingw-w64-x86_64-toolchain \
   mingw-w64-x86_64-xpm-nox \
   mingw-w64-x86_64-libtiff \
@@ -60,6 +62,7 @@ Windows 系统可以通过[GNU官网下载](https://alpha.gnu.org/gnu/emacs/pret
   mingw-w64-x86_64-libpng \
   mingw-w64-x86_64-libjpeg-turbo \
   mingw-w64-x86_64-librsvg \
+  mingw-w64-x86_64-libwebp \
   mingw-w64-x86_64-lcms2 \
   mingw-w64-x86_64-jansson \
   mingw-w64-x86_64-libxml2 \
