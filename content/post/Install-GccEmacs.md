@@ -79,6 +79,10 @@ git clone --depth=1 https://github.com/emacs-mirror/emacs.git
 ```bash
 git clone --depth=1  https://git.savannah.gnu.org/git/emacs.git
 ```
+提醒：执行`./autogen.sh`过程中出错，可能是因为克隆代码后 `checkout` 时用了 `CRLF`. 有2种方式可以解决：
+1. 设置 `git config core.autocrlf false`
+2. 通过Web浏览器访问 https://github.com/emacs-mirror/emacs.git ，点击绿色的`Clone`按钮下载Zip格式的源代码。
+
 #### 编译 Emacs
 进入源代码目录，然后通过以下命令编译 Emacs 的源码。
 
@@ -105,7 +109,7 @@ git clone --depth=1  https://git.savannah.gnu.org/git/emacs.git
 至于为什么选择使用 Emacs 29 主要是为了使用以下新特性：
 
 1. 支持像素滚动，可以通过触摸板像 Chrome 浏览器那样滚动屏幕
-2. 内置支持 `sqlite`, `org-roam` 和 `epkg` 这样的包就不需要通过动态模块实现。
+2. 内置支持 `sqlite`。这样 `org-roam` 和 `epkg` 这样的包就不需要通过动态模块，可以直接使用内置的 `sqlite`。
 3. 在 Windows 平台支持双缓冲，滚动屏幕时，不再会出现闪烁
 4. 修复了 `project.el` 在处理 `Git` 子模块的bug，现在可以在使用 `Borg` 时，在 `.gitsubmodule` 文件中加 `load-path`
 5. 修复了在使用 `destop.el` 和 `saveplace` 时不支持非 UTF-8 的 unicode 编码(比如 UTF-16)
