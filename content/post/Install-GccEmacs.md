@@ -41,7 +41,7 @@ sudo pacman -S emacs-native-comp-git
 ```
 
 ### Windows 10
-Windows 系统可以通过[GNU官网下载](https://alpha.gnu.org/gnu/emacs/pretest/windows/emacs-29/)预先编译的版本.
+Windows 系统可以通过[GNU官网下载](https://alpha.gnu.org/gnu/emacs/pretest/windows/emacs-29/)预先编译的版本。
 我更倾向于只能通过 [Msys2](https://www.msys2.org/) 进行编译安装，这样能用上最新的 Commit。
 提醒：建议在环境变量中设置 `HOME` 变量为 `C:\Users\<username>\`, 这里的 `<username>` 填写你的系统用户名。
 
@@ -79,9 +79,10 @@ git clone --depth=1 https://github.com/emacs-mirror/emacs.git
 ```bash
 git clone --depth=1  https://git.savannah.gnu.org/git/emacs.git
 ```
-提醒：执行`./autogen.sh`过程中出错，可能是因为克隆代码后 `checkout` 时用了 `CRLF`. 有2种方式可以解决：
+提醒：如果执行`./autogen.sh`过程中出错，可能是因为克隆代码后 `checkout` 时用了 `CRLF`.  
+有2种方式可以解决：
 1. 设置 `git config core.autocrlf false`
-2. 通过Web浏览器访问 https://github.com/emacs-mirror/emacs.git ，点击绿色的`Clone`按钮下载Zip格式的源代码。
+2. 通过 Web 浏览器访问 [emacs-mirror/emacs](https://github.com/emacs-mirror/emacs.git) ，点击绿色的`Clone`按钮下载Zip格式的源代码。
 
 #### 编译 Emacs
 进入源代码目录，然后通过以下命令编译 Emacs 的源码。
@@ -101,17 +102,17 @@ git clone --depth=1  https://git.savannah.gnu.org/git/emacs.git
 1. `make -j$(nproc)` 中的 `$(nproc)` 会自动获取当前系统的 CPU 核心数；你也可以自己手动输入，比如`make -j12` 就是使用 12 核心进行编译。
 2. `--with-native-compilation=aot` 相当于 `make NATIVE_FULL_AOT=1`， 会强制把所有 `.el` 文件提前编译成 `.eln`, 但编译时间会大幅增加。
 3. `make install` 的时候如果不指定 `prefix` 的话是会直接安装到 msys2 目录下，不讲究的话可以这样用。如果需要卸载的话在源码目录里面 `make uninstall`就可以了。个人建议安装到指定目录, 比如我这里是安装到 `c:\opt\emacs`, 注意在路径中使用斜杠"/", 而不是反斜杠"\\"。
-3. 如果编译过程出错了，记得`make clean`之后重新`configure`再`make` 。
+3. 如果编译过程出错了，记得`make clean`之后重新`configure`再`make`。
 
 ### 使用体验
 目前 native-compilation 的 Emacs 已经很成熟了，已经集成到 Emacs 28.1 版本中。但要注意，native-compilation 并不会加快 Emacs 的启动速度。它主要是对使用 LSP 时有性能提升。
 
 至于为什么选择使用 Emacs 29 主要是为了使用以下新特性：
 
-1. 支持像素滚动，可以通过触摸板像 Chrome 浏览器那样滚动屏幕
-2. 内置支持 `sqlite`。这样 `org-roam` 和 `epkg` 这样的包就不需要通过动态模块，可以直接使用内置的 `sqlite`。
-3. 在 Windows 平台支持双缓冲，滚动屏幕时，不再会出现闪烁
-4. 修复了 `project.el` 在处理 `Git` 子模块的bug，现在可以在使用 `Borg` 时，在 `.gitsubmodule` 文件中加 `load-path`
-5. 修复了在使用 `destop.el` 和 `saveplace` 时不支持非 UTF-8 的 unicode 编码(比如 UTF-16)
+1. 支持像素滚动，可以通过触摸板像 Chrome 浏览器那样滚动屏幕。
+2. 内置支持 `sqlite`，这样 `org-roam` 和 `epkg` 这样的包就不需要通过动态模块，可以直接使用内置的 `sqlite`。
+3. 在 Windows 平台支持双缓冲，滚动屏幕时，不再会出现闪烁。
+4. 修复了 `project.el` 在处理 `Git` 子模块的bug，现在可以在使用 `Borg` 时，在 `.gitsubmodule` 文件中加 `load-path`。
+5. 修复了在使用 `destop.el` 和 `saveplace` 时不支持非 UTF-8 的 unicode 编码(比如 UTF-16)。
 
-附上我的个人 Emacs 配置文件：https://github.com/Eason0210/.emacs.d
+附上我的个人 Emacs 配置文件：[Eason0210/.emacs.d](https://github.com/Eason0210/.emacs.d)
