@@ -1,4 +1,4 @@
----
+﻿---
 layout: post
 title: GccEmacs 在各个平台上的安装
 date: 2021-02-23T20:36:16+08:00
@@ -89,7 +89,7 @@ git clone --depth=1  https://git.savannah.gnu.org/git/emacs.git
 
 ```bash
    ./autogen.sh
-   ./configure --with-native-compilation=aot --without-dbus
+   ./configure --with-native-compilation=aot
 
    make -j$(nproc)
    
