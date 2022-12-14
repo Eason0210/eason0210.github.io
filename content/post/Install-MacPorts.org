@@ -1,0 +1,99 @@
+#+TITLE: 如何安装 MacPorts 并使用国内源
+#+DATE: 2022-12-14T22:38:00+08:00
+#+DRAFT: false
+#+TAGS[]: macOS macport
+#+CATEGORIES[]: Tools
+
+在macOS上使用过 Homebrew，Nix 和 MacPorts 这几个包管理器，总的来说，MacPorts 的体验最好，但它的安装对国内用户很不友好。主要是网络的原因，在国内无法访问 MacPorts的官方源。
+
+在此总结下安装流程，也许可以帮助到遇到同样问题的朋友。
+
+* 安装 MacPorts
+参考[[https://www.macports.org/install.php][官网的安装指南]]，下载适合的安装包进行安装。
+
+注意：
+
+1. 检查 XCode 的安装
+   可以通过 https://developer.apple.com/download/all/ 下载安装 Xcode 和 Command Line Tools
+
+2. 安装时要断开网络，不然没法安装。
+3. 若安装至 “正在运行软件包脚本” 会卡住，窗口关不掉
+   - 点击 安装器 窗口 ，Command + Alt + Esc 强制退出
+   - 打开终端（如 iTerm 或者 terminal）
+     #+begin_src bash
+ps aux | grep install
+sudo kill <process-number-of-macports>
+     #+end_src
+
+* 更换为国内的源
+参考 [[https://trac.macports.org/wiki/Mirrors#MacPortsSource][MacPorts Wiki]] 选择 China，Beijing 源。另外还可以使用[[https://mirrors.tuna.tsinghua.edu.cn/macports/][清华源]]。这里 China，Beijing 源为例。
+
+** 检查 profile 文件是否可读写
+#+begin_src bash
+open /etc		# 打开 profile 目录
+#+end_src
+右键 profile 文件， “显示简介”最下面点右下角的锁🔒，解锁最下面名称框“系统”对应的权限，若是“只读”就点选成“可读写”。
+** 修改 profile
+~sudo vim /etc/profile~ 在文件中加入以下内容：
+#+begin_src bash
+export PATH=/opt/local/bin:$PATH
+export PATH=/opt/local/sbin:$PATH
+#+end_src
+
+修改完成可将 profile 文件改回“只读”。
+
+** 修改 sources.conf
+~sudo vim /opt/local/etc/macports/sources.conf~  把最后一行 ~rsync://~ 开头的改成
+#+begin_src bash
+# file:///Users/<usrname>/ports # 自己本地的 ports (可选）
+rsync://pek.cn.rsync.macports.org/macports/release/tarballs/ports.tar [default]
+#+end_src
+
+如果加了本地的 ports，并且ports也放在Github，要确保网络能够访问 Github，不然更新 ports 会失败。并再现下面的错误：
+#+begin_src
+Error: Couldn't sync the ports tree: Synchronization of 1 source failed
+Error: Follow https://guide.macports.org/#project.tickets if you believe there is a bug.
+Error: /opt/local/bin/port: port selfupdate failed: Couldn't sync the ports tree: Synchronization of 1 source failed
+
+#+end_src
+
+** 修改 macports.conf
+~sudo vim /opt/local/etc/macports/macports.conf~ 修改整行 ~#rsync_server~ 为
+#+begin_src bash
+rsync_server           pek.cn.rsync.macports.org
+#+end_src
+
+修改整行 ~#rsync_server~ 为
+#+begin_src bash
+rsync_dir           	macports/release/tarballs/base.tar
+#+end_src
+
+** Macports 运行
+#+begin_src bash
+sudo port -v sync	  # 重新加载macports文件信息
+sudo port -v selfupdate	  # 更新
+
+sudo port sync	          # 重新加载macports文件信息
+sudo port selfupdate	  # 更新
+
+port list                 # 查看Mac Port中当前可用的软件包及其版本
+
+port search name # 搜索索引中的软件
+
+port info name # 查看包详细信息
+
+port deps name # 查看包详细信赖信息
+
+port variants name # 查看安装时允许客户定制的参数
+
+sudo port install name # 安装新软件
+
+sudo port clean --all name # 安装完毕之后，清除安装时产生的临时文件
+
+sudo port uninstall name  # 卸载软件
+
+port outdated  # 查看有更新的软件以及版本
+
+sudo port upgrade outdated  # 升级可以更新的软件
+
+#+end_src
