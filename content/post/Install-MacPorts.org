@@ -11,11 +11,9 @@
 * 安装 MacPorts
 参考[[https://www.macports.org/install.php][官网的安装指南]]，下载适合的安装包进行安装。
 
-注意：
-
+注意以下几点：
 1. 检查 XCode 的安装
    可以通过 https://developer.apple.com/download/all/ 下载安装 Xcode 和 Command Line Tools
-
 2. 安装时要断开网络，不然没法安装。
 3. 若安装至 “正在运行软件包脚本” 会卡住，窗口关不掉
    - 点击 安装器 窗口 ，Command + Alt + Esc 强制退出
@@ -44,7 +42,7 @@ export PATH=/opt/local/sbin:$PATH
 
 ** 修改 sources.conf
 ~sudo vim /opt/local/etc/macports/sources.conf~  把最后一行 ~rsync://~ 开头的改成
-#+begin_src bash
+#+begin_src conf
 # file:///Users/<usrname>/ports # 自己本地的 ports (可选）
 rsync://pek.cn.rsync.macports.org/macports/release/tarballs/ports.tar [default]
 #+end_src
@@ -59,12 +57,12 @@ Error: /opt/local/bin/port: port selfupdate failed: Couldn't sync the ports tree
 
 ** 修改 macports.conf
 ~sudo vim /opt/local/etc/macports/macports.conf~ 修改整行 ~#rsync_server~ 为
-#+begin_src bash
+#+begin_src conf
 rsync_server           pek.cn.rsync.macports.org
 #+end_src
 
 修改整行 ~#rsync_server~ 为
-#+begin_src bash
+#+begin_src conf
 rsync_dir           	macports/release/tarballs/base.tar
 #+end_src
 
