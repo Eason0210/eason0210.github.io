@@ -5,8 +5,8 @@ date: 2021-02-23T20:36:16+08:00
 tags: [Emacs, GccEmacs, Native-comp]
 categories: [Develop Tools]
 ---
- Emacs 28.1 最近已经发布，内置了对 `--with-native-compilation`的支持。只要安装 28.1 就能体验 native-comp 特性。
- 这里主要介绍在不同平台如何安装 Emacs 29.0.50，以体验更多的新功能。
+ Emacs 28.1 最近已经发布，内置了对 `--with-native-compilation`的支持。只要安装 28.1 以上版本就能体验 native-compilation 特性。
+ 这里主要介绍在不同平台如何安装 Emacs 29.0.60，以体验更多的新功能。
 
 ### Apple Mac OS
 这里以 Intel 平台的 Mac OS (Monterey 12.4) 为例：
@@ -49,14 +49,16 @@ Windows 系统可以通过[GNU官网下载](https://alpha.gnu.org/gnu/emacs/pret
 然后进入 mingw64 终端，安装好 Msys2 后进入 Mingw64 终端，先执行 `pacman -Syu` 更新系统到最新。
 
 #### 安装依赖
-详细说明请参考 Emacs 官方仓库的[安装文档](https://github.com/emacs-mirror/emacs/blob/master/nt/INSTALL.W64)
+详细说明请参考 Emacs 官方仓库的[安装文档](https://git.savannah.gnu.org/cgit/emacs.git/tree/nt/INSTALL.W64)
 
 在 Mingw64 终端中执行以下命令安装依赖。
 
 ```bash
-  pacman -S --needed base-devel gcc git \
+  pacman -S --needed base-devel \
   mingw-w64-x86_64-toolchain \
   mingw-w64-x86_64-xpm-nox \
+  mingw-w64-x86_64-gmp \
+  mingw-w64-x86_64-gnutls \
   mingw-w64-x86_64-libtiff \
   mingw-w64-x86_64-giflib \
   mingw-w64-x86_64-libpng \
@@ -66,10 +68,17 @@ Windows 系统可以通过[GNU官网下载](https://alpha.gnu.org/gnu/emacs/pret
   mingw-w64-x86_64-lcms2 \
   mingw-w64-x86_64-jansson \
   mingw-w64-x86_64-libxml2 \
-  mingw-w64-x86_64-gnutls \
   mingw-w64-x86_64-zlib \
-  mingw-w64-x86_64-harfbuzz
+  mingw-w64-x86_64-harfbuzz \
+  mingw-w64-x86_64-libgccjit \
+  mingw-w64-x86_64-sqlite3 \
+  mingw-w64-x86_64-tree-sitter
 ```
+
+这些软件包包括了基本的开发者工具（autoconf，grep，make，等等），编译器工具链（GCC，GDB，等等），几个图像库，一个XML库，GnuTLS（安全传输层协议）库，zlib用于解压缩文本，HarfBuzz用作文字塑形布局引擎(text shaping engine)，它主要是将 Unicode 转换为格式正确且位置正确的字形输出， libgccjit 用于支持 native-compilation， SQLite3 用于访问 SQL 数据库，以及一些主要模式（major modes）要使用的 tree-sitter。 只需要前四个软件包（base-devel, toolchain, xpm-nox, GMP）和GnuTLS是强烈推荐的；其余的是可选的。 如果你不需要全部的功能，则可以只选择一部分需要的库。
+
+安装好上面这些软件包后，您现在就有了一个完整的 Emacs 构建环境。
+
 #### 下载 Emacs 源代码
 Github 镜像:
 ```bash
@@ -83,7 +92,12 @@ git clone --depth=1  https://git.savannah.gnu.org/git/emacs.git
 有2种方式可以解决：
 1. 设置 `git config core.autocrlf false`
 2. 通过 Web 浏览器访问 [emacs-mirror/emacs](https://github.com/emacs-mirror/emacs.git) ，点击绿色的`Clone`按钮下载Zip格式的源代码。
+3. 通过 wget 下载源码, `<commit id>` 在官方仓库获得
+```bat
+wget https://git.savannah.gnu.org/cgit/emacs.git/snapshot/emacs-<commit id>.tar.gz
+tar -xzvf .\emacs-<commit id>.tar.gz
 
+```
 #### 编译 Emacs
 进入源代码目录，然后通过以下命令编译 Emacs 的源码。
 
@@ -91,25 +105,31 @@ git clone --depth=1  https://git.savannah.gnu.org/git/emacs.git
    ./autogen.sh
    ./configure --with-native-compilation=aot
 
-   make -j$(nproc)
-   
-   make install prefix=/c/opt/emacs
-   cp $( pacman -Ql mingw-w64-x86_64-{libtiff,giflib,libpng,libjpeg-turbo,librsvg,libxml2,gnutls} | grep bin/.*\.dll$ | awk '{print $2}' ) /c/opt/emacs/bin
+   echo $(nproc)
 
+   make -jN && make install prefix=/c/opt/emacs
 ```
 注意：
 
-1. `make -j$(nproc)` 中的 `$(nproc)` 会自动获取当前系统的 CPU 核心数；你也可以自己手动输入，比如`make -j12` 就是使用 12 核心进行编译。
+1. `echo $(nproc)` 会显示当前系统的 CPU 核心数；然后在`make -jN`输入需要使用的核心，比如`make -j6` 就是使用 6 核心进行编译, 推荐使用总数的一半，既提高了编译速度，也不影响其他应用的运行。
 2. `--with-native-compilation=aot` 相当于 `make NATIVE_FULL_AOT=1`， 会强制把所有 `.el` 文件提前编译成 `.eln`, 但编译时间会大幅增加。
 3. `make install` 的时候如果不指定 `prefix` 的话是会直接安装到 msys2 目录下，不讲究的话可以这样用。如果需要卸载的话在源码目录里面 `make uninstall`就可以了。个人建议安装到指定目录, 比如我这里是安装到 `c:\opt\emacs`, 注意在路径中使用斜杠"/", 而不是反斜杠"\\"。
 3. 如果编译过程出错了，记得`make clean`之后重新`configure`再`make`。
 
+#### 运行 Emacs
+通过 `c:\opt\emacs\bin\runemacs.exe` 就可以启动 Emacs，也可以运行 `c:\opt\emacs\bin\addpm.exe` 在开始菜单中添加一个快捷方式。
+
+当从 `mingw64 shell` 之外运行 Emacs 时，你需要将 `c:\msys64\mingw64\bin` 添加到您的 Windows PATH 中，或复制所需的 DLL 到 Emacs 的 bin/ 目录中。 否则依赖于这些 DLL 的特性(比如 TLS)将无法使用。
+下面的命令可以自动拷贝，但不一定全，仅供参考。个人是使用加入 PATH 的方式。
+```bash
+   cp $( pacman -Ql mingw-w64-x86_64-{libtiff,giflib,libpng,libjpeg-turbo,librsvg,libxml2,gnutls} | grep bin/.*\.dll$ | awk '{print $2}' ) /c/opt/emacs/bin
+```
 ### 使用体验
-目前 native-compilation 的 Emacs 已经很成熟了，已经集成到 Emacs 28.1 版本中。但要注意，native-compilation 并不会加快 Emacs 的启动速度。它主要是对使用 LSP 时有性能提升。
+目前 native-compilation 的 Emacs 已经很成熟了，已经集成到 Emacs 28.1 以上的版本中。但要注意，native-compilation 并不会加快 Emacs 的启动速度。它主要是对使用 LSP 时有性能提升。
 
 至于为什么选择使用 Emacs 29 主要是为了使用以下新特性：
 
-1. 支持像素滚动，可以通过触摸板像 Chrome 浏览器那样滚动屏幕。
+1. 支持像素滚动，可以通过触摸板像 Google Chrome 浏览器那样滚动屏幕。
 2. 内置支持 `sqlite`，这样 `org-roam` 和 `epkg` 这样的包就不需要通过动态模块，可以直接使用内置的 `sqlite`。
 3. 在 Windows 平台支持双缓冲，滚动屏幕时，不再会出现闪烁。
 4. 修复了 `project.el` 在处理 `Git` 子模块的bug，现在可以在使用 `Borg` 时，在 `.gitsubmodule` 文件中加 `load-path`。
