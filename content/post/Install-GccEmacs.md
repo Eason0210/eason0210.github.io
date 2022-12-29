@@ -9,8 +9,11 @@ categories: [Develop Tools]
  这里主要介绍在不同平台如何安装 Emacs 29.0.60，以体验更多的新功能。
 
 ### Apple Mac OS
-这里以 Intel 平台的 Mac OS (Monterey 12.4) 为例：
-
+这里以 Intel 平台的 macOS (Ventura 13.1) 为例：
+#### 通过 [macports](https://www.macports.org/install.php) 安装
+```bash
+sudo port install emacs-app-devel
+```
 #### 通过脚本自动编译：
 这种方法的好处是比较灵活，可以根据需要编译不同的 commit 或者 tag，而且所有需要的内容都打包到 Emacs.app 中，包括源代码。
 ```bash
@@ -89,7 +92,7 @@ git clone --depth=1 https://github.com/emacs-mirror/emacs.git
 git clone --depth=1  https://git.savannah.gnu.org/git/emacs.git
 ```
 提醒：如果执行`./autogen.sh`过程中出错，可能是因为克隆代码后 `checkout` 时用了 `CRLF`.  
-有2种方式可以解决：
+有几种方式可以解决：
 1. 设置 `git config core.autocrlf false`
 2. 通过 Web 浏览器访问 [emacs-mirror/emacs](https://github.com/emacs-mirror/emacs.git) ，点击绿色的`Clone`按钮下载Zip格式的源代码。
 3. 通过 wget 下载源码, `<commit id>` 在官方仓库获得
@@ -103,7 +106,7 @@ tar -xzvf .\emacs-<commit id>.tar.gz
 
 ```bash
 ./autogen.sh
-./configure --with-native-compilation=aot
+./configure --with-native-compilation=aot --without-dbus
 
 echo $(nproc)
 
