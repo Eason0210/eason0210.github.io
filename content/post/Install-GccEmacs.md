@@ -75,7 +75,7 @@ Windows 系统可以通过[GNU官网下载](https://alpha.gnu.org/gnu/emacs/pret
   mingw-w64-x86_64-tree-sitter
 ```
 
-这些软件包包括了基本的开发者工具（autoconf，grep，make，等等），编译器工具链（GCC，GDB，等等），几个图像库，一个XML库，GnuTLS（安全传输层协议）库，zlib用于解压缩文本，HarfBuzz用作文字塑形布局引擎(text shaping engine)，它主要是将 Unicode 转换为格式正确且位置正确的字形输出， libgccjit 用于支持 native-compilation， SQLite3 用于访问 SQL 数据库，以及一些主要模式（major modes）要使用的 tree-sitter。 只需要前四个软件包（base-devel, toolchain, xpm-nox, GMP）和GnuTLS是强烈推荐的；其余的是可选的。 如果你不需要全部的功能，则可以只选择一部分需要的库。
+这些软件包包括了基本的开发者工具（autoconf，grep，make，等等），编译器工具链（GCC，GDB，等等），几个图像库，XML库，GnuTLS（安全传输层协议）库，zlib 用于解压缩文本，HarfBuzz 用作文字塑形布局引擎(text shaping engine)，HarfBuzz 主要是将 Unicode 转换为格式正确且位置正确的字形输出， libgccjit 用于支持 native-compilation， SQLite3 用于访问 SQL 数据库，以及一些主要模式（major modes）要使用的 tree-sitter。 只有前四个软件包（base-devel, toolchain, xpm-nox, GMP）和GnuTLS是强烈推荐的；其余的是可选的。 如果你不需要全部的功能，则可以只安装一部分需要的库。
 
 安装好上面这些软件包后，您现在就有了一个完整的 Emacs 构建环境。
 
@@ -102,12 +102,12 @@ tar -xzvf .\emacs-<commit id>.tar.gz
 进入源代码目录，然后通过以下命令编译 Emacs 的源码。
 
 ```bash
-   ./autogen.sh
-   ./configure --with-native-compilation=aot
+./autogen.sh
+./configure --with-native-compilation=aot
 
-   echo $(nproc)
+echo $(nproc)
 
-   make -jN && make install prefix=/c/opt/emacs
+make -jN && make install prefix=/c/opt/emacs
 ```
 注意：
 
@@ -122,7 +122,7 @@ tar -xzvf .\emacs-<commit id>.tar.gz
 当从 `mingw64 shell` 之外运行 Emacs 时，你需要将 `c:\msys64\mingw64\bin` 添加到您的 Windows PATH 中，或复制所需的 DLL 到 Emacs 的 bin/ 目录中。 否则依赖于这些 DLL 的特性(比如 TLS)将无法使用。
 下面的命令可以自动拷贝，但不一定全，仅供参考。个人是使用加入 PATH 的方式。
 ```bash
-   cp $( pacman -Ql mingw-w64-x86_64-{libtiff,giflib,libpng,libjpeg-turbo,librsvg,libxml2,gnutls} | grep bin/.*\.dll$ | awk '{print $2}' ) /c/opt/emacs/bin
+cp $( pacman -Ql mingw-w64-x86_64-{libtiff,giflib,libpng,libjpeg-turbo,librsvg,libxml2,gnutls} | grep bin/.*\.dll$ | awk '{print $2}' ) /c/opt/emacs/bin
 ```
 ### 使用体验
 目前 native-compilation 的 Emacs 已经很成熟了，已经集成到 Emacs 28.1 以上的版本中。但要注意，native-compilation 并不会加快 Emacs 的启动速度。它主要是对使用 LSP 时有性能提升。
