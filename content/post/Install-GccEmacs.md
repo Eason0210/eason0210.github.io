@@ -14,6 +14,13 @@ categories: [Develop Tools]
 ```bash
 sudo port install emacs-app-devel
 ```
+#### 手动编译 Emacs 29
+参考官方的[安装手册](https://git.savannah.gnu.org/cgit/emacs.git/tree/nextstep/INSTALL?h=emacs-29&id=1d3cbba7dfa26fc74df4d09d40a3cd7ba07279b4)：
+```bash
+./autogen.sh
+./configure --with-native-compilation=aot
+make -j8 && make install
+```
 #### 通过脚本自动编译：
 这种方法的好处是比较灵活，可以根据需要编译不同的 commit 或者 tag，而且所有需要的内容都打包到 Emacs.app 中，包括源代码。
 ```bash
@@ -110,14 +117,15 @@ tar -xzvf .\emacs-<commit id>.tar.gz
 
 echo $(nproc)
 
-make -jN && make install prefix=/c/opt/emacs
+make -j6 && make install prefix=/c/opt/emacs
 ```
 注意：
 
-1. `echo $(nproc)` 会显示当前系统的 CPU 核心数；然后在`make -jN`输入需要使用的核心，比如`make -j6` 就是使用 6 核心进行编译, 推荐使用总数的一半，既提高了编译速度，也不影响其他应用的运行。
-2. `--with-native-compilation=aot` 相当于 `make NATIVE_FULL_AOT=1`， 会强制把所有 `.el` 文件提前编译成 `.eln`, 但编译时间会大幅增加。
+1. `echo $(nproc)` 会显示当前系统的 CPU 核心数；然后在`make -j6` 就是使用 6 个核心进行编译, 推荐使用总数的一半，既提高了编译速度，也不影响其他应用的运行。
+2. `--with-native-compilation=aot` 相当于 `make NATIVE_FULL_AOT=1`， 会把内置包的 `.elc` 前编译成 `.eln`, 这样启动Emacs时就不需要等待编译，如果不希望提前编译，去掉“=aot”就好了。
 3. `make install` 的时候如果不指定 `prefix` 的话是会直接安装到 msys2 目录下，不讲究的话可以这样用。如果需要卸载的话在源码目录里面 `make uninstall`就可以了。个人建议安装到指定目录, 比如我这里是安装到 `c:\opt\emacs`, 注意在路径中使用斜杠"/", 而不是反斜杠"\\"。
-3. 如果编译过程出错了，记得`make clean`之后重新`configure`再`make`。
+4. 如果编译过程出错了，记得`make clean`之后重新`configure`再`make`。
+
 
 #### 运行 Emacs
 通过 `c:\opt\emacs\bin\runemacs.exe` 就可以启动 Emacs，也可以运行 `c:\opt\emacs\bin\addpm.exe` 在开始菜单中添加一个快捷方式。
