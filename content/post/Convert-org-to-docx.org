@@ -11,21 +11,21 @@
 将 org 文件转换为 docx 文件的第一种方式是使用 [[https://pandoc.org][Pandoc]]。Pandoc 相当于文档格式转换的瑞士军刀，它能够处理各种文档格式，并且提供各种的不同的配置选项组合。
 
 **  安装和配置 Pandoc
-要使用 Pandoc 生成美观的 DOCX 文件，需要配置一个模板文档。执行此操作的推荐方法是使用 Pandoc 生成默认模板，然后在 Word 中对其进行编辑。
+要使用 Pandoc 生成美观的 docx 文件，需要配置一个模板文档。推荐使用 Pandoc 生成默认模板，然后在 Word 中对其进行编辑。
 
 按照官方的[[https://pandoc.org/installing.html][说明文档]]安装最新的 Pandoc。
-运行以下命令以生成 reference.docx
+运行以下命令以生成模板文件 custom-reference.docx
 
 #+begin_src shell
 pandoc -o custom-reference.docx --print-default-data-file reference.docx
 #+end_src
 
-在 Word 中打开 reference.docx，根据自己的需求编辑样式。
+在 Word 中打开 custom-reference.docx，根据自己的需求编辑样式。
 
 然后在终端下就可以通过以下命令转换文档：
 
 #+begin_src shell
-refdoc="<这里填写模板文件 reference.docx 的存放路径>"
+refdoc="<这里填写模板文件 custom-reference.docx 的存放路径>"
 outdoc="<这里填写要输出的 docx 文件的路径>"
 sourcedoc="<这里填写要转换的 org 文件的路径>"
 pandoc --reference-doc $refdoc -o $outdoc $sourcedoc
@@ -38,7 +38,7 @@ pandoc --reference-doc $refdoc -o $outdoc $sourcedoc
   "Convert current buffer file to .docx format by Pandoc."
   (interactive)
   (let* ((filename (buffer-file-name))
-         (refdoc (expand-file-name "reference.docx" no-littering-var-directory))
+         (refdoc (expand-file-name "var/reference.docx" user-emacs-directory))
          (outdoc (concat (file-name-sans-extension filename) ".docx")))
     (if (eq 0 (shell-command (format "pandoc --reference-doc \"%s\" -o \"%s\" \"%s\""
                                      refdoc outdoc filename)))
@@ -46,7 +46,10 @@ pandoc --reference-doc $refdoc -o $outdoc $sourcedoc
       (error "Convert failed: %s" outdoc))))
 #+end_src
 
-注意，命令参数中的路径要用 ~\"~ 包裹起来，不然的话，如果文件的路径带有空格字符，就会无法成功转换。
+注意:
+1. 命令参数中的路径要用 ~\"~ 包裹起来，不然的话，如果文件的路径带有空格字符，就会无法成功转换。
+2. 我将 custom-reference.docx 文件重命名为 reference.docx，并放置在 ~.emacs.d/var/~ 目录下。
+
 
 这是我个人的 [[https://github.com/Eason0210/.emacs.d/blob/master/init.el#L613-L622][Emacs 配置]]，仅供参考。
 * 通过 ODT 格式
