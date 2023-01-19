@@ -1,0 +1,64 @@
+#+TITLE: 如何将 org 文件转为 docx格式
+#+DATE: 2023-01-19T14:28:00+08:00
+#+DRAFT: false
+#+TAGS[]: org-mode docx
+#+CATEGORIES[]: Tools
+
+由于我是 Emacs 用户，特别喜欢用 org-mode 写文档，因为它是纯文本的，可以让我更加专注于内容，而不用去设置格式。文档写完后再根据需要转为PDF（通过 Emacs 内置的 ox-latex ) 或者 docx 格式。
+
+下面介绍两种如何将 .org 文件转为 .docx 格式的方法。
+* 使用 Pandoc
+将 org 文件转换为 docx 文件的第一种方式是使用 [[https://pandoc.org][Pandoc]]。Pandoc 相当于文档格式转换的瑞士军刀，它能够处理各种文档格式，并且提供各种的不同的配置选项组合。
+
+**  安装和配置 Pandoc
+要使用 Pandoc 生成美观的 DOCX 文件，需要配置一个模板文档。执行此操作的推荐方法是使用 Pandoc 生成默认模板，然后在 Word 中对其进行编辑。
+
+按照官方的[[https://pandoc.org/installing.html][说明文档]]安装最新的 Pandoc。
+运行以下命令以生成 reference.docx
+
+#+begin_src shell
+pandoc -o custom-reference.docx --print-default-data-file reference.docx
+#+end_src
+
+在 Word 中打开 reference.docx，根据自己的需求编辑样式。
+
+然后在终端下就可以通过以下命令转换文档：
+
+#+begin_src shell
+refdoc="<这里填写模板文件 reference.docx 的存放路径>"
+outdoc="<这里填写要输出的 docx 文件的路径>"
+sourcedoc="<这里填写要转换的 org 文件的路径>"
+pandoc --reference-doc $refdoc -o $outdoc $sourcedoc
+#+end_src
+
+但每次在终端中敲命令很繁琐，而且容易出错。可以自己定义一个 Shell脚本，如果使用的是 fish shell 可以参考[[https://arnesonium.com/2022/10/org-mode-to-docx-pipelin][这个文章]]。由于我是 Emacs 用户，当然是定义一个 Emacs 函数了。只要在我的 init.el 中加入下面的配置，就可以在需要转换的 org buffer 中执行 ~M-x org-pandoc-convert-to-docx~ 了。
+
+#+begin_src emacs-lisp
+(defun org-pandoc-convert-to-docx ()
+  "Convert current buffer file to .docx format by Pandoc."
+  (interactive)
+  (let* ((filename (buffer-file-name))
+         (refdoc (expand-file-name "reference.docx" no-littering-var-directory))
+         (outdoc (concat (file-name-sans-extension filename) ".docx")))
+    (if (eq 0 (shell-command (format "pandoc --reference-doc \"%s\" -o \"%s\" \"%s\""
+                                     refdoc outdoc filename)))
+        (message "Convert succeeded: %s" outdoc)
+      (error "Convert failed: %s" outdoc))))
+#+end_src
+
+注意，命令参数中的路径要用 ~\"~ 包裹起来，不然的话，如果文件的路径带有空格字符，就会无法成功转换。
+
+这是我个人的 [[https://github.com/Eason0210/.emacs.d/blob/master/init.el#L613-L622][Emacs 配置]]，仅供参考。
+* 通过 ODT 格式
+将 org 文件转换为 docx 文件的第二种方式是通过 Open Office ODT 格式，这是一种开源的文档格式，它和 MS Word 兼容。如果安装了 [[https://www.openoffice.org][Open Office]] 或者 [[https://www.libreoffice.org/][LibreOffice]]，可以将文件创建为 docx 文件，这样 MS Word 用户就可以直接使用。
+
+注意：安装好 LibreOffice 后，要将 program 目录加入 Path，如果在终端中执行 ~soffice --version~ 命令可以输出版本号，就说明成功了。至于 Open Office， 我还没试过。
+
+最后，在 Emacs 的 init.el 中加入以下设置：
+#+begin_src emacs-lisp
+(setq org-odt-preferred-output-format "docx")
+#+end_src
+
+打开要转换的 org 文件，执行 ~M-x org-odt-export-to-odt~, 或者用快捷键 ~C-c C-e o o~ 就可以当前目录输出 docx 格式的文件了。
+* 总结
+我个人更加喜欢使用 Pandoc 这种方式，因为不用安装 LibreOffice, 更加灵活。
