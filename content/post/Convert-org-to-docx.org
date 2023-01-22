@@ -50,8 +50,36 @@ pandoc --reference-doc $refdoc -o $outdoc $sourcedoc
 1. 命令参数中的路径要用 ~\"~ 包裹起来，不然的话，如果文件的路径带有空格字符，就会无法成功转换。
 2. 我将 custom-reference.docx 文件重命名为 reference.docx，并放置在 ~.emacs.d/var/~ 目录下。
 
+写了一个更加好用的版本，如果出错，会看到详细的错误信息和错误代码。建议使用这个版本：
 
-这是我个人的 [[https://github.com/Eason0210/.emacs.d/blob/master/init.el#L613-L622][Emacs 配置]]，仅供参考。
+#+begin_src emacs-lisp
+(defun org-pandoc-convert-to-docx ()
+  "Convert current buffer file to docx format by Pandoc."
+  (interactive)
+  (let ((command "pandoc")
+        (refdoc (list "--reference-doc"
+                      (expand-file-name "var/reference.docx" user-emacs-directory))))
+    (cond ((not buffer-file-name) (user-error "Must be visiting a file"))
+          (t (let* ((buffer (generate-new-buffer " *Pandoc output*"))
+                    (filename (list buffer-file-name))
+                    (output (list "-o" (concat (file-name-sans-extension (buffer-file-name)) ".docx")))
+                    (arguments (nconc filename refdoc output))
+                    (exit-code (apply #'call-process command nil buffer nil arguments)))
+               (cond ((eql 0 exit-code)
+                      (kill-buffer buffer)
+                      (message "Convert finished: %s" (cadr output)))
+                     (t (with-current-buffer buffer
+                          (goto-char (point-min))
+                          (insert (format "%s\n%s\n\n" (make-string 50 ?=) (current-time-string)))
+                          (insert (format "Calling pandoc with:\n\n%s\n\nFailed with error:\n\n"
+                                          (mapconcat #'identity (cons command arguments) " ")))
+                          (special-mode))
+                        (pop-to-buffer buffer)
+                        (error "Convert failed with exit code %s" exit-code))))))))
+#+end_src
+
+
+这是我个人的 [[https://github.com/Eason0210/.emacs.d/blob/master/init.el#L613-L635][Emacs 配置]]，仅供参考。
 * 通过 ODT 格式
 将 org 文件转换为 docx 文件的第二种方式是通过 Open Office ODT 格式，这是一种开源的文档格式，它和 MS Word 兼容。如果安装了 [[https://www.openoffice.org][Open Office]] 或者 [[https://www.libreoffice.org/][LibreOffice]]，可以将文件创建为 docx 文件，这样 MS Word 用户就可以直接使用。
 
